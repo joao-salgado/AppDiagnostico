@@ -1,7 +1,7 @@
 <app-header
   [fixed]="true"
-  [navbarBrandFull]="{src: 'assets/img/brand/logo.svg', width: 89, height: 25, alt: 'CoreUI Logo'}"
-  [navbarBrandMinimized]="{src: 'assets/img/brand/sygnet.svg', width: 30, height: 30, alt: 'CoreUI Logo'}"
+  [navbarBrandFull]="{src: 'assets/img/brand/icon-sm.png', width: 30, height: 25, alt: 'Diagnostico Logo'}"
+  [navbarBrandMinimized]="{src: 'assets/img/brand/icon-sm.png', width: 30, height: 30, alt: 'Diagnostico Logo'}"
   [sidebarToggler]="'lg'"
   [asideMenuToggler]="'lg'">
   <ul class="nav navbar-nav d-md-down-none">
@@ -9,22 +9,21 @@
       <a class="nav-link" href="#">Dashboard</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Users</a>
+      <a class="nav-link" href="#">Usuários</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" href="#">Settings</a>
+      <a class="nav-link" href="#">Configurações</a>
     </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
-        <img src="assets/img/avatars/6.jpg" class="img-avatar" alt="admin@bootstrapmaster.com"/>
+        <img src="assets/img/user/user-default.png" class="img-avatar" alt="Imagem do usuário"/>
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>Account</strong></div>
-        <a class="dropdown-item" href="#"><i class="fa fa-bell-o"></i> Updates<span class="badge badge-info">42</span></a>
-        <div class="dropdown-header text-center"><strong>Settings</strong></div>
+        <div class="dropdown-header text-center"><strong>Sua conta</strong></div>
         <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Perfil</a>
+        <div class="dropdown-header text-center"><strong>Sistema</strong></div>
         <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Configurações</a>
         <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-lock"></i> Sair</a>
       </div>
@@ -57,6 +56,6 @@
 
 </div>
 <app-footer>
-  <span><a href="https://coreui.io">CoreUI</a> &copy; 2018 creativeLabs.</span>
-  <span class="ml-auto">Powered by <a href="https://coreui.io/angular">CoreUI for Angular</a></span>
+  <span><a href="https://www.linkedin.com/in/joao-slgd/" target="_blank">João Salgado</a> &copy; 2018.</span>
+  <span class="ml-auto">Criado por <a href="https://github.com/joao-salgado" target="_blank">João Gabriel Salgado</a></span>
 </app-footer>
