@@ -1,7 +1,7 @@
 import { ToastyService } from 'ng2-toasty';
-import { AuthService } from './../core/security/auth.service';
+import { AuthService } from '../core/security/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '../../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 
 export class Login {
   email: string;

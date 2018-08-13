@@ -1,0 +1,87 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <form #formRegisterCompany="ngForm" (ngSubmit)="register(companyRegister)" novalidate>
+                <h1>Cadastro de empresa</h1>
+                <p class="text-muted">Crie a conta de sua empresa</p>
+
+                <fieldset>
+                  <legend>Dados da empresa</legend>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="icon-user"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control" [(ngModel)]="companyRegister.name" placeholder="Nome da empresa" required name="name"
+                      autocomplete="off" #name="ngModel">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text">P</label>
+                    </div>
+                    <select name="process" class="form-control" required #process="ngModel" [(ngModel)]="companyRegister.companyProcess.id">
+                      <option [ngValue]="undefined" selected disabled>Principal processo da empresa</option>
+                      <option *ngFor="let process of listCompanyProcesses; trackBy:process?.id" [value]="process.id">{{process.name}}</option>
+                    </select>
+                  </div>
+                </fieldset>
+
+                <fieldset>
+                  <legend>Dados de acesso</legend>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">@</span>
+                    </div>
+                    <input type="email" class="form-control" placeholder="Email" required name="email" #email="ngModel" [(ngModel)]="companyRegister.userAccount[0].email"
+                      autocomplete="off">
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="icon-lock"></i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Senha" minlength="6" required [(ngModel)]="companyRegister.userAccount[0].password"
+                      name="password" #password="ngModel">
+                  </div>
+
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="icon-lock"></i>
+                      </span>
+                    </div>
+                    <input type="password" class="form-control" placeholder="Confirme sua senha" minlength="6" required name="passwordConfirmation"
+                      [(ngModel)]="companyRegister.userAccount[0].passwordConfirmation" #passwordConfirmation="ngModel">
+                  </div>
+
+                  <p class="text-danger" [hidden]="!(passwordConfirmation.valid && password.valid && passwordConfirmation.value !== password.value)">
+                    A confirmação de senha está diferente da nova senha
+                  </p>
+
+                  <p class="text-danger" *ngIf="(!password.valid && password.dirty && companyRegister.userAccount[0].password.length < 6)">
+                    A senha deve ter no mínimo 6 caracteres
+                  </p>
+
+                </fieldset>
+
+                <button type="submit" class="btn btn-block btn-success" [disabled]="(!formRegisterCompany.valid || (passwordConfirmation.valid && password.valid && passwordConfirmation.value !== password.value)) || (isLoading)">
+                  Criar conta
+                  <i class="fa fa-lg m-l-5" [ngClass]="{'fa-spinner fa-spin': isLoading}" *ngIf="isLoading"> </i>
+                </button>
+                <button type="button" class="btn btn-block btn-primary" routerLink="/login">Ir para o login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

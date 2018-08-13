@@ -1,7 +1,7 @@
-import { LogoutService } from './../../views/core/security/logout.service';
+import { LogoutService } from '../../views/core/security/logout.service';
 import { Router } from '@angular/router';
 import { Component, Input } from '@angular/core';
-import { navItems } from './../../_nav';
+import { navItems } from '../../_nav';
 
 @Component({
   selector: 'app-dashboard',

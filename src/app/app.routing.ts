@@ -1,3 +1,4 @@
+import { RegisterCompanyResolver } from './views/register/company/register-company-resolver';
 import { AuthGuard } from './views/core/security/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -8,7 +9,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
+import { RegisterCompanyComponent } from './views/register/company/register-company.component';
 
 export const routes: Routes = [
   {
@@ -35,15 +36,18 @@ export const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     data: {
-      title: 'Login Page'
+      title: 'Página de login'
     }
   },
   {
-    path: 'register',
-    component: RegisterComponent,
+    path: 'cadastro-empresa',
+    component: RegisterCompanyComponent,
     data: {
-      title: 'Register Page'
-    }
+      title: 'Cadastro de empresa'
+    },
+    resolve: {
+      homeData: RegisterCompanyResolver
+    },
   },
   {
     path: '',
@@ -99,6 +103,9 @@ export const routes: Routes = [
 
 @NgModule({
   imports: [ RouterModule.forRoot(routes) ],
-  exports: [ RouterModule ]
+  exports: [ RouterModule ],
+  providers: [
+    RegisterCompanyResolver
+  ]
 })
 export class AppRoutingModule {}
