@@ -5,7 +5,7 @@ import { ToastyConfig } from '../../node_modules/ng2-toasty';
 @Component({
   // tslint:disable-next-line
   selector: 'body',
-  template: '<router-outlet></router-outlet>'
+  template: '<router-outlet></router-outlet> <ng2-toasty></ng2-toasty>'
 })
 export class AppComponent implements OnInit {
 

@@ -1,6 +1,6 @@
 import { UserLoggedService } from './../../../core/user-logged.service';
 import { AuthService } from './../../../core/security/auth.service';
-import { ToastyService } from 'ng2-toasty';
+import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { InviteService } from './../../../api/invite.service';
 import { CompanyService } from './../../../api/company.service';
 import { Component, OnInit } from '@angular/core';
@@ -23,7 +23,10 @@ export class UsersInviteComponent implements OnInit {
               private auth: AuthService,
               private userLoggedService: UserLoggedService,
               private inviteService: InviteService,
-              private toasty: ToastyService) {
+              private toasty: ToastyService,
+              private toastyConfig: ToastyConfig) {
+
+    this.toastyConfig.theme = 'bootstrap';
   }
 
   public ngOnInit(): void {

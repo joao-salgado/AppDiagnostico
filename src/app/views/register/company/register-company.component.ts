@@ -1,3 +1,4 @@
+import { ToastyService } from 'ng2-toasty';
 import { UserLoggedService } from './../../../core/user-logged.service';
 import { AuthService } from './../../../core/security/auth.service';
 import { UserService } from './../../../api/user.service';
@@ -57,7 +58,8 @@ export class RegisterCompanyComponent implements OnInit {
               private router: Router,
               private auth: AuthService,
               private userService: UserService,
-              private userLoggedService: UserLoggedService) {
+              private userLoggedService: UserLoggedService,
+              private toasty: ToastyService) {
     this.companyRegister = new CompanyRegister();
   }
 
@@ -80,12 +82,15 @@ export class RegisterCompanyComponent implements OnInit {
           this.router.navigate(['/dashboard']);
           this.isLoading = false;
         });
-
       });
     })
     .catch(reject => {
       this.isLoading = false;
-      console.error(reject);
+      reject = JSON.parse(reject._body);
+      const msg = reject && reject[0]
+          ? reject[0].msgUser
+          : 'Houve um erro ao realizar o cadastro, tente novamente mais tarde';
+      this.toasty.error(msg);
     });
 
   }
