@@ -1,4 +1,6 @@
-import { AuthService } from './../../core/security/auth.service';
+import { UserLoggedService } from './../../../core/user-logged.service';
+import { AuthService } from './../../../core/security/auth.service';
+import { UserService } from './../../../api/user.service';
 import { CompanyService } from './../../../api/company.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '../../../../../node_modules/@angular/router';
@@ -53,7 +55,9 @@ export class RegisterCompanyComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private companyService: CompanyService,
               private router: Router,
-              private auth: AuthService) {
+              private auth: AuthService,
+              private userService: UserService,
+              private userLoggedService: UserLoggedService) {
     this.companyRegister = new CompanyRegister();
   }
 
@@ -70,8 +74,13 @@ export class RegisterCompanyComponent implements OnInit {
 
       this.auth.login(company.userAccount[0].email, company.userAccount[0].password)
       .then(response2 => {
-        this.router.navigate(['/dashboard']);
-        this.isLoading = false;
+
+        this.userService.findById(this.auth.jwtPayload.id).then(userAppSaved => {
+          this.userLoggedService.updateUserLogged(userAppSaved);
+          this.router.navigate(['/dashboard']);
+          this.isLoading = false;
+        });
+
       });
     })
     .catch(reject => {

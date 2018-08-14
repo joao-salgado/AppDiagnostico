@@ -1,7 +1,8 @@
+import { CoreModule } from './core/core.module';
+import { InviteModule } from './views/invite/invite.module';
 import { ApiModule } from './api/api.module';
 import { RegisterCompanyComponent } from './views/register/company/register-company.component';
 import { FormsModule } from '@angular/forms';
-import { CoreModule } from './views/core/core.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -64,7 +65,8 @@ import { HttpModule } from '@angular/http';
     FormsModule,
     CoreModule,
     ChartsModule,
-    ApiModule
+    ApiModule,
+    InviteModule
   ],
   declarations: [
     AppComponent,

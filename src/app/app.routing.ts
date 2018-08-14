@@ -1,5 +1,5 @@
+import { AuthGuard } from './core/security/auth.guard';
 import { RegisterCompanyResolver } from './views/register/company/register-company-resolver';
-import { AuthGuard } from './views/core/security/auth.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -74,6 +74,11 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule',
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'convites',
+        loadChildren: './views/invite/invite.module#InviteModule',
         canActivate: [AuthGuard]
       },
       {

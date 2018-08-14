@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
+import { ToastyConfig } from '../../node_modules/ng2-toasty';
 
 @Component({
   // tslint:disable-next-line
@@ -7,7 +8,12 @@ import { Router, NavigationEnd } from '@angular/router';
   template: '<router-outlet></router-outlet>'
 })
 export class AppComponent implements OnInit {
-  constructor(private router: Router) { }
+
+  constructor(private router: Router,
+    private toastyConfig: ToastyConfig) {
+
+    this.toastyConfig.theme = 'bootstrap';
+  }
 
   ngOnInit() {
     this.router.events.subscribe((evt) => {

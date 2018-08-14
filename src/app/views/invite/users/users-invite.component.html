@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Enviar convites
+      </div>
+      <div class="card-body">
+
+        <div class="input-group mb-3" *ngFor="let list of listSendEmails; let i = index;">
+          <div class="input-group-prepend">
+            <span class="input-group-text">@</span>
+          </div>
+          <input type="email" class="form-control" placeholder="Email" required
+                [name]="'email'+i" [(ngModel)]="list.email"
+            autocomplete="off">
+        </div>
+
+        <button class="btn btn-primary fa fa-plus pull-right mb-2" (click)="addEmail()"></button>
+
+        <button class="btn btn-success btn-block mt-5" (click)="send()">Enviar</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Convites enviados
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Email</th>
+              <th>Situação</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>exemplo@email.com</td>
+              <td>
+                <span class="badge badge-success">Aceito</span>
+              </td>
+            </tr>
+            <tr>
+              <td>exemplo@email.com</td>
+              <td>
+                <span class="badge badge-warning">Pendente</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng2-toasty></ng2-toasty>

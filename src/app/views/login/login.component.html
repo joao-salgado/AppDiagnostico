@@ -28,9 +28,9 @@
                   <div class="row">
                     <div class="col-6">
                       <button type="submit" class="btn btn-primary px-4"
-                              [disabled]="verifyInformations(login.email, login.password)">
+                              [disabled]="verifyInformations(login.email, login.password) || isLoading">
                         Entrar
-                        <i class="fa fa-lg m-l-5" [ngClass]="{'fa-spinner fa-spin': isLogging}"></i>
+                        <i class="fa fa-lg m-l-5" [ngClass]="{'fa-spinner fa-spin': isLoading}"></i>
                       </button>
                     </div>
                     <div class="col-6 text-right">

@@ -1,5 +1,7 @@
+import { UserLoggedService } from './../../core/user-logged.service';
+import { AuthService } from './../../core/security/auth.service';
+import { UserService } from './../../api/user.service';
 import { ToastyService } from 'ng2-toasty';
-import { AuthService } from '../core/security/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -15,11 +17,13 @@ export class Login {
 export class LoginComponent implements OnInit {
 
   public login: Login;
-  public isLogging = false;
+  public isLoading = false;
 
   constructor(private auth: AuthService,
               private router: Router,
-              private toasty: ToastyService) {}
+              private toasty: ToastyService,
+              private userService: UserService,
+              private userLoggedService: UserLoggedService) {}
 
   public ngOnInit(): void {
 
@@ -28,16 +32,21 @@ export class LoginComponent implements OnInit {
   }
 
   public logIn(email: string, password: string): void {
-    this.isLogging = true;
+    this.isLoading = true;
 
     this.auth
       .login(email, password)
       .then(response => {
-        this.router.navigate(['/dashboard']);
-        this.isLogging = false;
+
+        this.userService.findById(this.auth.jwtPayload.id).then(userAppSaved => {
+          this.userLoggedService.updateUserLogged(userAppSaved);
+          this.router.navigate(['/dashboard']);
+          this.isLoading = false;
+        });
+
       })
       .catch(errorObject => {
-        this.isLogging = false;
+        this.isLoading = false;
         this.login.password = '';
         this.toasty.error('Usuário ou senha incorretos.');
       });
