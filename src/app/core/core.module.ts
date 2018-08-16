@@ -1,3 +1,6 @@
+import { ApiModule } from './../api/api.module';
+import { BWHttp } from './security/bw-http';
+import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './../api/user.service';
 import { UserLoggedService } from './user-logged.service';
 import { AuthService } from './security/auth.service';
@@ -5,22 +8,26 @@ import { SecurityModule } from './security/security.module';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
-import { JwtHelper } from 'angular2-jwt';
 import { onAppInit } from './app-init.provider';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @NgModule({
   imports: [
     CommonModule,
     RouterModule,
-    SecurityModule
+    HttpClientModule,
+    SecurityModule,
+    ApiModule
   ],
   exports: [
-    SecurityModule
+    SecurityModule,
+    ApiModule
   ],
   providers: [
-    JwtHelper,
+    JwtHelperService,
     AuthService,
     UserLoggedService,
+    BWHttp,
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'
@@ -34,4 +41,6 @@ import { onAppInit } from './app-init.provider';
   ],
   declarations: [],
 })
-export class CoreModule {}
+export class CoreModule {
+
+}

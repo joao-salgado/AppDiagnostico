@@ -1,5 +1,5 @@
+import { BWHttp } from './bw-http';
 import { environment } from './../../../environments/environment';
-import { AuthHttp } from 'angular2-jwt';
 import { Injectable } from '@angular/core';
 
 import { AuthService } from './auth.service';
@@ -7,10 +7,10 @@ import { AuthService } from './auth.service';
 @Injectable()
 export class LogoutService {
 
-  tokensRenokeUrl: string;
+  private tokensRenokeUrl: string;
 
   constructor(
-    private http: AuthHttp,
+    private http: BWHttp,
     private auth: AuthService
   ) {
     this.tokensRenokeUrl = `${environment.apiUrl}/tokens/revoke`;

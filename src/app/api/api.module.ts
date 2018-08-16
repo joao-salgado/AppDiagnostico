@@ -1,3 +1,4 @@
+import { BWHttp } from './../core/security/bw-http.service';
 import { UserService } from './user.service';
 import { CompanyService } from './company.service';
 import { CompanyProcessService } from './company-process.service';
@@ -11,6 +12,7 @@ import { InviteService } from './invite.service';
   ],
   declarations: [],
   providers: [
+    BWHttp,
     CompanyProcessService,
     CompanyService,
     UserService,

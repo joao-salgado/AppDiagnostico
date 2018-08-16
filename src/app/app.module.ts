@@ -1,6 +1,5 @@
 import { CoreModule } from './core/core.module';
 import { InviteModule } from './views/invite/invite.module';
-import { ApiModule } from './api/api.module';
 import { RegisterCompanyComponent } from './views/register/company/register-company.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -65,7 +64,6 @@ import { HttpModule } from '@angular/http';
     FormsModule,
     CoreModule,
     ChartsModule,
-    ApiModule,
     InviteModule
   ],
   declarations: [

@@ -1,7 +1,7 @@
 import { NotAuthenticatedError } from './security/bw-http.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
-import { Response } from '@angular/http';
+import { HttpErrorResponse  } from '@angular/common/http';
 
 import { ToastyService } from 'ng2-toasty';
 
@@ -23,19 +23,20 @@ export class ErrorHandlerService {
       msg = 'Sua sessão expirou!';
       this.router.navigate(['/login']);
 
-    } else if (errorResponse instanceof Response
+    } else if (errorResponse instanceof HttpErrorResponse
         && errorResponse.status >= 400 && errorResponse.status <= 499) {
-      let errors;
       msg = 'Ocorreu um erro ao processar a sua solicitação';
 
       if (errorResponse.status === 403) {
         msg = 'Você não tem permissão para executar esta ação';
       }
 
-      try {
-        errors = errorResponse.json();
+      if (errorResponse.status === 401) {
+        this.router.navigate(['/login']);
+      }
 
-        msg = errors[0].mensagemUsuario;
+      try {
+        msg = errorResponse.error[0].msgUser;
       } catch (e) { }
 
       console.error('Ocorreu um erro', errorResponse);

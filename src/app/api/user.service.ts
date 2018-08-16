@@ -1,4 +1,4 @@
-import { AuthHttp } from 'angular2-jwt';
+import { BWHttp } from './../core/security/bw-http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
@@ -10,14 +10,12 @@ export class UserService {
 
   private userUrl: string;
 
-  constructor(private authHttp: AuthHttp) {
+  constructor(private authHttp: BWHttp) {
     this.userUrl = `${environment.apiUrl}/users`;
   }
 
   public findById(id: string): Promise<any> {
-    return this.authHttp.get(`${this.userUrl}/${id}`)
-      .toPromise()
-      .then(response => response.json());
+    return this.authHttp.get(`${this.userUrl}/${id}`).toPromise();
   }
 
 }

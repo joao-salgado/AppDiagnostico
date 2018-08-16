@@ -1,5 +1,5 @@
-import { AuthHttp } from 'angular2-jwt';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { BWHttp } from './../core/security/bw-http.service';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
@@ -11,14 +11,12 @@ export class CompanyService {
 
   private companyUrl: string;
 
-  constructor(private http: Http, authHttp: AuthHttp) {
+  constructor(private authHttp: BWHttp, private http: HttpClient) {
     this.companyUrl = `${environment.apiUrl}/companies`;
   }
 
   public save(company: any): Promise<any> {
-    return this.http.post(this.companyUrl, company)
-      .toPromise()
-      .then(response => response.json());
+    return this.http.post(this.companyUrl, company).toPromise();
   }
 
 }

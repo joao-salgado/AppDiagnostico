@@ -1,5 +1,4 @@
-import { AuthHttp } from 'angular2-jwt';
-import { Http } from '@angular/http';
+import { BWHttp } from './../core/security/bw-http.service';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
@@ -11,13 +10,12 @@ export class InviteService {
 
   private inviteUrl: string;
 
-  constructor(private http: Http, authHttp: AuthHttp) {
+  constructor(private http: BWHttp) {
     this.inviteUrl = `${environment.apiUrl}/invitations`;
   }
 
   public save(listEmails: any): Promise<any> {
-    return this.http.post(this.inviteUrl, listEmails)
-      .toPromise();
+    return this.http.post(this.inviteUrl, listEmails).toPromise();
   }
 
 }

@@ -49,7 +49,7 @@ export class BWHttp extends HttpClient {
     if (this.auth.isAccessTokenInvalid()) {
       console.log('Requisição HTTP com access token inválido. Obtendo novo token...');
 
-      const callNewAccessToken = this.auth.getNewAccessToken()
+      const chamadaNovoAccessToken = this.auth.getNewAccessToken()
         .then(() => {
           if (this.auth.isAccessTokenInvalid()) {
             throw new NotAuthenticatedError();
@@ -58,7 +58,7 @@ export class BWHttp extends HttpClient {
           return fn().toPromise();
         });
 
-      return observableFromPromise(callNewAccessToken);
+      return observableFromPromise(chamadaNovoAccessToken);
     } else {
       return fn();
     }

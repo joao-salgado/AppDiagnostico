@@ -1,32 +1,26 @@
+import { environment } from './../../../environments/environment';
 import { LogoutService } from './logout.service';
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from './auth.guard';
-import { AuthConfig, AuthHttp } from 'angular2-jwt';
-import { Http, RequestOptions } from '@angular/http';
-import { AuthService } from './auth.service';
 import { NgModule } from '@angular/core';
-import { BWHttp } from './bw-http.service';
+import { JwtModule } from '@auth0/angular-jwt';
 
-export function authHttpServiceFactory(auth: AuthService, http: Http, options: RequestOptions) {
-  const config = new AuthConfig({
-    globalHeaders: [
-      { 'Content-Type': 'application/json' }
-    ]
-  });
-
-  return new BWHttp(auth, config, http, options);
+export function tokenGetter() {
+  return localStorage.getItem('token');
 }
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: environment.tokenWhitelistedDomains,
+        blacklistedRoutes: environment.tokenBlacklistedRoutes
+      }
+    }),
   ],
   providers: [
-    {
-      provide: AuthHttp,
-      useFactory: authHttpServiceFactory,
-      deps: [AuthService, Http, RequestOptions]
-    },
     AuthGuard,
     LogoutService
   ]

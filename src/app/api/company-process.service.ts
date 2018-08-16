@@ -1,4 +1,4 @@
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import 'rxjs/add/operator/toPromise';
@@ -10,14 +10,12 @@ export class CompanyProcessService {
 
   private processUrl: string;
 
-  constructor(private http: Http) {
+  constructor(private http: HttpClient) {
     this.processUrl = `${environment.apiUrl}/company-processes`;
   }
 
   public findAll(): Promise<any> {
-    return this.http.get(this.processUrl)
-      .toPromise()
-      .then(response => response.json());
+    return this.http.get(this.processUrl).toPromise();
   }
 
 }
