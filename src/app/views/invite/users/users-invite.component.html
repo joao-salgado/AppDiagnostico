@@ -28,7 +28,7 @@
         <i class="fa fa-align-justify"></i> Convites enviados
       </div>
       <div class="card-body">
-        <table class="table table-striped">
+        <table class="table table-sm table-striped">
           <thead>
             <tr>
               <th>Email</th>
@@ -36,19 +36,16 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>exemplo@email.com</td>
+            <tr *ngFor="let user of listSentEmails">
+              <td>{{user.email}}</td>
               <td>
-                <span class="badge badge-success">Aceito</span>
-              </td>
-            </tr>
-            <tr>
-              <td>exemplo@email.com</td>
-              <td>
-                <span class="badge badge-warning">Pendente</span>
+                <span class="badge" [ngClass]="user.situation === 'SEND' ? 'badge-warning' : 'badge-success'">
+                  {{user.situation === 'SEND' ? 'Enviado' : 'Aceito'}}
+                </span>
               </td>
             </tr>
           </tbody>
+          <pagination [totalItems]="30"></pagination>
         </table>
       </div>
     </div>

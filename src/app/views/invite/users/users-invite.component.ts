@@ -16,6 +16,7 @@ export class UsersInviteComponent implements OnInit {
 
   public isLoading = false;
   public listSendEmails: any;
+  public listSentEmails: any;
   public user: any;
 
   constructor(private companyService: CompanyService,
@@ -34,6 +35,10 @@ export class UsersInviteComponent implements OnInit {
     this.userLoggedService.currentUserLogged.subscribe((userLogged) => {
       this.user = JSON.parse(userLogged);
 
+      this.inviteService.findByCompany(this.user.company.id).subscribe(response => {
+        this.listSentEmails = response.content;
+      });
+
       this.listSendEmails = [
         this.inviteFactory()
       ];
@@ -48,12 +53,11 @@ export class UsersInviteComponent implements OnInit {
   public send(): void {
 
     this.inviteService.save(this.listSendEmails)
-    .then(response => {
+    .subscribe(response => {
       this.listSendEmails = [];
       this.listSendEmails.push(this.inviteFactory());
       this.toasty.success('Convites enviados com sucesso!');
-    })
-    .catch(reject => {
+    }, reject => {
       this.toasty.error('Verifique se os emails inseridos estão em formato correto.');
     });
 

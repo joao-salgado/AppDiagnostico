@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
       .login(email, password)
       .then(response => {
 
-        this.userService.findById(this.auth.jwtPayload.id).then(userAppSaved => {
+        this.userService.findById(this.auth.jwtPayload.id).subscribe(userAppSaved => {
           this.userLoggedService.updateUserLogged(userAppSaved);
           this.router.navigate(['/dashboard']);
           this.isLoading = false;

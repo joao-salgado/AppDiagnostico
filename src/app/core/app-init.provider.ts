@@ -7,8 +7,7 @@ export function onAppInit(auth: AuthService, userService: UserService, userLogge
     return new Promise((resolve) => {
       if (auth.jwtPayload) {
         userService.findById(auth.jwtPayload.id)
-          .then(userAppSaved => {
-            console.log(userAppSaved);
+          .subscribe(userAppSaved => {
             userLoggedService.updateUserLogged(userAppSaved);
             resolve();
           });

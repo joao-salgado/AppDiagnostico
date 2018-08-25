@@ -72,23 +72,20 @@ export class RegisterCompanyComponent implements OnInit {
     this.isLoading = true;
 
     this.companyService.save(company)
-    .then(response => {
+    .subscribe(response => {
 
       this.auth.login(company.userAccount[0].email, company.userAccount[0].password)
       .then(response2 => {
-
-        this.userService.findById(this.auth.jwtPayload.id).then(userAppSaved => {
+        this.userService.findById(this.auth.jwtPayload.id).subscribe(userAppSaved => {
           this.userLoggedService.updateUserLogged(userAppSaved);
           this.router.navigate(['/dashboard']);
           this.isLoading = false;
         });
       });
-    })
-    .catch(reject => {
+    }, reject => {
       this.isLoading = false;
-      reject = JSON.parse(reject._body);
-      const msg = reject && reject[0]
-          ? reject[0].msgUser
+      const msg = reject && reject.error[0]
+          ? reject.error[0].msgUser
           : 'Houve um erro ao realizar o cadastro, tente novamente mais tarde';
       this.toasty.error(msg);
     });

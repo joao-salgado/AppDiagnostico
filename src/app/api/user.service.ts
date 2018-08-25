@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class UserService {
@@ -14,8 +15,8 @@ export class UserService {
     this.userUrl = `${environment.apiUrl}/users`;
   }
 
-  public findById(id: string): Promise<any> {
-    return this.authHttp.get(`${this.userUrl}/${id}`).toPromise();
+  public findById(id: string): Observable<any> {
+    return this.authHttp.get(`${this.userUrl}/${id}`);
   }
 
 }

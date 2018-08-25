@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class CompanyService {
@@ -15,8 +16,8 @@ export class CompanyService {
     this.companyUrl = `${environment.apiUrl}/companies`;
   }
 
-  public save(company: any): Promise<any> {
-    return this.http.post(this.companyUrl, company).toPromise();
+  public save(company: any): Observable<any> {
+    return this.http.post(this.companyUrl, company);
   }
 
 }
