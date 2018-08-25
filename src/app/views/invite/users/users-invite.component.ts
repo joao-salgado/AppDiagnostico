@@ -35,9 +35,7 @@ export class UsersInviteComponent implements OnInit {
     this.userLoggedService.currentUserLogged.subscribe((userLogged) => {
       this.user = JSON.parse(userLogged);
 
-      this.inviteService.findByCompany(this.user.company.id).subscribe(response => {
-        this.listSentEmails = response.content;
-      });
+     this.findInvitationByCompany(0);
 
       this.listSendEmails = [
         this.inviteFactory()
@@ -63,6 +61,10 @@ export class UsersInviteComponent implements OnInit {
 
   }
 
+  public pageChanged(event: any): void {
+    this.findInvitationByCompany(event.page - 1);
+  }
+
   private inviteFactory(): any {
     return {
       email: '',
@@ -70,6 +72,12 @@ export class UsersInviteComponent implements OnInit {
         id: this.user.company.id
       }
     };
+  }
+
+  private findInvitationByCompany(page: number) {
+    this.inviteService.findByCompany(this.user.company.id, page).subscribe(response => {
+      this.listSentEmails = response;
+    });
   }
 
 

@@ -36,7 +36,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let user of listSentEmails">
+            <tr *ngFor="let user of listSentEmails?.content">
               <td>{{user.email}}</td>
               <td>
                 <span class="badge" [ngClass]="user.situation === 'SEND' ? 'badge-warning' : 'badge-success'">
@@ -44,9 +44,14 @@
                 </span>
               </td>
             </tr>
+            <tr [hidden]="listSentEmails?.totalElements">
+              <td colspan="2">Nenhum convite enviado</td>
+            </tr>
           </tbody>
-          <pagination [totalItems]="30"></pagination>
         </table>
+        <pagination [totalItems]="listSentEmails?.totalElements"
+                    (pageChanged)="pageChanged($event)">
+        </pagination>
       </div>
     </div>
   </div>

@@ -5,6 +5,7 @@ import 'rxjs/add/operator/toPromise';
 
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { HttpParams } from '@angular/common/http';
 
 @Injectable()
 export class InviteService {
@@ -19,8 +20,16 @@ export class InviteService {
     return this.http.post(this.inviteUrl, listEmails);
   }
 
-  public findByCompany(id: string): Observable<any> {
-    return this.http.get(`${this.inviteUrl}/companies/${id}`);
+  public findByCompany(id: string, page: number): Observable<any> {
+
+    let params = new HttpParams();
+
+    params = params.append('page', String(page));
+    params = params.append('size', '10');
+
+    return this.http.get(`${this.inviteUrl}/companies/${id}`, {
+      params: params
+    });
   }
 
 }
