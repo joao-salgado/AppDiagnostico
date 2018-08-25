@@ -69,6 +69,19 @@ export class UsersInviteComponent implements OnInit {
     this.findInvitationByCompany(event.page - 1);
   }
 
+  public cancelInvite(user: any): void {
+
+    const situation = user.situation;
+    user.situation = 'CANCELED';
+
+    this.inviteService.delete(user).subscribe(response => {
+    }, reject => {
+      this.toasty.error('Erro ao cancelar convite');
+      user.situation = situation;
+    });
+
+  }
+
   private inviteSentFactory(listEmails: any): any {
     return listEmails.map(element => {
       return {

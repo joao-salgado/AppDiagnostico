@@ -33,4 +33,8 @@ export class InviteService {
     return this.http.get(`${this.inviteUrl}/code/${code}`);
   }
 
+  public delete(user: any): Observable<any> {
+    return this.authHttp.delete(`${this.inviteUrl}/${user.id}`);
+  }
+
 }

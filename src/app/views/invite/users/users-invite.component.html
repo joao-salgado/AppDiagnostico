@@ -31,15 +31,22 @@
             <tr>
               <th>Email</th>
               <th>Situação</th>
+              <th>Ação</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let user of listSentEmails?.content">
               <td>{{user.email}}</td>
               <td>
-                <span class="badge" [ngClass]="user.situation === 'SEND' ? 'badge-warning' : 'badge-success'">
-                  {{user.situation === 'SEND' ? 'Enviado' : 'Aceito'}}
+                <span class="badge" [ngClass]="user.situation === 'SEND' ? 'badge-warning' : user.situation === 'ACCEPTED' ? 'badge-success' : 'badge-danger'">
+                  {{user.situation === 'SEND' ? 'Enviado' : user.situation === 'ACCEPTED' ? 'Aceito' : 'Cancelado'}}
                 </span>
+              </td>
+              <td>
+                <button class="btn btn-danger btn-sm" title="Cancelar"
+                (click)="cancelInvite(user)" *ngIf="user.situation === 'SEND'">
+                  <i class="fa fa-trash"></i>
+                </button>
               </td>
             </tr>
             <tr [hidden]="listSentEmails?.totalElements">
