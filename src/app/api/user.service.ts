@@ -1,10 +1,7 @@
-import { BWHttp } from './../core/security/bw-http';
 import { Injectable } from '@angular/core';
-
-import 'rxjs/add/operator/toPromise';
-
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
+import { BWHttp } from '../core/security/bw-http.service';
 
 @Injectable()
 export class UserService {

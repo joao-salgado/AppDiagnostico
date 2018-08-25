@@ -68,6 +68,7 @@ export class AuthService {
 
   public clearAccessToken() {
     localStorage.removeItem('token');
+    localStorage.removeItem('user_id');
     this.jwtPayload = null;
   }
 

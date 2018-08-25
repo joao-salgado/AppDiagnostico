@@ -1,8 +1,5 @@
 import { BWHttp } from './../core/security/bw-http.service';
 import { Injectable } from '@angular/core';
-
-import 'rxjs/add/operator/toPromise';
-
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 import { HttpParams } from '@angular/common/http';
@@ -30,6 +27,10 @@ export class InviteService {
     return this.http.get(`${this.inviteUrl}/companies/${id}`, {
       params: params
     });
+  }
+
+  public findByCode(code: string): Observable<any> {
+    return this.http.get(`${this.inviteUrl}/code/${code}`);
   }
 
 }

@@ -1,3 +1,4 @@
+import { UserTypeService } from './user-type.service';
 import { BWHttp } from './../core/security/bw-http.service';
 import { UserService } from './user.service';
 import { CompanyService } from './company.service';
@@ -16,7 +17,8 @@ import { InviteService } from './invite.service';
     CompanyProcessService,
     CompanyService,
     UserService,
-    InviteService
+    InviteService,
+    UserTypeService
   ]
 })
 export class ApiModule { }

@@ -5,16 +5,16 @@ import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class CompanyService {
+export class UserTypeService {
 
-  private companyUrl: string;
+  private typeUrl: string;
 
   constructor(private authHttp: BWHttp, private http: HttpClient) {
-    this.companyUrl = `${environment.apiUrl}/companies`;
+    this.typeUrl = `${environment.apiUrl}/user-types`;
   }
 
-  public save(company: any): Observable<any> {
-    return this.http.post(this.companyUrl, company);
+  public findAll(): Observable<any> {
+    return this.http.get(this.typeUrl);
   }
 
 }

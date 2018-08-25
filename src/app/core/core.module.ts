@@ -1,5 +1,4 @@
 import { ApiModule } from './../api/api.module';
-import { BWHttp } from './security/bw-http';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './../api/user.service';
 import { UserLoggedService } from './user-logged.service';
@@ -10,6 +9,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { onAppInit } from './app-init.provider';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { BWHttp } from './security/bw-http.service';
 
 @NgModule({
   imports: [

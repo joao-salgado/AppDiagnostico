@@ -1,3 +1,4 @@
+import { RegisterUserComponent } from './views/register/user/register-user.component';
 import { CoreModule } from './core/core.module';
 import { InviteModule } from './views/invite/invite.module';
 import { RegisterCompanyComponent } from './views/register/company/register-company.component';
@@ -72,7 +73,8 @@ import { HttpModule } from '@angular/http';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterCompanyComponent
+    RegisterCompanyComponent,
+    RegisterUserComponent
   ],
   providers: [{
     provide: LocationStrategy,

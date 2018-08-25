@@ -52,6 +52,10 @@ export class UsersInviteComponent implements OnInit {
 
     this.inviteService.save(this.listSendEmails)
     .subscribe(response => {
+      this.listSentEmails.content = this.listSentEmails.content || [];
+
+      this.listSentEmails.content = this.listSentEmails.content.concat(this.inviteSentFactory(this.listSendEmails));
+
       this.listSendEmails = [];
       this.listSendEmails.push(this.inviteFactory());
       this.toasty.success('Convites enviados com sucesso!');
@@ -63,6 +67,15 @@ export class UsersInviteComponent implements OnInit {
 
   public pageChanged(event: any): void {
     this.findInvitationByCompany(event.page - 1);
+  }
+
+  private inviteSentFactory(listEmails: any): any {
+    return listEmails.map(element => {
+      return {
+        email: element.email,
+        situation: 'SEND'
+      };
+    });
   }
 
   private inviteFactory(): any {
@@ -79,6 +92,5 @@ export class UsersInviteComponent implements OnInit {
       this.listSentEmails = response;
     });
   }
-
 
 }

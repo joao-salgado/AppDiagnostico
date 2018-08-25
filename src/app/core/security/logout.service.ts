@@ -1,8 +1,8 @@
-import { BWHttp } from './bw-http';
 import { environment } from './../../../environments/environment';
 import { Injectable } from '@angular/core';
 
 import { AuthService } from './auth.service';
+import { BWHttp } from './bw-http.service';
 
 @Injectable()
 export class LogoutService {

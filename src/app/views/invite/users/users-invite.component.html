@@ -14,9 +14,7 @@
                 [name]="'email'+i" [(ngModel)]="list.email"
             autocomplete="off">
         </div>
-
         <button class="btn btn-primary fa fa-plus pull-right mb-2" (click)="addEmail()"></button>
-
         <button class="btn btn-success btn-block mt-5" (click)="send()">Enviar</button>
       </div>
     </div>
@@ -50,7 +48,9 @@
           </tbody>
         </table>
         <pagination [totalItems]="listSentEmails?.totalElements"
-                    (pageChanged)="pageChanged($event)">
+                    (pageChanged)="pageChanged($event)"
+                    [maxSize]="5"
+                    [rotate]="rotate">
         </pagination>
       </div>
     </div>

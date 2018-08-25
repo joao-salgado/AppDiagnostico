@@ -1,3 +1,6 @@
+import { RegisterUserTypesResolver } from './views/register/user/register-user-type.resolver';
+import { RegisterUserCodeResolver } from './views/register/user/register-user-code.resolver';
+import { RegisterUserComponent } from './views/register/user/register-user.component';
 import { AuthGuard } from './core/security/auth.guard';
 import { RegisterCompanyResolver } from './views/register/company/register-company-resolver';
 import { NgModule } from '@angular/core';
@@ -47,6 +50,17 @@ export const routes: Routes = [
     },
     resolve: {
       homeData: RegisterCompanyResolver
+    },
+  },
+  {
+    path: 'cadastro-usuario',
+    component: RegisterUserComponent,
+    data: {
+      title: 'Cadastro de usuario'
+    },
+    resolve: {
+      userData: RegisterUserCodeResolver,
+      userTypes: RegisterUserTypesResolver
     },
   },
   {
@@ -110,7 +124,9 @@ export const routes: Routes = [
   imports: [ RouterModule.forRoot(routes) ],
   exports: [ RouterModule ],
   providers: [
-    RegisterCompanyResolver
+    RegisterCompanyResolver,
+    RegisterUserCodeResolver,
+    RegisterUserTypesResolver
   ]
 })
 export class AppRoutingModule {}
