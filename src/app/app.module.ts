@@ -4,17 +4,14 @@ import { InviteModule } from './views/invite/invite.module';
 import { RegisterCompanyComponent } from './views/register/company/register-company.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+
+import { NgxMaskModule } from 'ngx-mask';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
 
 import { AppComponent } from './app.component';
 
@@ -47,6 +44,10 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ToastyModule } from 'ng2-toasty';
 import { HttpModule } from '@angular/http';
 
+import ptBr from '@angular/common/locales/pt';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(ptBr);
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -60,12 +61,14 @@ import { HttpModule } from '@angular/http';
     AppSidebarModule,
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
+    BsDatepickerModule.forRoot(),
     TabsModule.forRoot(),
     ToastyModule.forRoot(),
+    NgxMaskModule.forRoot(),
     FormsModule,
     CoreModule,
     ChartsModule,
-    InviteModule
+    InviteModule,
   ],
   declarations: [
     AppComponent,
@@ -76,10 +79,16 @@ import { HttpModule } from '@angular/http';
     RegisterCompanyComponent,
     RegisterUserComponent
   ],
-  providers: [{
-    provide: LocationStrategy,
-    useClass: HashLocationStrategy
-  }],
+  providers: [
+    {
+      provide: LOCALE_ID,
+      useValue: 'pt'
+    },
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -5,31 +5,83 @@
         <div class="col-md-6 mx-auto">
           <div class="card mx-4">
             <div class="card-body p-4">
-              <form #formRegisterCompany="ngForm" (ngSubmit)="register(companyRegister)" novalidate>
-                <h1>Cadastro de empresa</h1>
-                <p class="text-muted">Crie a conta de sua empresa</p>
+              <form #formRegisterUser="ngForm" (ngSubmit)="register(userRegister)" novalidate>
+                <h1>Cadastro de usuário</h1>
+                <p class="text-muted">Crie sua conta</p>
 
                 <fieldset>
-                  <legend>Dados da empresa</legend>
+                  <legend>Seus dados</legend>
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="icon-user"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" [(ngModel)]="companyRegister.name" placeholder="Nome da empresa" required name="name"
-                      autocomplete="off" #name="ngModel">
+                    <input type="text" class="form-control" [(ngModel)]="userRegister.name"
+                          placeholder="Nome e sobrenome" required name="name"
+                          #name="ngModel"
+                          autocomplete="full_name">
                   </div>
 
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
                       <label class="input-group-text">P</label>
                     </div>
-                    <select name="process" class="form-control" required #process="ngModel" [(ngModel)]="companyRegister.companyProcess.id">
-                      <option [ngValue]="undefined" selected disabled>Principal processo da empresa</option>
-                      <option *ngFor="let process of listCompanyProcesses; trackBy:process?.id" [value]="process.id">{{process.name}}</option>
+                    <select name="process" class="form-control" required #process="ngModel" [(ngModel)]="userRegister.userType.id">
+                      <option [ngValue]="undefined" selected disabled>Selecione seu papel</option>
+                      <option *ngFor="let type of listUserTypes; trackBy:type?.id" [value]="type.id">{{type.name}}</option>
                     </select>
                   </div>
+
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                          <i class="fa fa-calendar"></i>
+                        </span>
+                      </div>
+                    <input type="text"
+                        [(ngModel)]="userRegister.birthdate"
+                        name="birthdate"
+                        placeholder="Data de nascimento"
+                        class="form-control"
+                        bsDatepicker
+                        [bsConfig]="bsConfig"
+                        autocomplete="birthdate">
+                  </div>
+
+                  <div class="input-group mb-3">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">
+                            <i class="fa fa-phone"></i>
+                        </span>
+                      </div>
+                      <input type="tel" class="form-control" [(ngModel)]="userRegister.phone"
+                              placeholder="Telefone" name="phone"
+                              #phone="ngModel" mask="(99) 99999-9999"
+                              autocomplete="phone">
+                  </div>
+
+                  <div class="form-group row text-center">
+                    <div class="col-md-12 col-form-label">
+                      <div class="form-check form-check-inline mr-3" id="inline-radios">
+                        <input class="form-check-input" type="radio"
+                                name="inline-radios" id="inlineRadio1"
+                                value="MALE"
+                                [(ngModel)]="userRegister.sex">
+
+                        <label class="form-check-label" for="inlineRadio1">Masculino</label>
+                      </div>
+                      <div class="form-check form-check-inline mr-1">
+                        <input class="form-check-input" type="radio"
+                                name="inline-radios" id="inlineRadio2"
+                                value="FEMALE"
+                                [(ngModel)]="userRegister.sex">
+
+                        <label class="form-check-label" for="inlineRadio2">Feminino</label>
+                      </div>
+                    </div>
+                  </div>
+
                 </fieldset>
 
                 <fieldset>
@@ -38,7 +90,7 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text">@</span>
                     </div>
-                    <input type="email" class="form-control" placeholder="Email" required name="email" #email="ngModel" [(ngModel)]="companyRegister.userAccount[0].email"
+                    <input type="email" class="form-control" placeholder="Email" required name="email" #email="ngModel" [(ngModel)]="userRegister.email"
                       autocomplete="off">
                   </div>
 
@@ -48,7 +100,7 @@
                         <i class="icon-lock"></i>
                       </span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Senha" minlength="6" required [(ngModel)]="companyRegister.userAccount[0].password"
+                    <input type="password" class="form-control" placeholder="Senha" minlength="6" required [(ngModel)]="userRegister.password"
                       name="password" #password="ngModel">
                   </div>
 
@@ -59,20 +111,20 @@
                       </span>
                     </div>
                     <input type="password" class="form-control" placeholder="Confirme sua senha" minlength="6" required name="passwordConfirmation"
-                      [(ngModel)]="companyRegister.userAccount[0].passwordConfirmation" #passwordConfirmation="ngModel">
+                      [(ngModel)]="userRegister.passwordConfirmation" #passwordConfirmation="ngModel">
                   </div>
 
                   <p class="text-danger" [hidden]="!(passwordConfirmation.valid && password.valid && passwordConfirmation.value !== password.value)">
                     A confirmação de senha está diferente da nova senha
                   </p>
 
-                  <p class="text-danger" *ngIf="(!password.valid && password.dirty && companyRegister.userAccount[0].password.length < 6)">
+                  <p class="text-danger" *ngIf="(!password.valid && password.dirty && userRegister.password.length < 6)">
                     A senha deve ter no mínimo 6 caracteres
                   </p>
 
                 </fieldset>
 
-                <button type="submit" class="btn btn-block btn-success" [disabled]="(!formRegisterCompany.valid || (passwordConfirmation.valid && password.valid && passwordConfirmation.value !== password.value)) || (isLoading)">
+                <button type="submit" class="btn btn-block btn-success" [disabled]="(!formRegisterUser.valid || (passwordConfirmation.valid && password.valid && passwordConfirmation.value !== password.value)) || (isLoading)">
                   Criar conta
                   <i class="fa fa-lg m-l-5" [ngClass]="{'fa-spinner fa-spin': isLoading}" *ngIf="isLoading"> </i>
                 </button>
