@@ -5,22 +5,38 @@ export const navItems = [
     icon: 'icon-speedometer',
     badge: {
       variant: 'info',
-      text: 'NEW'
+      text: 'NOVO'
     }
   },
   {
     title: true,
-    name: 'Theme'
+    name: 'Diagnósticos'
   },
   {
-    name: 'Colors',
-    url: '/theme/colors',
-    icon: 'icon-drop'
+    name: 'Categorias',
+    url: '/diagnosticos',
+    icon: 'icon-paper-clip',
+    children: [
+      {
+        name: 'Bukowitz & Williams',
+        url: '/diagnosticos/bw',
+        icon: 'icon-badge'
+      },
+    ]
   },
   {
-    name: 'Typography',
-    url: '/theme/typography',
-    icon: 'icon-pencil'
+    title: true,
+    name: 'Usuários'
+  },
+  {
+    name: 'Usuários',
+    url: '/usuarios',
+    icon: 'fa fa-user-o'
+  },
+  {
+    name: 'Convites',
+    url: '/convites',
+    icon: 'icon-user-follow'
   },
   {
     title: true,

@@ -71,6 +71,11 @@ export const routes: Routes = [
     },
     children: [
       {
+        path: 'diagnosticos',
+        loadChildren: './views/diagnosis/diagnosis.module#DiagnosisModule',
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'perfil',
         loadChildren: './views/profile/profile.module#ProfileModule',
         canActivate: [AuthGuard]

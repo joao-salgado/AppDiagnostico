@@ -1,10 +1,7 @@
 import { UserLoggedService } from './../../../core/user-logged.service';
-import { AuthService } from './../../../core/security/auth.service';
 import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { InviteService } from './../../../api/invite.service';
-import { CompanyService } from './../../../api/company.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '../../../../../node_modules/@angular/router';
 
 @Component({
   selector: 'app-users-invite',

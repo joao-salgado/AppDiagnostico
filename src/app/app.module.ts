@@ -1,3 +1,5 @@
+import { SharedModule } from './shared/shared.module';
+import { DiagnosisModule } from './views/diagnosis/diagnosis.module';
 import { ProfileModule } from './views/profile/profile.module';
 import { RegisterUserComponent } from './views/register/user/register-user.component';
 import { CoreModule } from './core/core.module';
@@ -69,8 +71,10 @@ registerLocaleData(ptBr);
     FormsModule,
     CoreModule,
     ChartsModule,
+    SharedModule,
     InviteModule,
     ProfileModule,
+    DiagnosisModule
   ],
   declarations: [
     AppComponent,

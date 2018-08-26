@@ -1,0 +1,27 @@
+<section>
+  <div class="row-fluid service-main">
+    <div class="offset-md-1 col-md-10 col-12 pt-3 pb-3">
+      <div class="row">
+        <div class="col-md-12 col-12 service-heading text-center pt-3">
+          <h2 class="pb-2 border-bottom text-black">{{dlpConfig.title}}</h2>
+          <p class="f-15">{{dlpConfig.description}}</p>
+        </div>
+      </div>
+      <div class="row">
+
+        <div class="col-md-6 col-12 mt-5" *ngFor="let info of dlpConfig.info">
+          <div class="row service-box">
+            <div class="col-md-3 col-3 service-box-icon">
+              <i [ngClass]="info.icon" class="text-center rounded-circle" aria-hidden="true"></i>
+            </div>
+            <div class="col-md-9 col-9 service-box-desc pl-0">
+              <h5 class="text-white border border-top-0 border-left-0 border-right-0 pb-2"><strong>{{info.title}}</strong></h5>
+              <p>{{info.description}}</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>

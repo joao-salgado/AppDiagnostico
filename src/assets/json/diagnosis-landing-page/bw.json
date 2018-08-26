@@ -1,0 +1,26 @@
+{
+  "title": "Bukowitz & Williams",
+  "description": "Na tentativa de proporcionar uma maior atenção quanto à problemática do processo de Gestão do conhecimento, Bukowitz & Williams mapeiam caminhos, técnicas e ferramentas que possam facilitar este processo.",
+  "info": [
+    {
+      "title": "OBJETIVO",
+      "description": "Identificar dentro da empresa quais aréas da Gestão de Conhecimento que não estão funcionando bem.",
+      "icon": "fa fa-bullseye"
+    },
+    {
+      "title": "INSTRUÇÕES",
+      "description": "Você não está sendo testado. Ao responder o questionário você fornecerá, de acordo com sua experiência, dados para sua empresa mensurar a situação da Gestão de Conhecimento.",
+      "icon": "fa fa-server"
+    },
+    {
+      "title": "FORMULÁRIO",
+      "description": "O diagnóstico possui 7 seções com 20 questões por seção. Ao final será gerado o resultado de acordo com o cálculo proposto pelo diagnóstico. Lembre-se de responder o questionário completamente antes de sair!",
+      "icon": "fa fa-file-text-o"
+    },
+    {
+      "title": "RESULTADOS",
+      "description": "Apenas o usuário que responder o diagnóstico terá acesso a seu resultado. Para a empresa será fornecido uma visão geral através de uma média aritimética de todos os resultados.",
+      "icon": "fa fa-line-chart"
+    }
+  ]
+}

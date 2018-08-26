@@ -1,3 +1,4 @@
+import { StaticJsonService } from './static-json.service';
 import { UserTypeService } from './user-type.service';
 import { BWHttp } from './../core/security/bw-http.service';
 import { UserService } from './user.service';
@@ -18,7 +19,8 @@ import { InviteService } from './invite.service';
     CompanyService,
     UserService,
     InviteService,
-    UserTypeService
+    UserTypeService,
+    StaticJsonService
   ]
 })
 export class ApiModule { }
