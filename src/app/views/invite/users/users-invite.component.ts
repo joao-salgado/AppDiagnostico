@@ -19,10 +19,7 @@ export class UsersInviteComponent implements OnInit {
   public listSentEmails: any;
   public user: any;
 
-  constructor(private companyService: CompanyService,
-              private router: Router,
-              private auth: AuthService,
-              private userLoggedService: UserLoggedService,
+  constructor(private userLoggedService: UserLoggedService,
               private inviteService: InviteService,
               private toasty: ToastyService,
               private toastyConfig: ToastyConfig) {

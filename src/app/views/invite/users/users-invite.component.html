@@ -49,8 +49,8 @@
                 </button>
               </td>
             </tr>
-            <tr [hidden]="listSentEmails?.totalElements">
-              <td colspan="2">Nenhum convite enviado</td>
+            <tr [hidden]="listSentEmails?.content?.length">
+              <td colspan="3">Nenhum convite enviado</td>
             </tr>
           </tbody>
         </table>

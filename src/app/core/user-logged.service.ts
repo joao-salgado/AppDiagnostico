@@ -7,8 +7,15 @@ export class UserLoggedService {
 
   public currentUserLogged = this.userLoggedBehavior.asObservable();
 
+  private role: number;
+
   public updateUserLogged(item: any) {
+    this.role = item.userGroup.id;
     this.userLoggedBehavior.next(JSON.stringify(item));
+  }
+
+  public isAdmin(): boolean {
+    return this.role === 1;
   }
 
 }

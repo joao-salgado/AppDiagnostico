@@ -24,7 +24,6 @@ export class RegisterUserComponent implements OnInit {
   public listUserTypes: any;
 
   public bsConfig: any;
-  public bsValue: Date;
 
   public isLoading = false;
 
@@ -62,6 +61,7 @@ export class RegisterUserComponent implements OnInit {
     }
 
     this.listUserTypes = this.route.snapshot.data.userTypes;
+    this.listUserTypes.shift();
 
     this.userRegister.email = this.userData.email;
 

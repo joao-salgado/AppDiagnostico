@@ -1,3 +1,4 @@
+import { ProfileModule } from './views/profile/profile.module';
 import { RegisterUserComponent } from './views/register/user/register-user.component';
 import { CoreModule } from './core/core.module';
 import { InviteModule } from './views/invite/invite.module';
@@ -69,6 +70,7 @@ registerLocaleData(ptBr);
     CoreModule,
     ChartsModule,
     InviteModule,
+    ProfileModule,
   ],
   declarations: [
     AppComponent,

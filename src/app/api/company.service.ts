@@ -17,4 +17,8 @@ export class CompanyService {
     return this.http.post(this.companyUrl, company);
   }
 
+  public update(company: any): Observable<any> {
+    return this.authHttp.put(`${this.companyUrl}/${company.id}`, company);
+  }
+
 }
