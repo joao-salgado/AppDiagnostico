@@ -1,3 +1,4 @@
+import { BWService } from './bw-questionnaire.service';
 import { StaticJsonService } from './static-json.service';
 import { UserTypeService } from './user-type.service';
 import { BWHttp } from './../core/security/bw-http.service';
@@ -20,6 +21,7 @@ import { InviteService } from './invite.service';
     UserService,
     InviteService,
     UserTypeService,
+    BWService,
     StaticJsonService
   ]
 })

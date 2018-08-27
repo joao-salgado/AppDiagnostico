@@ -9,6 +9,40 @@
       </div>
       <div class="row">
 
+        <div class="col-12 text-center">
+          <div class="row service-box init">
+
+            <div *ngIf="isAdminAndHasNotQuestionnaire()">
+              <div class="service-box-icon" (click)="btnActionListener('open')">
+                <i class="text-center fa fa-rocket rounded-circle primary" aria-hidden="true"></i>
+              </div>
+              <div class="service-box-desc">
+                <h5 class="text-white"><strong>Disponibilizar diagnóstico</strong></h5>
+              </div>
+            </div>
+
+            <div *ngIf="isAdminAndHasQuestionnaire()">
+              <div class="service-box-icon" (click)="btnActionListener('close')">
+                <i class="text-center fa fa-check rounded-circle success" aria-hidden="true"></i>
+              </div>
+              <div class="service-box-desc">
+                <h5 class="text-white"><strong>Fechar diagnóstico</strong></h5>
+                <h6 *ngIf="!!dlpConfig.data">{{dlpConfig.data.countUsersWhoResponded + ' de ' + dlpConfig.data.countUsers + ' responderam o questionário.'}}</h6>
+              </div>
+            </div>
+
+            <div *ngIf="isUserAndHasQuestionnaire()">
+              <div class="service-box-icon" (click)="btnActionListener('do')">
+                <i class="text-center fa fa-rocket rounded-circle success" aria-hidden="true"></i>
+              </div>
+              <div class="service-box-desc">
+                <h5 class="text-white"><strong>Clique para iniciar</strong></h5>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
         <div class="col-md-6 col-12 mt-5" *ngFor="let info of dlpConfig.info">
           <div class="row service-box">
             <div class="col-md-3 col-3 service-box-icon">

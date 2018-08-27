@@ -1,4 +1,5 @@
-import { BWResolver } from './bw/bw.resolver';
+import { BWDataResolver } from './bw/bw-data.resolver';
+import { BWLandingPageResolver } from './bw/bw-landing-page.resolver';
 import { BWComponent } from './bw/bw.component';
 import { NgModule } from '@angular/core';
 import { Routes,
@@ -18,7 +19,8 @@ const routes: Routes = [
           title: 'Bukowitz & Williams'
         },
         resolve: {
-          landingData: BWResolver
+          landingData: BWLandingPageResolver,
+          bwData: BWDataResolver
         },
       }
     ]
@@ -29,7 +31,8 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [
-    BWResolver
+    BWLandingPageResolver,
+    BWDataResolver
   ]
 })
 export class DiagnosisRoutingModule {}

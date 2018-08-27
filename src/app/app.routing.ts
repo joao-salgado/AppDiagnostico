@@ -116,11 +116,6 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'theme',
-        loadChildren: './views/theme/theme.module#ThemeModule',
-        canActivate: [AuthGuard]
-      },
-      {
         path: 'widgets',
         loadChildren: './views/widgets/widgets.module#WidgetsModule',
         canActivate: [AuthGuard]

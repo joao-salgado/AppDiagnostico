@@ -29,3 +29,28 @@ section {
 .f-15 {
   font-size: 15px;
 }
+
+.init {
+  display: flow-root;
+
+  i {
+    cursor: pointer;
+  }
+
+  .service-box-icon i.success {
+    background-color: #1de41d;
+
+    &:hover {
+      background-color: #2dbb2d;
+    }
+  }
+
+  .service-box-icon i.primary {
+    background-color: #4b60d4;
+
+    &:hover {
+      background-color: #3f51b5;
+    }
+  }
+
+}

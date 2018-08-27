@@ -1,5 +1,5 @@
 import { UserLoggedService } from './../../../core/user-logged.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-diagnosis-landing-page',
@@ -11,8 +11,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class DiagnosisLandingPageComponent implements OnInit {
 
   public user: any;
+  public btnShow: string;
 
   @Input() dlpConfig: any;
+  @Output() btnListener = new EventEmitter();
 
   constructor(private userLoggedService: UserLoggedService) {
   }
@@ -21,7 +23,38 @@ export class DiagnosisLandingPageComponent implements OnInit {
     this.userLoggedService.currentUserLogged.subscribe((userLogged) => {
       this.user = JSON.parse(userLogged);
     });
+  }
 
+  public btnActionListener(event): void {
+    console.log(event);
+    this.btnShow = event;
+    this.btnListener.emit(event);
+  }
+
+  public isAdminAndHasNotQuestionnaire(): boolean {
+
+    return this.btnShow === 'open'
+    ? false
+    : this.userLoggedService.isAdmin() && (
+    !this.dlpConfig.data ||
+    !this.dlpConfig.data.questionnaire ||
+    !this.dlpConfig.data.questionnaire.id);
+
+  }
+
+  public isAdminAndHasQuestionnaire(): boolean {
+    return (this.userLoggedService.isAdmin() &&
+    this.dlpConfig.data &&
+    this.dlpConfig.data.questionnaire &&
+    this.dlpConfig.data.questionnaire.id)
+    || this.btnShow === 'open';
+  }
+
+  public isUserAndHasQuestionnaire(): boolean {
+    return !this.userLoggedService.isAdmin() &&
+    this.dlpConfig.data &&
+    this.dlpConfig.data.questionnaire &&
+    this.dlpConfig.data.questionnaire.id;
   }
 
 }
