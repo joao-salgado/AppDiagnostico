@@ -14,6 +14,7 @@ export class ErrorHandlerService {
   ) { }
 
   handle(errorResponse: any) {
+    console.log('oi');
     let msg: string;
 
     if (typeof errorResponse === 'string') {

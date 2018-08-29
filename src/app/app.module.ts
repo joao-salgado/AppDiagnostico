@@ -1,3 +1,4 @@
+import { CustomHttpInterceptor } from './api/http-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { DiagnosisModule } from './views/diagnosis/diagnosis.module';
 import { ProfileModule } from './views/profile/profile.module';
@@ -9,7 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { NgxMaskModule } from 'ngx-mask';
@@ -89,6 +90,11 @@ registerLocaleData(ptBr);
     {
       provide: LOCALE_ID,
       useValue: 'pt'
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomHttpInterceptor,
+      multi: true
     },
     {
       provide: LocationStrategy,

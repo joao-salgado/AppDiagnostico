@@ -1,3 +1,4 @@
+import { ErrorHandlerService } from './error-handler.service';
 import { ApiModule } from './../api/api.module';
 import { HttpClientModule } from '@angular/common/http';
 import { UserService } from './../api/user.service';
@@ -27,6 +28,7 @@ import { BWHttp } from './security/bw-http.service';
     JwtHelperService,
     AuthService,
     UserLoggedService,
+    ErrorHandlerService,
     BWHttp,
     {
       provide: LOCALE_ID,

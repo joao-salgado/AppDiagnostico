@@ -29,7 +29,7 @@
                     </div>
                     <select name="process" class="form-control" required #process="ngModel" [(ngModel)]="userRegister.userType.id">
                       <option [ngValue]="undefined" selected disabled>Selecione seu papel</option>
-                      <option *ngFor="let type of listUserTypes; trackBy:type?.id" [value]="type.id">{{type.name}}</option>
+                      <option *ngFor="let type of listUserTypes;" [value]="type.id">{{type.name}}</option>
                     </select>
                   </div>
 
