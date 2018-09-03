@@ -1,57 +1,71 @@
 <app-diagnosis-landing-page [dlpConfig]="landingData" (btnListener)="onBtnClick($event)" *ngIf="!doQuestionnaire()" [@doDiagnosis]="'actice'">
 </app-diagnosis-landing-page>
 
-<div *ngIf="doQuestionnaire()" [@doDiagnosis]="'inactive'">
+<div *ngIf="doQuestionnaire() && !loadingQuestions" [@doDiagnosis]="'inactive'">
 
-  <tabset>
-    <tab *ngFor="let section of questions; let parentIndex=index">
-      <ng-template tabHeading><i class="mr-2" [ngClass]="section.icon"></i>{{section.title}}</ng-template>
+  <div class="row">
+    <tabset [vertical]="true" type="pills">
+      <tab *ngFor="let section of questions; let parentIndex=index">
+        <ng-template tabHeading><i class="mr-2" [ngClass]="section.icon"></i>{{section.title}}</ng-template>
 
-
-      <div class="card text-white bg-info text-center">
-        <div class="card-body">
-          {{section.description}}
+        <div class="card text-white bg-info text-center">
+          <div class="card-body">
+            {{section.description}}
+          </div>
         </div>
-      </div>
 
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th>Afirmação</th>
-            <th class="text-center">Fraco</th>
-            <th class="text-center">Moderado</th>
-            <th class="text-center">Forte</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let question of section.questions; let childIndex=index">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Afirmação</th>
+              <th class="text-center">Fraco</th>
+              <th class="text-center">Moderado</th>
+              <th class="text-center">Forte</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let question of section.questions; let childIndex=index">
 
-            <td>{{question}}</td>
-            <td class="td__diagnosis">
-              <label>
-                <input type="radio" [name]="parentIndex + 'radio' + childIndex" value="F">
-              </label>
-            </td>
-            <td class="td__diagnosis">
-              <label>
-                <input type="radio" [name]="parentIndex + 'radio' + childIndex" value="M">
-              </label>
-            </td>
-            <td class="td__diagnosis">
-              <label>
-                <input type="radio" [name]="parentIndex + 'radio' + childIndex" value="S">
-              </label>
-            </td>
+              <td>{{question}}</td>
+              <td class="td__diagnosis">
+                <label>
+                  <input type="radio" [name]="parentIndex + 'radio' + childIndex" [value]="1"
+                          [(ngModel)]="answers[section.model][childIndex]">
+                </label>
+              </td>
+              <td class="td__diagnosis">
+                <label>
+                  <input type="radio" [name]="parentIndex + 'radio' + childIndex" [value]="2"
+                        [(ngModel)]="answers[section.model][childIndex]">
+                </label>
+              </td>
+              <td class="td__diagnosis">
+                <label>
+                  <input type="radio" [name]="parentIndex + 'radio' + childIndex" [value]="3"
+                        [(ngModel)]="answers[section.model][childIndex]">
+                </label>
+              </td>
 
-          </tr>
-        </tbody>
-      </table>
+            </tr>
+          </tbody>
+        </table>
+
+      </tab>
+
+      <tab (select)="onFinalizeTab($event)">
+        <ng-template tabHeading><i class="mr-2 icon-calculator"></i>Finalizar</ng-template>
+
+        <h3 class="text-center">Aqui você pode visualizar o andamento de seu diagnóstico, cada seção possui uma pontuação.</h3>
+
+        <app-diagnosis-basic-result [data]="objectDiagnosis"></app-diagnosis-basic-result>
 
 
 
-    </tab>
-  </tabset>
+        <button class="btn btn-block btn-lg btn-success" (click)="finishDiagnosis()">Finalizar diagnóstico</button>
+      </tab>
 
+    </tabset>
+  </div>
 </div>
 
 <ng2-toasty></ng2-toasty>

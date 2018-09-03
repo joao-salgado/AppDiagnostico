@@ -41,6 +41,9 @@ export class BWComponent implements OnInit {
   public landingData: any;
   public clickType: string;
   public questions: any;
+  public loadingQuestions = false;
+  public answers: any;
+  public objectDiagnosis: any;
 
   constructor(private userLoggedService: UserLoggedService,
               private toasty: ToastyService,
@@ -50,6 +53,11 @@ export class BWComponent implements OnInit {
               private staticJsonService: StaticJsonService) {
 
     this.toastyConfig.theme = 'bootstrap';
+
+    this.answers = {
+      get: [], use: [], learn: [], contribute: [], evaluate: [], build: [], discard: []
+    };
+
   }
 
   public ngOnInit(): void {
@@ -85,15 +93,45 @@ export class BWComponent implements OnInit {
 
   private getQuestions(): void {
 
+    this.loadingQuestions = true;
+
     this.staticJsonService.getJson('assets/json/diagnosis-sections/bw.json')
     .subscribe(response => {
       this.questions = response;
+      this.loadingQuestions = false;
     });
 
   }
 
   public doQuestionnaire(): boolean {
     return this.clickType === 'do';
+  }
+
+  public onFinalizeTab(): void {
+    this.objectDiagnosis = {
+      sections: [
+        {name: 'Obter'},
+        {name: 'Utilizar'},
+        {name: 'Aprender'},
+        {name: 'Contribuir'},
+        {name: 'Avaliar'},
+        {name: 'Construir/Manter'},
+        {name: 'Descartar'},
+      ]
+    };
+
+    let index = 0;
+
+    Object.keys(this.answers).forEach(key => {
+      const sectionValues = this.answers[key];
+      this.objectDiagnosis.sections[index].total_points = sectionValues.reduce((a, b) => a + b, 0);
+      index++;
+    });
+
+  }
+
+  public finishDiagnosis(): void {
+    console.log(this.objectDiagnosis);
   }
 
 }
