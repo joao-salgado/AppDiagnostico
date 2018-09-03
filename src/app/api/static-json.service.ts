@@ -8,7 +8,7 @@ export class StaticJsonService {
   constructor(private http: HttpClient) {
   }
 
-  public findDiagnosisLangingPage(path: string): Observable<any> {
+  public getJson(path: string): Observable<any> {
     return this.http.get(path);
   }
 

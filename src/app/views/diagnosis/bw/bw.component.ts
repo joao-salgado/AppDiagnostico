@@ -1,26 +1,53 @@
+import { StaticJsonService } from './../../../api/static-json.service';
 import { BWService } from './../../../api/bw-questionnaire.service';
 import { ActivatedRoute } from '@angular/router';
 import { UserLoggedService } from './../../../core/user-logged.service';
 import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { Component, OnInit } from '@angular/core';
+import { trigger, style, transition, animate, state } from '@angular/animations';
 
 @Component({
   selector: 'app-bw',
   templateUrl: 'bw.component.html',
   styleUrls: [
     './bw.component.scss'
+  ],
+  animations: [
+    trigger('doDiagnosis', [
+      state('inactive', style({ transform: 'translateX(0) scale(1)' })),
+      state('active', style({ transform: 'translateX(0) scale(1.1)' })),
+      transition('inactive => active', animate('100ms ease-in')),
+      transition('active => inactive', animate('100ms ease-out')),
+      transition('void => inactive', [
+        style({ transform: 'translateX(-100%) scale(1)' }),
+        animate(100)
+      ]),
+      transition('inactive => void', [
+        animate(100, style({ transform: 'translateX(100%) scale(1)' }))
+      ]),
+      transition('void => active', [
+        style({ transform: 'translateX(0) scale(0)' }),
+        animate(200)
+      ]),
+      transition('active => void', [
+        animate(200, style({ transform: 'translateX(0) scale(0)' }))
+      ])
+    ])
   ]
 })
 export class BWComponent implements OnInit {
 
   public user: any;
   public landingData: any;
+  public clickType: string;
+  public questions: any;
 
   constructor(private userLoggedService: UserLoggedService,
               private toasty: ToastyService,
               private toastyConfig: ToastyConfig,
               private route: ActivatedRoute,
-              private bwService: BWService) {
+              private bwService: BWService,
+              private staticJsonService: StaticJsonService) {
 
     this.toastyConfig.theme = 'bootstrap';
   }
@@ -37,6 +64,8 @@ export class BWComponent implements OnInit {
 
   public onBtnClick(event: any): void {
 
+    this.clickType = event;
+
     switch (event) {
       case 'open':
         this.bwService.save(this.user.company.id).subscribe(response => {
@@ -49,8 +78,22 @@ export class BWComponent implements OnInit {
 
         break;
       case 'do':
-
+        this.getQuestions();
         break;
     }
   }
+
+  private getQuestions(): void {
+
+    this.staticJsonService.getJson('assets/json/diagnosis-sections/bw.json')
+    .subscribe(response => {
+      this.questions = response;
+    });
+
+  }
+
+  public doQuestionnaire(): boolean {
+    return this.clickType === 'do';
+  }
+
 }

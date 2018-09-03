@@ -16,7 +16,7 @@ const routes: Routes = [
         path: 'bw',
         component: BWComponent,
         data: {
-          title: 'Bukowitz & Williams'
+          title: 'Diagnóstico de Gestão de Conhecimento'
         },
         resolve: {
           landingData: BWLandingPageResolver,

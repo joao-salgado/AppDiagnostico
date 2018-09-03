@@ -18,7 +18,7 @@ export const navItems = [
     icon: 'icon-paper-clip',
     children: [
       {
-        name: 'Bukowitz & Williams',
+        name: 'DGC',
         url: '/diagnosticos/bw',
         icon: 'icon-badge'
       },

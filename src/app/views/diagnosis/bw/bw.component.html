@@ -1,7 +1,56 @@
-<app-diagnosis-landing-page [dlpConfig]="landingData" (btnListener)="onBtnClick($event)"></app-diagnosis-landing-page>
+<app-diagnosis-landing-page [dlpConfig]="landingData" (btnListener)="onBtnClick($event)" *ngIf="!doQuestionnaire()" [@doDiagnosis]="'actice'">
+</app-diagnosis-landing-page>
 
-<div>
+<div *ngIf="doQuestionnaire()" [@doDiagnosis]="'inactive'">
 
+  <tabset>
+    <tab *ngFor="let section of questions; let parentIndex=index">
+      <ng-template tabHeading><i class="mr-2" [ngClass]="section.icon"></i>{{section.title}}</ng-template>
+
+
+      <div class="card text-white bg-info text-center">
+        <div class="card-body">
+          {{section.description}}
+        </div>
+      </div>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Afirmação</th>
+            <th class="text-center">Fraco</th>
+            <th class="text-center">Moderado</th>
+            <th class="text-center">Forte</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let question of section.questions; let childIndex=index">
+
+            <td>{{question}}</td>
+            <td class="td__diagnosis">
+              <label>
+                <input type="radio" [name]="parentIndex + 'radio' + childIndex" value="F">
+              </label>
+            </td>
+            <td class="td__diagnosis">
+              <label>
+                <input type="radio" [name]="parentIndex + 'radio' + childIndex" value="M">
+              </label>
+            </td>
+            <td class="td__diagnosis">
+              <label>
+                <input type="radio" [name]="parentIndex + 'radio' + childIndex" value="S">
+              </label>
+            </td>
+
+          </tr>
+        </tbody>
+      </table>
+
+
+
+    </tab>
+  </tabset>
 
 </div>
 

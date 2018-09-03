@@ -25,3 +25,23 @@ section {
 .text-black {
   color: #2f353a;
 }
+
+table {
+  margin-bottom: 0;
+}
+
+td.td__diagnosis {
+  text-align: center;
+  vertical-align: middle;
+
+  label {
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+}
+
+.tab-content {
+  margin-bottom: 15px !important;
+}
+

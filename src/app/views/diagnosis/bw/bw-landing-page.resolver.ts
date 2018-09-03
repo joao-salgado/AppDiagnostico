@@ -8,6 +8,6 @@ export class BWLandingPageResolver implements Resolve<any> {
   constructor(private staticJsonService: StaticJsonService) {}
 
   resolve() {
-    return this.staticJsonService.findDiagnosisLangingPage('assets/json/diagnosis-landing-page/bw.json');
+    return this.staticJsonService.getJson('assets/json/diagnosis-landing-page/bw.json');
   }
 }

@@ -1,3 +1,4 @@
+import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SharedModule } from './../../shared/shared.module';
 import { BWComponent } from './bw/bw.component';
 import { DiagnosisRoutingModule } from './diagnosis.routing';
@@ -11,6 +12,7 @@ import { NgModule } from '@angular/core';
     DiagnosisRoutingModule,
     FormsModule,
     CommonModule,
+    TabsModule,
     ToastyModule,
     SharedModule
   ],

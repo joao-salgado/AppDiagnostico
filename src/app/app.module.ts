@@ -1,3 +1,4 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CustomHttpInterceptor } from './api/http-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { DiagnosisModule } from './views/diagnosis/diagnosis.module';
@@ -57,6 +58,7 @@ registerLocaleData(ptBr);
     BrowserModule,
     HttpModule,
     HttpClientModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     AppAsideModule,
     AppBreadcrumbModule.forRoot(),
