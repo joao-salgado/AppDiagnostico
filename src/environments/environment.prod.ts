@@ -2,6 +2,6 @@ export const environment = {
   production: true,
   apiUrl: 'https://api-diagnosis.herokuapp.com/',
 
-  tokenWhitelistedDomains: [ /api-stage-diagnosis/ ],
-  tokenBlacklistedRoutes: [/\/oauth\/token/, /\/company-processes/]
+  tokenWhitelistedDomains: [ new RegExp(/api-stage-diagnosis/) ],
+  tokenBlacklistedRoutes: [new RegExp(/\/oauth\/token/), new RegExp(/\/company-processes/)]
 };
