@@ -1,4 +1,3 @@
-import { environment } from './../../../environments/environment';
 import { LogoutService } from './logout.service';
 import { CommonModule } from '@angular/common';
 import { AuthGuard } from './auth.guard';
@@ -14,9 +13,7 @@ export function tokenGetter() {
     CommonModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: tokenGetter,
-        whitelistedDomains: environment.tokenWhitelistedDomains,
-        blacklistedRoutes: environment.tokenBlacklistedRoutes
+        tokenGetter: tokenGetter
       }
     }),
   ],
