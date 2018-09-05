@@ -1,10 +1,10 @@
 {
-  "name": "@coreui/coreui-free-angular-admin-template",
-  "version": "2.0.0-beta.4",
-  "description": "CoreUI Free Angular 2+ Admin Template",
-  "author": "Łukasz Holeczek",
-  "homepage": "https://coreui.io/angular",
-  "copyright": "Copyright 2018 creativeLabs Łukasz Holeczek",
+  "name": "@dgc/user-interface",
+  "version": "1.0.0",
+  "description": "UI da aplicação de diagnóstico de gestão de conhecimento",
+  "author": "João Gabriel Salgado",
+  "homepage": "https://www.linkedin.com/in/joao-slgd/",
+  "copyright": "Copyright 2018 João Salgado",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -13,7 +13,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng build --prod --configuration=stage"
   },
   "private": true,
   "dependencies": {
