@@ -26,7 +26,8 @@ export class AuthService {
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
-    return this.http.post<any>(this.oauthTokenUrl, body)
+    return this.http.post<any>(this.oauthTokenUrl, body,
+        { headers })
       .toPromise()
       .then(response => {
         this.storageToken(response.access_token);
@@ -49,7 +50,8 @@ export class AuthService {
 
     const body = 'grant_type=refresh_token';
 
-    return this.http.post<any>(this.oauthTokenUrl, body)
+    return this.http.post<any>(this.oauthTokenUrl, body,
+        { headers })
       .toPromise()
       .then(response => {
         this.storageToken(response.access_token);
