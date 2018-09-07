@@ -120,7 +120,7 @@ export const routes: Routes = [
         loadChildren: './views/widgets/widgets.module#WidgetsModule',
         canActivate: [AuthGuard]
       },
-      { path: '**', redirectTo: '404' },
+      { path: '**', redirectTo: '/404' },
     ]
   }
 ];

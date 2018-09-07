@@ -1,3 +1,4 @@
+import { LogoutService } from './security/logout.service';
 import { NotAuthenticatedError } from './security/bw-http.service';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
@@ -10,7 +11,8 @@ export class ErrorHandlerService {
 
   constructor(
     private toasty: ToastyService,
-    private router: Router
+    private router: Router,
+    private logoutService: LogoutService
   ) { }
 
   handle(errorResponse: any) {
@@ -25,25 +27,31 @@ export class ErrorHandlerService {
 
     } else if (errorResponse instanceof HttpErrorResponse
         && errorResponse.status >= 400 && errorResponse.status <= 499) {
-      // msg = 'Ocorreu um erro ao processar a sua solicitação';
 
-      if (errorResponse.status === 403) {
-        msg = 'Você não tem permissão para executar esta ação';
-      }
-
-      if (errorResponse.status === 401) {
-        this.router.navigate(['/login']);
+      switch (errorResponse.status) {
+        case 404:
+          msg = 'Não encontrado';
+          this.router.navigate(['/404']);
+          break;
+        case 403:
+          msg = 'Você não tem permissão para executar esta ação';
+          break;
+        case 401:
+          msg = 'Você não tem permissão para executar esta ação';
+          this.logoutService.logout();
+          this.router.navigate(['/login']);
+          break;
+        default:
+          msg = 'Ocorreu um erro ao processar a sua solicitação';
+          break;
       }
 
       try {
         msg = errorResponse.error[0].msgUser;
       } catch (e) { }
 
-      // console.error('Ocorreu um erro', errorResponse);
-
     } else {
       msg = 'Erro ao processar serviço remoto. Tente novamente.';
-      // console.error('Ocorreu um erro', errorResponse);
     }
 
     this.toasty.error(msg);
