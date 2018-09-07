@@ -22,7 +22,7 @@ export class AuthService {
   public login(usuario: string, senha: string): Promise<void> {
     const headers = new HttpHeaders()
         .append('Content-Type', 'application/x-www-form-urlencoded')
-        .append('Authorization', 'Basic ZGlhZ25vc3RpY29hcHA6Z3JlYXREaWFnbm9zaXM=');
+        .append('Authorization', environment.authorization);
 
     const body = `username=${usuario}&password=${senha}&grant_type=password`;
 
@@ -46,7 +46,7 @@ export class AuthService {
   public getNewAccessToken(): Promise<void> {
     const headers = new HttpHeaders()
         .append('Content-Type', 'application/x-www-form-urlencoded')
-        .append('Authorization', 'Basic ZGlhZ25vc3RpY29hcHA6Z3JlYXREaWFnbm9zaXM=');
+        .append('Authorization', environment.authorization);
 
     const body = 'grant_type=refresh_token';
 
