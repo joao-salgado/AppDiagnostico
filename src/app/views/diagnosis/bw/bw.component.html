@@ -3,13 +3,17 @@
 
 <div *ngIf="doQuestionnaire() && !loadingQuestions" [@doDiagnosis]="'inactive'">
 
-  <alert type="danger" *ngIf="hasErrorInDiagnosis()">
-    <strong>Ops!</strong> Alguma questão não foi respondida!
-  </alert>
+  <div class="row">
+    <div class="col-12">
+      <alert type="danger" *ngIf="hasErrorInDiagnosis()">
+          <strong>Ops!</strong> Alguma questão não foi respondida!
+        </alert>
 
-  <alert type="success" *ngIf="isDiagnosisCompleted()">
-    <strong>Parabéns!</strong> Todas as questões foram respondidas! Você já pode finalizar o diagnóstico.
-  </alert>
+        <alert type="success" *ngIf="isDiagnosisCompleted()">
+          <strong>Parabéns!</strong> Todas as questões foram respondidas! Você já pode finalizar o diagnóstico.
+        </alert>
+    </div>
+  </div>
 
   <div class="row">
     <tabset [vertical]="true" type="pills">
@@ -71,14 +75,13 @@
 
         <app-diagnosis-basic-result [data]="objectDiagnosis"></app-diagnosis-basic-result>
 
-        <button class="btn btn-block btn-lg btn-success" (click)="finishDiagnosis()" [disabled]="!isDiagnosisCompleted()">
+        <button class="btn btn-block btn-lg btn-success" (click)="finishDiagnosis()"
+              [disabled]="!isDiagnosisCompleted() || loadingFinish">
           Finalizar diagnóstico
+          <i class="fa fa-spinner fa-lg" *ngIf="loadingFinish"></i>
         </button>
 
-
-
       </tab>
-
     </tabset>
   </div>
 </div>

@@ -28,4 +28,8 @@ export class BWService {
     return this.authHttp.put(`${this.bwUrl}/${bwId}/close`, {});
   }
 
+  public savePersonalDiagnosis(diagnosisId: string, diagnosis: any): Observable<any> {
+    return this.authHttp.post(`${this.bwUrl}/${diagnosisId}/personal`, diagnosis);
+  }
+
 }

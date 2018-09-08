@@ -43,9 +43,11 @@ export class BWComponent implements OnInit {
   public landingData: any;
   public clickType: string;
   public questions: any;
-  public loadingQuestions = false;
   public answers: any;
   public objectDiagnosis: any;
+
+  public loadingFinish = false;
+  public loadingQuestions = false;
 
   constructor(private userLoggedService: UserLoggedService,
               private toasty: ToastyService,
@@ -125,15 +127,16 @@ export class BWComponent implements OnInit {
 
     Object.keys(this.answers).forEach(key => {
       const sectionValues = this.answers[key];
-      this.objectDiagnosis.sections[index].total_result = sectionValues.reduce((a, b) => a + b, 0);
+      this.objectDiagnosis.sections[index].totalResult = sectionValues.reduce((a, b) => a + b, 0);
       this.objectDiagnosis.sections[index].meta = this.objectDiagnosis.sections[index].meta || {};
       this.objectDiagnosis.sections[index].meta.answers = sectionValues;
+      this.objectDiagnosis.sections[index].section = index + 1;
       index++;
     });
 
-    this.objectDiagnosis.total_result = 0;
+    this.objectDiagnosis.totalResult = 0;
     this.objectDiagnosis.sections.forEach(section => {
-      this.objectDiagnosis.total_result += section.total_result;
+      this.objectDiagnosis.totalResult += section.totalResult;
     });
 
   }
@@ -149,7 +152,28 @@ export class BWComponent implements OnInit {
   }
 
   public finishDiagnosis(): void {
-    console.log(this.objectDiagnosis);
+
+    this.loadingFinish = true;
+
+    const questionnaireId = this.landingData.data.questionnaire.id;
+    let bwPersonal: any;
+    bwPersonal = {};
+
+    bwPersonal.totalResult = this.objectDiagnosis.totalResult;
+    bwPersonal.bwPersonalSection = this.objectDiagnosis.sections;
+    bwPersonal.user = {id: this.user.id};
+    bwPersonal.bwQuestionnaire = {id: questionnaireId};
+
+    this.bwService.savePersonalDiagnosis(questionnaireId, bwPersonal).subscribe(response => {
+      this.clickType = '';
+      this.toasty.success('Questionário finalizado com sucesso.');
+      this.loadingFinish = false;
+      this.landingData.data.questionnaire = null;
+    }, reject => {
+      this.toasty.error('Erro ao finalizar o questionário, tente novamente mais tarde.');
+      this.loadingFinish = false;
+    });
+
   }
 
   public hasErrorInDiagnosis(): boolean {
@@ -169,6 +193,7 @@ export class BWComponent implements OnInit {
       this.landingData.data = this.landingData.data || {};
       this.landingData.data.questionnaire = response;
       this.toasty.success('Questionário iniciado com sucesso');
+      this.landingData.manualOpen = true;
     }, reject => {
       this.toasty.error('Erro ao iniciar o questionário, tente novamente mais tarde.');
     });

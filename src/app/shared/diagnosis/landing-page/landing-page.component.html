@@ -27,7 +27,7 @@
               </div>
               <div class="service-box-desc">
                 <h5 class="text-white"><strong>Fechar diagnóstico</strong></h5>
-                <h6 *ngIf="!!dlpConfig.data">{{dlpConfig.data.countUsersWhoResponded + ' de ' + dlpConfig.data.countUsers + ' responderam o questionário.'}}</h6>
+                <h6 *ngIf="!!dlpConfig.data && !dlpConfig.manualOpen">{{dlpConfig.data.countUsersWhoResponded + ' de ' + dlpConfig.data.countUsers + ' responderam o questionário.'}}</h6>
               </div>
 
               <div>

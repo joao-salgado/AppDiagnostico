@@ -50,10 +50,19 @@ export class DiagnosisLandingPageComponent implements OnInit {
   }
 
   public isUserAndHasQuestionnaire(): boolean {
+
+    let alreadyResponded = false;
+    if (this.dlpConfig.data && Array(this.dlpConfig.data.usersWhoResponded)) {
+      alreadyResponded = this.dlpConfig.data.usersWhoResponded.some(user => {
+        return user && user.user && user.user.id === this.user.id;
+      });
+    }
+
     return !this.userLoggedService.isAdmin() &&
     this.dlpConfig.data &&
     this.dlpConfig.data.questionnaire &&
-    this.dlpConfig.data.questionnaire.id;
+    this.dlpConfig.data.questionnaire.id &&
+    !alreadyResponded;
   }
 
 }
