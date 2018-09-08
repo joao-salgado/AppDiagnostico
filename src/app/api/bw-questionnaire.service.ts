@@ -24,4 +24,8 @@ export class BWService {
     return this.authHttp.get(`${this.bwUrl}/companies/${companyId}`);
   }
 
+  public closeDiagnosis(bwId: string): Observable<any> {
+    return this.authHttp.put(`${this.bwUrl}/${bwId}/close`, {});
+  }
+
 }

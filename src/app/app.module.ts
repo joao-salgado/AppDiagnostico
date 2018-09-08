@@ -48,6 +48,7 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { ToastyModule } from 'ng2-toasty';
 import { HttpModule } from '@angular/http';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
@@ -71,6 +72,7 @@ registerLocaleData(ptBr);
     TabsModule.forRoot(),
     ToastyModule.forRoot(),
     NgxMaskModule.forRoot(),
+    SweetAlert2Module.forRoot(),
     FormsModule,
     CoreModule,
     ChartsModule,

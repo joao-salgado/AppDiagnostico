@@ -6,6 +6,7 @@ import { ToastyModule } from 'ng2-toasty';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
+import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { NgModule } from '@angular/core';
     CommonModule,
     TabsModule,
     ToastyModule,
-    SharedModule
+    SharedModule,
+    SweetAlert2Module
   ],
   declarations: [
     BWComponent

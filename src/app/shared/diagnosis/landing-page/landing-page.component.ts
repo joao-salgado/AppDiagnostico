@@ -26,7 +26,6 @@ export class DiagnosisLandingPageComponent implements OnInit {
   }
 
   public btnActionListener(event): void {
-    console.log(event);
     this.btnShow = event;
     this.btnListener.emit(event);
   }

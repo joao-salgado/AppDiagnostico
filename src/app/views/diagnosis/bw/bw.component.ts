@@ -6,6 +6,8 @@ import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { Component, OnInit } from '@angular/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 
+import swal from 'sweetalert2';
+
 @Component({
   selector: 'app-bw',
   templateUrl: 'bw.component.html',
@@ -76,14 +78,13 @@ export class BWComponent implements OnInit {
 
     switch (event) {
       case 'open':
-        this.bwService.save(this.user.company.id).subscribe(response => {
-          this.toasty.success('Questionário iniciado com sucesso');
-        }, reject => {
-          this.toasty.error('Erro ao iniciar o questionário, tente novamente mais tarde.');
-        });
+        this.openDiagnosis();
         break;
       case 'close':
-
+        this.closeDiagnosis();
+        break;
+      case 'cancel':
+        this.cancelDiagnosis();
         break;
       case 'do':
         this.getQuestions();
@@ -132,6 +133,71 @@ export class BWComponent implements OnInit {
 
   public finishDiagnosis(): void {
     console.log(this.objectDiagnosis);
+  }
+
+  private openDiagnosis(): void {
+    this.bwService.save(this.user.company.id).subscribe(response => {
+      this.landingData.data.questionnaire = response;
+      this.toasty.success('Questionário iniciado com sucesso');
+    }, reject => {
+      this.toasty.error('Erro ao iniciar o questionário, tente novamente mais tarde.');
+    });
+  }
+
+  private closeDiagnosis(): void {
+
+    const that = this;
+
+    swal({
+      title: 'Deseja finalizar o questionário?',
+      text: 'Ao finalizar o questionário, nenhum outro usuário poderá respondê-lo.',
+      type: 'info',
+      showCloseButton: true,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Finalizar',
+      cancelButtonText: 'Cancelar'
+    }).then(function(answer) {
+      if (answer.value) {
+
+        that.bwService.closeDiagnosis(that.landingData.data.questionnaire.id)
+        .subscribe(response => {
+          that.toasty.success('Diagnóstico finalizado com sucesso.');
+          that.landingData.data.questionnaire = null;
+        }, reject => {
+          that.toasty.success('Erro ao finalizar diagnóstico, tente novamente mais tarde.');
+        });
+
+      }
+    });
+  }
+
+  private cancelDiagnosis(): void {
+
+    const that = this;
+
+    swal({
+      title: 'Tem certeza?',
+      text: 'Deseja realmente cancelar o diagnóstico?',
+      type: 'warning',
+      showCloseButton: true,
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim',
+      cancelButtonText: 'Não'
+    }).then((result) => {
+      if (result.value) {
+        that.bwService.delete(that.landingData.data.questionnaire.id)
+        .subscribe(response => {
+          that.toasty.success('Cancelado com sucesso.');
+          that.landingData.data.questionnaire = null;
+        }, reject => {
+          that.toasty.success('Erro ao cancelar diagnóstico, tente novamente mais tarde.');
+        });
+      }
+    });
   }
 
 }
