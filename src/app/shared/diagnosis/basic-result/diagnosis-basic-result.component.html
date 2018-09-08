@@ -6,14 +6,33 @@
       </div>
       <div class="brand-card-body">
         <div>
-          <div class="text-value">{{section.total_points}}</div>
+          <div class="text-value">{{section.total_result}}</div>
           <div class="text-uppercase text-muted small">Pontos</div>
         </div>
         <div>
-          <div class="text-value">{{(section.total_points/60) | percent:'1.2'}}</div>
+          <div class="text-value">{{(section.total_result/60) | percent:'1.2'}}</div>
           <div class="text-uppercase text-muted small">Porcentagem</div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="col-sm-6 col-lg-3">
+    <div class="brand-card">
+      <div class="brand-card-header bg-success">
+        <span>Resultado Geral</span>
+      </div>
+      <div class="brand-card-body">
+        <div>
+          <div class="text-value">{{data.total_result}}</div>
+          <div class="text-uppercase text-muted small">Pontos</div>
+        </div>
+        <div>
+          <div class="text-value">{{(data.total_result/420) | percent:'1.2'}}</div>
+          <div class="text-uppercase text-muted small">Porcentagem</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>

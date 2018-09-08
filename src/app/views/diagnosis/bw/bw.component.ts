@@ -125,9 +125,26 @@ export class BWComponent implements OnInit {
 
     Object.keys(this.answers).forEach(key => {
       const sectionValues = this.answers[key];
-      this.objectDiagnosis.sections[index].total_points = sectionValues.reduce((a, b) => a + b, 0);
+      this.objectDiagnosis.sections[index].total_result = sectionValues.reduce((a, b) => a + b, 0);
+      this.objectDiagnosis.sections[index].meta = this.objectDiagnosis.sections[index].meta || {};
+      this.objectDiagnosis.sections[index].meta.answers = sectionValues;
       index++;
     });
+
+    this.objectDiagnosis.total_result = 0;
+    this.objectDiagnosis.sections.forEach(section => {
+      this.objectDiagnosis.total_result += section.total_result;
+    });
+
+  }
+
+  public onChangeTab(section): void {
+
+    if (this.answers[section.model].length !== 20) {
+      section.situation = 'error';
+    } else {
+      section.situation = 'success';
+    }
 
   }
 
@@ -135,8 +152,21 @@ export class BWComponent implements OnInit {
     console.log(this.objectDiagnosis);
   }
 
+  public hasErrorInDiagnosis(): boolean {
+    return this.questions.some(section => {
+      return section.situation === 'error';
+    });
+  }
+
+  public isDiagnosisCompleted(): boolean {
+    return this.questions.every(section => {
+      return section.situation === 'success';
+    });
+  }
+
   private openDiagnosis(): void {
     this.bwService.save(this.user.company.id).subscribe(response => {
+      this.landingData.data = this.landingData.data || {};
       this.landingData.data.questionnaire = response;
       this.toasty.success('Questionário iniciado com sucesso');
     }, reject => {
@@ -164,6 +194,7 @@ export class BWComponent implements OnInit {
         that.bwService.closeDiagnosis(that.landingData.data.questionnaire.id)
         .subscribe(response => {
           that.toasty.success('Diagnóstico finalizado com sucesso.');
+          that.landingData.data = that.landingData.data || {};
           that.landingData.data.questionnaire = null;
         }, reject => {
           that.toasty.success('Erro ao finalizar diagnóstico, tente novamente mais tarde.');
@@ -192,6 +223,7 @@ export class BWComponent implements OnInit {
         that.bwService.delete(that.landingData.data.questionnaire.id)
         .subscribe(response => {
           that.toasty.success('Cancelado com sucesso.');
+          that.landingData.data = that.landingData.data || {};
           that.landingData.data.questionnaire = null;
         }, reject => {
           that.toasty.success('Erro ao cancelar diagnóstico, tente novamente mais tarde.');

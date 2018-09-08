@@ -3,10 +3,22 @@
 
 <div *ngIf="doQuestionnaire() && !loadingQuestions" [@doDiagnosis]="'inactive'">
 
+  <alert type="danger" *ngIf="hasErrorInDiagnosis()">
+    <strong>Ops!</strong> Alguma questão não foi respondida!
+  </alert>
+
+  <alert type="success" *ngIf="isDiagnosisCompleted()">
+    <strong>Parabéns!</strong> Todas as questões foram respondidas! Você já pode finalizar o diagnóstico.
+  </alert>
+
   <div class="row">
     <tabset [vertical]="true" type="pills">
-      <tab *ngFor="let section of questions; let parentIndex=index">
-        <ng-template tabHeading><i class="mr-2" [ngClass]="section.icon"></i>{{section.title}}</ng-template>
+      <tab *ngFor="let section of questions; let parentIndex=index" (deselect)="onChangeTab(section)">
+        <ng-template tabHeading>
+          <span [ngClass]="section.situation === 'error' ? 'text-danger' : section.situation === 'success' ? 'text-success' : ''">
+          <i class="mr-2">{{parentIndex+1}}</i>{{section.title}}
+          </span>
+        </ng-template>
 
         <div class="card text-white bg-info text-center">
           <div class="card-body">
@@ -52,14 +64,19 @@
 
       </tab>
 
-      <tab (select)="onFinalizeTab($event)">
-        <ng-template tabHeading><i class="mr-2 icon-calculator"></i>Finalizar</ng-template>
+      <tab (select)="onFinalizeTab($event)" *ngIf="true">
+        <ng-template tabHeading><i class="mr-2 icon-calculator"></i>Finalizar diagnóstico</ng-template>
 
         <h3 class="text-center">Aqui você pode visualizar o andamento de seu diagnóstico, cada seção possui uma pontuação.</h3>
 
         <app-diagnosis-basic-result [data]="objectDiagnosis"></app-diagnosis-basic-result>
 
-        <button class="btn btn-block btn-lg btn-success" (click)="finishDiagnosis()">Finalizar diagnóstico</button>
+        <button class="btn btn-block btn-lg btn-success" (click)="finishDiagnosis()" [disabled]="!isDiagnosisCompleted()">
+          Finalizar diagnóstico
+        </button>
+
+
+
       </tab>
 
     </tabset>
