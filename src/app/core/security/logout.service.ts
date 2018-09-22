@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 
 import { AuthService } from './auth.service';
 import { BWHttp } from './bw-http.service';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class LogoutService {
@@ -11,17 +12,20 @@ export class LogoutService {
 
   constructor(
     private http: BWHttp,
-    private auth: AuthService
+    private auth: AuthService,
+    private router: Router
   ) {
     this.tokensRenokeUrl = `${environment.apiUrl}/tokens/revoke`;
   }
 
   public logout() {
-    return this.http.delete(this.tokensRenokeUrl, { withCredentials: true })
+    this.auth.clearAccessToken();
+    this.router.navigate(['/login']);
+    /*return this.http.delete(this.tokensRenokeUrl, { withCredentials: true })
       .toPromise()
       .then(() => {
         this.auth.clearAccessToken();
-      });
+      });*/
   }
 
 }

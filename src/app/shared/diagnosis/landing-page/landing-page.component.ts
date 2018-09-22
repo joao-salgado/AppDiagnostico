@@ -1,5 +1,5 @@
 import { UserLoggedService } from './../../../core/user-logged.service';
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 
 @Component({
   selector: 'app-diagnosis-landing-page',
@@ -8,7 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
     './landing-page.component.scss'
   ]
 })
-export class DiagnosisLandingPageComponent implements OnInit {
+export class DiagnosisLandingPageComponent implements OnInit, OnDestroy {
 
   public user: any;
   public btnShow: string;
@@ -17,12 +17,17 @@ export class DiagnosisLandingPageComponent implements OnInit {
   @Output() btnListener = new EventEmitter();
 
   constructor(private userLoggedService: UserLoggedService) {
+    document.querySelector('main.main').classList.add('service-main');
   }
 
   public ngOnInit(): void {
     this.userLoggedService.currentUserLogged.subscribe((userLogged) => {
       this.user = JSON.parse(userLogged);
     });
+  }
+
+  public ngOnDestroy(): void {
+    document.querySelector('main.main').classList.remove('service-main');
   }
 
   public btnActionListener(event): void {

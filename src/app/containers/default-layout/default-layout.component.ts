@@ -1,7 +1,6 @@
 import { UserLoggedService } from './../../core/user-logged.service';
 import { AuthService } from './../../core/security/auth.service';
 import { LogoutService } from './../../core/security/logout.service';
-import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../_nav';
 
@@ -18,7 +17,6 @@ export class DefaultLayoutComponent implements OnInit {
   public user: any;
 
   constructor(private logoutService: LogoutService,
-              private router: Router,
               public auth: AuthService,
               private userLoggedService: UserLoggedService) {
 
@@ -40,9 +38,7 @@ export class DefaultLayoutComponent implements OnInit {
   }
 
   public logout(): void {
-    this.logoutService.logout().then(() => {
-      this.router.navigate(['/login']);
-    });
+    this.logoutService.logout();
   }
 
 }

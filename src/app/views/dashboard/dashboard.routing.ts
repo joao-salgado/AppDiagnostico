@@ -1,19 +1,18 @@
-import { BWDataResolver } from './bw/bw-data.resolver';
-import { BWLandingPageResolver } from './bw/bw-landing-page.resolver';
-import { BWComponent } from './bw/bw.component';
 import { NgModule } from '@angular/core';
 import { Routes,
      RouterModule } from '@angular/router';
-import { ComingSoonComponent } from '../../shared/coming-soon/coming-soon.component';
-import { DiagnosisComponent } from './diagnosis.component';
+
+import { DashboardComponent } from './dashboard.component';
+import { DashboardBwComponent } from './bw/dashboard-bw.component';
 import { DiagnosisListComponent } from '../../shared/diagnosis/list/diagnosis-list.component';
+import { ComingSoonComponent } from '../../shared/coming-soon/coming-soon.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: DiagnosisComponent,
+    component: DashboardComponent,
     data: {
-      title: 'Diagnósticos'
+      title: 'Dashboard'
     },
     children: [
       {
@@ -25,13 +24,12 @@ const routes: Routes = [
       },
       {
         path: 'bw',
-        component: BWComponent,
+        component: DashboardBwComponent,
         data: {
           title: 'Diagnóstico de Gestão de Conhecimento'
         },
         resolve: {
-          landingData: BWLandingPageResolver,
-          bwData: BWDataResolver
+          /*landingData: BWLandingPageResolver,*/
         },
       },
       {
@@ -75,10 +73,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: [
-    BWLandingPageResolver,
-    BWDataResolver
-  ]
+  exports: [RouterModule]
 })
-export class DiagnosisRoutingModule {}
+export class DashboardRoutingModule {}
