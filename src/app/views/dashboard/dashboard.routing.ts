@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardBwComponent } from './bw/dashboard-bw.component';
 import { DiagnosisListComponent } from '../../shared/diagnosis/list/diagnosis-list.component';
 import { ComingSoonComponent } from '../../shared/coming-soon/coming-soon.component';
+import { DashboardBWResolver } from './bw/dashboar-bw.resolver';
 
 const routes: Routes = [
   {
@@ -30,7 +31,7 @@ const routes: Routes = [
           diagnosis: 'bw'
         },
         resolve: {
-          /*landingData: BWLandingPageResolver,*/
+          data: DashboardBWResolver
         },
       },
       {
@@ -79,6 +80,9 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [
+    DashboardBWResolver
+  ]
 })
 export class DashboardRoutingModule {}

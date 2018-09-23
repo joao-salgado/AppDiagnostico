@@ -10,7 +10,7 @@
         <label class="input-group-text">P</label>
       </div>
       <select name="process" class="form-control" [(ngModel)]="filter.role">
-        <option [ngValue]="undefined" selected disabled>Papel</option>
+        <option [ngValue]="undefined" selected>Todos</option>
         <option *ngFor="let type of listUserTypes;" [value]="type.id">
           {{type.name}}
         </option>

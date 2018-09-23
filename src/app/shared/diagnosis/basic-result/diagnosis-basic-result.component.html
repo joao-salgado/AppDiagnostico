@@ -6,11 +6,11 @@
       </div>
       <div class="brand-card-body">
         <div>
-          <div class="text-value">{{section.totalResult}}</div>
+          <div class="text-value">{{section.totalResult | number:'0.0-0'}}</div>
           <div class="text-uppercase text-muted small">Pontos</div>
         </div>
         <div>
-          <div class="text-value">{{(section.totalResult/60) | percent:'1.2'}}</div>
+          <div class="text-value">{{(section.totalResult/60) | percent:'1.0'}}</div>
           <div class="text-uppercase text-muted small">Porcentagem</div>
         </div>
       </div>
@@ -24,11 +24,11 @@
       </div>
       <div class="brand-card-body">
         <div>
-          <div class="text-value">{{data.totalResult}}</div>
+          <div class="text-value">{{data.totalResult | number:'0.0-0'}}</div>
           <div class="text-uppercase text-muted small">Pontos</div>
         </div>
         <div>
-          <div class="text-value">{{(data.totalResult/420) | percent:'1.2'}}</div>
+          <div class="text-value">{{(data.totalResult/420) | percent:'1.0'}}</div>
           <div class="text-uppercase text-muted small">Porcentagem</div>
         </div>
       </div>
