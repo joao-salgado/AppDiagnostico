@@ -39,10 +39,6 @@ export class ErrorHandlerService {
         case 401:
           msg = 'Você não tem permissão para executar esta ação';
           this.logoutService.logout();
-          this.router.navigate(['/login']);
-          break;
-        default:
-          msg = 'Ocorreu um erro ao processar a sua solicitação';
           break;
       }
 
@@ -54,7 +50,10 @@ export class ErrorHandlerService {
       msg = 'Erro ao processar serviço remoto. Tente novamente.';
     }
 
-    this.toasty.error(msg);
+    if (!!msg) {
+      this.toasty.error(msg);
+    }
+
   }
 
 }
