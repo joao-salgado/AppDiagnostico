@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   templateUrl: 'dashboard-bw.component.html'
@@ -12,7 +13,7 @@ export class DashboardBwComponent implements OnInit {
     this.prepareData(this.route.snapshot.data.data);
   }
 
-  ngOnInit(): void {}
+  public ngOnInit(): void {}
 
   public onbtnSendListener(event: any) {
     this.prepareData(event);
@@ -113,9 +114,44 @@ export class DashboardBwComponent implements OnInit {
       element.totalResult = (element.totalResult / answersCount);
     });
 
-    console.log(this.basicData);
-
   }
 
-  private prepareAdvancedData(data) {this.advancedData = {}; }
+  private prepareAdvancedData(data) {
+
+    this.advancedData = {};
+    console.log(data);
+
+    // PIE
+    const pie = {
+      data: this.basicData.sections.map(element => element.totalResult.toFixed(0)),
+      labels: this.basicData.sections.map(element => `${element.name}`)
+    };
+
+    // BAR
+    const barData = [
+      {data: [], label: 'Diagnósticos'}
+    ];
+
+    data.forEach(element => {
+      let answersCount = 0;
+      let result = 0;
+
+      element.answers.forEach(answer => {
+        answersCount++;
+        result += answer.totalPersonalResult;
+      });
+
+      barData[0].data.push((result / answersCount).toFixed(0));
+    });
+
+    const bar = {
+      data: barData,
+      labels: data.map(element => moment(element.answers[0].endDate).format('DD-MM-YYYY'))
+    };
+
+    this.advancedData = {
+      pie: pie,
+      bar: bar
+    };
+  }
 }

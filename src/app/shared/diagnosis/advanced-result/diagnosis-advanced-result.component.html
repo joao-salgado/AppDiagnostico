@@ -35,33 +35,34 @@
 
 <div class="card">
   <div class="card-header">
-    Bar Chart
-    <div class="card-header-actions">
-      <a href="http://www.chartjs.org">
-        <small class="text-muted">docs</small>
-      </a>
-    </div>
+    Progressão ao longo do tempo
   </div>
   <div class="card-body">
     <div class="chart-wrapper">
-      <canvas baseChart class="chart" [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions"
-        [legend]="barChartLegend" [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      <canvas class="chart"
+              baseChart
+              [datasets]="data?.bar?.data"
+              [labels]="data?.bar?.labels"
+              [options]="barChartOptions"
+              [legend]="true"
+              [chartType]="'bar'">
+      </canvas>
     </div>
   </div>
 </div>
+
 <div class="card">
   <div class="card-header">
-    Pie Chart
-    <div class="card-header-actions">
-      <a href="http://www.chartjs.org">
-        <small class="text-muted">docs</small>
-      </a>
-    </div>
+    Pontuação por seção
   </div>
   <div class="card-body">
     <div class="chart-wrapper">
-      <canvas baseChart class="chart" [data]="pieChartData" [labels]="pieChartLabels" [chartType]="pieChartType"
-        (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      <canvas class="chart"
+            baseChart
+            [data]="data?.pie?.data"
+            [labels]="data?.pie?.labels"
+            [chartType]="'pie'">
+      </canvas>
     </div>
   </div>
 </div>
