@@ -11,7 +11,7 @@
       </div>
       <select name="process" class="form-control" [(ngModel)]="filter.role">
         <option [ngValue]="undefined" selected disabled>Papel</option>
-        <option *ngFor="let type of listUserTypes; trackBy:type?.id" [value]="type.id">
+        <option *ngFor="let type of listUserTypes;" [value]="type.id">
           {{type.name}}
         </option>
       </select>
