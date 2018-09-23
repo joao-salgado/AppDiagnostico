@@ -18,3 +18,12 @@
 .cursor-pointer {
   cursor: pointer;
 }
+
+td {
+  vertical-align: middle;
+}
+
+.switch-success .switch-input:not(checked) + .switch-slider {
+  background-color: #ea6060;
+  border-color: #ea6060;
+}

@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities';
-import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 
 @Component({
   templateUrl: 'dashboard-bw.component.html'
@@ -101,6 +99,10 @@ export class DashboardBwComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  public onbtnSendListener(event: any) {
+    console.log(event);
   }
 
 

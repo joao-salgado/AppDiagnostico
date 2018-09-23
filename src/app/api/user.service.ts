@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
@@ -15,6 +15,17 @@ export class UserService {
 
   public findById(id: string): Observable<any> {
     return this.authHttp.get(`${this.userUrl}/${id}`);
+  }
+
+  public findByCompany(companyId: string, page: number): Observable<any> {
+    let params = new HttpParams();
+
+    params = params.append('page', String(page));
+    params = params.append('size', '10');
+
+    return this.authHttp.get(`${this.userUrl}/companies/${companyId}`, {
+      params: params
+    });
   }
 
   public save(user: any): Observable<any> {

@@ -1,9 +1,12 @@
-import { Component, OnInit, ElementRef, AfterViewInit, Input } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
 import { ptBrLocale } from 'ngx-bootstrap/locale';
 import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { UserTypeService } from '../../../api/user-type.service';
+import { UserLoggedService } from '../../../core/user-logged.service';
+import { DashboardService } from '../../../api/dashboard.service';
+import { ActivatedRoute } from '@angular/router';
 defineLocale('pt-br', ptBrLocale);
 
 export class Filter {
@@ -21,10 +24,12 @@ export class Filter {
 export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
 
   @Input() parentContainer: any;
+  @Output() btnSendListener = new EventEmitter();
 
   public filter: Filter;
   public bsConfig: any;
   public listUserTypes: any;
+  public user: any;
 
   public parentDivElement: any;
   public fixedElement: any;
@@ -32,7 +37,14 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
   public isViewLoaded = false;
 
   constructor(private localeService: BsLocaleService,
-              private userTypeService: UserTypeService) {
+              private userTypeService: UserTypeService,
+              private userLoggedService: UserLoggedService,
+              private dashboardService: DashboardService,
+              private route: ActivatedRoute) {
+
+    this.userLoggedService.currentUserLogged.subscribe((userLogged) => {
+      this.user = JSON.parse(userLogged);
+    });
 
     this.filter = new Filter();
 
@@ -60,8 +72,14 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
   }
 
   public send() {
-    console.log(this.filter);
-  }
 
+    this.dashboardService.getByCompany(this.user.company.id,
+                                        this.route.snapshot.data.diagnosis,
+                                        this.filter)
+      .subscribe(response => {
+        this.btnSendListener.emit(response);
+      });
+
+  }
 
 }

@@ -3,7 +3,7 @@
   <div class="row">
 
     <div class="col-sm-4 col-md-3" #filterContainer>
-      <app-diagnosis-filter [parentContainer]="filterContainer"></app-diagnosis-filter>
+      <app-diagnosis-filter [parentContainer]="filterContainer" (btnSendListener)="onbtnSendListener($event)"></app-diagnosis-filter>
     </div>
 
     <div class="col-sm-8 col-md-9">

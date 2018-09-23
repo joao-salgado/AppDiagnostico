@@ -1,0 +1,51 @@
+<div class="row animated fadeIn">
+
+  <div class="col-12">
+    <div class="card">
+      <div class="card-header">
+        <i class="fa fa-align-justify"></i> Lista de usuários
+      </div>
+      <div class="card-body">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Papel</th>
+              <th>Email</th>
+              <th>Telefone</th>
+              <th class="text-center">Status (Ativo/Inativo)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of listUsers?.content">
+              <td>{{user.name}}</td>
+              <td>{{user.userType.name}}</td>
+              <td>{{user.email}}</td>
+              <td>{{user.phone ? (user.phone | mask: '(99) 99999-9999') : 'Não informado'}}</td>
+
+              <td *ngIf="!userLoggedService.isAdmin() || user.userType.name === 'Admin'" class="text-center">
+                <span class="badge" [ngClass]="user.active ? 'badge-success' : 'badge-danger'">
+                  {{user.active ? 'Ativo' : 'Inativo'}}
+                </span>
+              </td>
+
+              <td *ngIf="user.userType.name !== 'Admin' && userLoggedService.isAdmin()" class="text-center">
+                <label class="switch switch-label switch-pill switch-success">
+                  <input type="checkbox" class="switch-input" [(ngModel)]="user.active"
+                          (change)="toggleUserStatus(user)">
+                  <span class="switch-slider" data-checked="A" data-unchecked="I"></span>
+                </label>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+        <pagination [totalItems]="listUsers?.totalElements"
+                    (pageChanged)="pageChanged($event)" [maxSize]="5">
+        </pagination>
+      </div>
+    </div>
+
+  </div>
+
+</div>

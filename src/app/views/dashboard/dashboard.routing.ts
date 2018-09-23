@@ -26,7 +26,8 @@ const routes: Routes = [
         path: 'bw',
         component: DashboardBwComponent,
         data: {
-          title: 'Diagnóstico de Gestão de Conhecimento'
+          title: 'Diagnóstico de Gestão de Conhecimento',
+          diagnosis: 'bw'
         },
         resolve: {
           /*landingData: BWLandingPageResolver,*/
@@ -36,35 +37,40 @@ const routes: Routes = [
         path: 'dgcc',
         component: ComingSoonComponent,
         data: {
-          title: 'Diagnóstico Claudia'
+          title: 'Diagnóstico Claudia',
+          diagnosis: 'dgcc'
         }
       },
       {
         path: 'kmd',
         component: ComingSoonComponent,
         data: {
-          title: 'Knowledge Management Diagnostic'
+          title: 'Knowledge Management Diagnostic',
+          diagnosis: 'kmd'
         }
       },
       {
         path: 'apo',
         component: ComingSoonComponent,
         data: {
-          title: 'Asian Productivity Organization'
+          title: 'Asian Productivity Organization',
+          diagnosis: 'apo'
         }
       },
       {
         path: 'oka',
         component: ComingSoonComponent,
         data: {
-          title: 'Organizational Knowledge Assessment'
+          title: 'Organizational Knowledge Assessment',
+          diagnosis: 'oka'
         }
       },
       {
         path: 'sdkm',
         component: ComingSoonComponent,
         data: {
-          title: 'Seven Dimensions of Knowledge Management'
+          title: 'Seven Dimensions of Knowledge Management',
+          diagnosis: 'sdkm'
         }
       }
     ]

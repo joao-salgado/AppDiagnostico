@@ -76,6 +76,11 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
+        path: 'usuarios',
+        loadChildren: './views/users/users.module#UsersModule',
+        canActivate: [AuthGuard]
+      },
+      {
         path: 'perfil',
         loadChildren: './views/profile/profile.module#ProfileModule',
         canActivate: [AuthGuard]

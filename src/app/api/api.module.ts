@@ -8,6 +8,7 @@ import { CompanyProcessService } from './company-process.service';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { InviteService } from './invite.service';
+import { DashboardService } from './dashboard.service';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { InviteService } from './invite.service';
     InviteService,
     UserTypeService,
     BWService,
-    StaticJsonService
+    StaticJsonService,
+    DashboardService
   ]
 })
 export class ApiModule { }

@@ -52,6 +52,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
+import { UsersModule } from './views/users/users.module';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -79,7 +80,8 @@ registerLocaleData(ptBr);
     SharedModule,
     InviteModule,
     ProfileModule,
-    DiagnosisModule
+    DiagnosisModule,
+    UsersModule
   ],
   declarations: [
     AppComponent,
