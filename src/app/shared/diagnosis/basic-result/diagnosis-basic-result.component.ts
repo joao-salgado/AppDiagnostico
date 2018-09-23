@@ -1,5 +1,4 @@
 import { UserLoggedService } from './../../../core/user-logged.service';
-import { ToastyService } from 'ng2-toasty';
 import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
@@ -15,10 +14,7 @@ export class DiagnosisBasicResultComponent implements OnInit {
 
   @Input() data: any;
 
-  constructor(private userLoggedService: UserLoggedService,
-              private toasty: ToastyService,
-              ) {
-
+  constructor(private userLoggedService: UserLoggedService) {
   }
 
   public ngOnInit(): void {
@@ -27,7 +23,6 @@ export class DiagnosisBasicResultComponent implements OnInit {
       this.user = JSON.parse(userLogged);
     });
 
-    console.log(this.data);
   }
 
 }
