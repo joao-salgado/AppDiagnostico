@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-diagnosis-advanced-result',
@@ -7,60 +7,30 @@ import { Component, OnInit, Input } from '@angular/core';
     './diagnosis-advanced-result.component.scss'
   ]
 })
-export class DiagnosisAdvancedResultComponent implements OnInit {
+export class DiagnosisAdvancedResultComponent implements OnInit, OnChanges {
 
   @Input() data: any;
 
+  @ViewChild('barChart') barChart;
+  @ViewChild('radarChart') radarChart;
+  @ViewChild('lineChart') lineChart;
+
+  public some: any;
+
   // lineChart
-  /*public lineChartData: Array<any> = [
-    {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-    {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
-  ];
-  public lineChartLabels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
   public lineChartOptions: any = {
     animation: false,
-    responsive: true
+    responsive: true,
   };
-  public lineChartColours: Array<any> = [
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
-    },
-    { // dark grey
-      backgroundColor: 'rgba(77,83,96,0.2)',
-      borderColor: 'rgba(77,83,96,1)',
-      pointBackgroundColor: 'rgba(77,83,96,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(77,83,96,1)'
-    },
-    { // grey
-      backgroundColor: 'rgba(148,159,177,0.2)',
-      borderColor: 'rgba(148,159,177,1)',
-      pointBackgroundColor: 'rgba(148,159,177,1)',
-      pointBorderColor: '#fff',
-      pointHoverBackgroundColor: '#fff',
-      pointHoverBorderColor: 'rgba(148,159,177,0.8)'
+
+  public radarChartOptions: any = {
+    scale: {
+      ticks: {
+        max: 60,
+        min: 0
+      }
     }
-  ];
-  public lineChartLegend = true;
-  public lineChartType = 'line';
-
-  */
-
-  // Radar
-  /*public radarChartLabels: string[] = ['Eating', 'Drinking', 'Sleeping', 'Designing', 'Coding', 'Cycling', 'Running'];
-
-  public radarChartData: any = [
-    {data: [65, 59, 90, 81, 56, 55, 40], label: 'Series A'},
-    {data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B'}
-  ];
-  public radarChartType = 'radar';*/
+  };
 
   // barChart
   public barChartOptions: any = {
@@ -68,16 +38,46 @@ export class DiagnosisAdvancedResultComponent implements OnInit {
     responsive: true,
     scales: {
       xAxes: [{
-          stacked: true
+        stacked: true
       }],
       yAxes: [{
-          stacked: true
+        stacked: true
       }]
     }
   };
 
-  ngOnInit(): void {
+  ngOnChanges(changes: SimpleChanges) {
 
+    setTimeout(() => {
+      if (this.barChart !== undefined) {
+        this.barChart.ngOnDestroy();
+        this.barChart.chart = 0;
+        this.barChart.datasets = this.data.bar.data;
+        this.barChart.labels = this.data.bar.labels;
+        this.barChart.ngOnInit();
+      }
+
+      if (this.radarChart !== undefined) {
+        this.radarChart.ngOnDestroy();
+        this.radarChart.chart = 0;
+        this.radarChart.datasets = this.data.radar.data;
+        this.radarChart.labels = this.data.radar.labels;
+        this.radarChart.ngOnInit();
+      }
+
+      if (this.lineChart !== undefined) {
+        this.lineChart.ngOnDestroy();
+        this.lineChart.chart = 0;
+        this.lineChart.datasets = this.data.line.data;
+        this.lineChart.labels = this.data.line.labels;
+        this.lineChart.ngOnInit();
+      }
+    });
+
+
+  }
+
+  ngOnInit(): void {
   }
 
 

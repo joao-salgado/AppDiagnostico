@@ -1,37 +1,38 @@
 <div class="card">
   <div class="card-header">
     Line Chart
-    <div class="card-header-actions">
-      <a href="http://www.chartjs.org">
-        <small class="text-muted">docs</small>
-      </a>
-    </div>
   </div>
   <div class="card-body">
     <div class="chart-wrapper">
-      <canvas baseChart class="chart" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions"
-        [colors]="lineChartColours" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)"
-        (chartClick)="chartClicked($event)"></canvas>
+      <canvas #lineChart="base-chart" class="chart"
+              baseChart
+              [datasets]="some"
+              [labels]="some"
+              [options]="lineChartOptions"
+              [legend]="true"
+              [chartType]="'line'">
+      </canvas>
     </div>
   </div>
 </div>
 
 <div class="card">
   <div class="card-header">
-    Radar Chart
-    <div class="card-header-actions">
-      <a href="http://www.chartjs.org">
-        <small class="text-muted">docs</small>
-      </a>
-    </div>
+    Pontuação por seção em cada diagnóstico
   </div>
   <div class="card-body">
     <div class="chart-wrapper">
-      <canvas baseChart class="chart" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType"
-        (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      <canvas #radarChart="base-chart" class="chart"
+              baseChart
+              [datasets]="some"
+              [labels]="some"
+              [options]="radarChartOptions"
+              [chartType]="'radar'">
+        </canvas>
     </div>
   </div>
 </div>
+
 
 <div class="card">
   <div class="card-header">
@@ -39,7 +40,7 @@
   </div>
   <div class="card-body">
     <div class="chart-wrapper">
-      <canvas class="chart"
+      <canvas #barChart="base-chart" class="chart"
               baseChart
               [datasets]="data?.bar?.data"
               [labels]="data?.bar?.labels"
@@ -53,7 +54,7 @@
 
 <div class="card">
   <div class="card-header">
-    Pontuação por seção
+    Pontuação geral por seção
   </div>
   <div class="card-body">
     <div class="chart-wrapper">
@@ -66,3 +67,4 @@
     </div>
   </div>
 </div>
+

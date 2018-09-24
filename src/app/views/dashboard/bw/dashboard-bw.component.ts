@@ -118,8 +118,7 @@ export class DashboardBwComponent implements OnInit {
 
   private prepareAdvancedData(data) {
 
-    this.advancedData = {};
-    console.log(data);
+    this.advancedData = this.advancedData || {};
 
     // PIE
     const pie = {
@@ -149,9 +148,35 @@ export class DashboardBwComponent implements OnInit {
       labels: data.map(element => moment(element.answers[0].endDate).format('DD-MM-YYYY'))
     };
 
+    // RADAR
+    const radarData = [];
+    let radarCount = 0;
+    data.forEach(element => {
+      const item = {data: [0, 0, 0, 0, 0, 0, 0], label: moment(element.answers[0].endDate).format('DD-MM-YYYY')};
+
+      element.answers.forEach(answer => {
+        radarCount++;
+
+        answer.bwPersonalSection.forEach((section, index) => {
+          item.data[index] += section.totalResult;
+        });
+      });
+
+      item.data.forEach(value => value / radarCount);
+      radarData.push(item);
+    });
+
+    const radar = {
+      data: radarData.length ? radarData : [{data: [0, 0, 0, 0, 0, 0, 0], label: 'Não há dados'}],
+      labels: ['Obter', 'Utilizar', 'Aprender', 'Contribuir', 'Avaliar', 'Construir/Manter', 'Descartar']
+    };
+
+    // OBJECT
     this.advancedData = {
       pie: pie,
-      bar: bar
+      bar: bar,
+      radar: radar,
+      line: radar
     };
   }
 }
