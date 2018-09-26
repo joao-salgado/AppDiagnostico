@@ -57,7 +57,7 @@ export class DiagnosisLandingPageComponent implements OnInit, OnDestroy {
   public isUserAndHasQuestionnaire(): boolean {
 
     let alreadyResponded = false;
-    if (this.dlpConfig.data && Array(this.dlpConfig.data.usersWhoResponded)) {
+    if (this.dlpConfig.data && Array(this.dlpConfig.data.usersWhoResponded) && this.dlpConfig.data.usersWhoResponded.length) {
       alreadyResponded = this.dlpConfig.data.usersWhoResponded.some(user => {
         return user && user.user && user.user.id === this.user.id;
       });
