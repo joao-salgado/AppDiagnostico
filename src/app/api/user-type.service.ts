@@ -1,5 +1,4 @@
 import { HttpClient } from '@angular/common/http';
-import { BWHttp } from './../core/security/bw-http.service';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +8,7 @@ export class UserTypeService {
 
   private typeUrl: string;
 
-  constructor(private authHttp: BWHttp, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.typeUrl = `${environment.apiUrl}/user-types`;
   }
 

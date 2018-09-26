@@ -1,8 +1,7 @@
-import { BWHttp } from './../core/security/bw-http.service';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
-import { HttpParams } from '@angular/common/http';
+import { HttpParams, HttpClient } from '@angular/common/http';
 import * as moment from 'moment';
 
 @Injectable()
@@ -11,7 +10,7 @@ export class DashboardService {
   private dashboardUrl: string;
   private dashboardCompanyUrl: string;
 
-  constructor(private authHttp: BWHttp) {
+  constructor(private http: HttpClient) {
     this.dashboardUrl = `${environment.apiUrl}/statistics`;
     this.dashboardCompanyUrl = `${this.dashboardUrl}/companies`;
   }
@@ -34,7 +33,7 @@ export class DashboardService {
 
     params = params.append('company', companyId);
 
-    return this.authHttp.get(`${this.dashboardCompanyUrl}/${companyId}/${diagnosis}`, {
+    return this.http.get(`${this.dashboardCompanyUrl}/${companyId}/${diagnosis}`, {
       params: params
     });
   }

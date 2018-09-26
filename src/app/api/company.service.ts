@@ -1,5 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BWHttp } from './../core/security/bw-http.service';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +8,7 @@ export class CompanyService {
 
   private companyUrl: string;
 
-  constructor(private authHttp: BWHttp, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.companyUrl = `${environment.apiUrl}/companies`;
   }
 
@@ -18,7 +17,7 @@ export class CompanyService {
   }
 
   public update(company: any): Observable<any> {
-    return this.authHttp.put(`${this.companyUrl}/${company.id}`, company);
+    return this.http.put(`${this.companyUrl}/${company.id}`, company);
   }
 
 }

@@ -1,4 +1,3 @@
-import { BWHttp } from './../core/security/bw-http.service';
 import { Injectable } from '@angular/core';
 import { environment } from './../../environments/environment';
 import { Observable } from 'rxjs/Observable';
@@ -9,12 +8,12 @@ export class InviteService {
 
   private inviteUrl: string;
 
-  constructor(private authHttp: BWHttp, private http: HttpClient) {
+  constructor(private http: HttpClient) {
     this.inviteUrl = `${environment.apiUrl}/invitations`;
   }
 
   public save(listEmails: any): Observable<any> {
-    return this.authHttp.post(this.inviteUrl, listEmails);
+    return this.http.post(this.inviteUrl, listEmails);
   }
 
   public findByCompany(id: string, page: number): Observable<any> {
@@ -24,7 +23,7 @@ export class InviteService {
     params = params.append('page', String(page));
     params = params.append('size', '10');
 
-    return this.authHttp.get(`${this.inviteUrl}/companies/${id}`, {
+    return this.http.get(`${this.inviteUrl}/companies/${id}`, {
       params: params
     });
   }
@@ -34,7 +33,7 @@ export class InviteService {
   }
 
   public delete(user: any): Observable<any> {
-    return this.authHttp.delete(`${this.inviteUrl}/${user.id}`);
+    return this.http.delete(`${this.inviteUrl}/${user.id}`);
   }
 
 }
