@@ -1,25 +1,30 @@
-import { RegisterUserTypesResolver } from './views/register/user/register-user-type.resolver';
-import { RegisterUserCodeResolver } from './views/register/user/register-user-code.resolver';
-import { RegisterUserComponent } from './views/register/user/register-user.component';
-import { AuthGuard } from './core/security/auth.guard';
-import { RegisterCompanyResolver } from './views/register/company/register-company-resolver';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+
+import { AuthGuard } from './core/security/auth.guard';
 
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
+import { P403Component } from './views/error/403.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterCompanyComponent } from './views/register/company/register-company.component';
+import { RegisterUserComponent } from './views/register/user/register-user.component';
+
+import { RegisterUserTypesResolver } from './views/register/user/register-user-type.resolver';
+import { RegisterUserCodeResolver } from './views/register/user/register-user-code.resolver';
+import { RegisterCompanyResolver } from './views/register/company/register-company-resolver';
 
 export const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    data: {
+      roles: ['ROLE_COMPANY_DASHBOARD']
+    }
   },
   {
     path: '404',
@@ -29,10 +34,10 @@ export const routes: Routes = [
     }
   },
   {
-    path: '500',
-    component: P500Component,
+    path: '403',
+    component: P403Component,
     data: {
-      title: 'Page 500'
+      title: 'Page 403'
     }
   },
   {
@@ -78,7 +83,10 @@ export const routes: Routes = [
       {
         path: 'usuarios',
         loadChildren: './views/users/users.module#UsersModule',
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: {
+          roles: ['ROLE_USER']
+        }
       },
       {
         path: 'perfil',
@@ -88,12 +96,18 @@ export const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: './views/dashboard/dashboard.module#DashboardModule',
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: {
+          roles: ['ROLE_COMPANY_DASHBOARD']
+        }
       },
       {
         path: 'convites',
         loadChildren: './views/invite/invite.module#InviteModule',
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: {
+          roles: ['ROLE_INVITE']
+        }
       },
       { path: '**', redirectTo: '/404' },
     ]

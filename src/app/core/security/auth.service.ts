@@ -78,7 +78,7 @@ export class AuthService {
   }
 
   public isAuthorized(permissao: string) {
-    return this.jwtPayload && this.jwtPayload.authorities.includes(permissao);
+    return this.jwtPayload && this.jwtPayload.authorities && this.jwtPayload.authorities.includes(permissao);
   }
 
   public hasAtLeastAnyPermission(roles) {

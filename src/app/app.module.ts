@@ -24,7 +24,7 @@ import { AppComponent } from './app.component';
 import { DefaultLayoutComponent } from './containers';
 
 import { P404Component } from './views/error/404.component';
-import { P500Component } from './views/error/500.component';
+import { P403Component } from './views/error/403.component';
 import { LoginComponent } from './views/login/login.component';
 
 const APP_CONTAINERS = [
@@ -53,6 +53,7 @@ import { SweetAlert2Module } from '@toverux/ngx-sweetalert2';
 import ptBr from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
 import { UsersModule } from './views/users/users.module';
+import { RouterModule } from '@angular/router';
 registerLocaleData(ptBr);
 
 @NgModule({
@@ -75,6 +76,7 @@ registerLocaleData(ptBr);
     NgxMaskModule.forRoot(),
     SweetAlert2Module.forRoot(),
     FormsModule,
+    RouterModule,
     CoreModule,
     ChartsModule,
     SharedModule,
@@ -87,7 +89,7 @@ registerLocaleData(ptBr);
     AppComponent,
     ...APP_CONTAINERS,
     P404Component,
-    P500Component,
+    P403Component,
     LoginComponent,
     RegisterCompanyComponent,
     RegisterUserComponent
