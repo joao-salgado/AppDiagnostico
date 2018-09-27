@@ -10,7 +10,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule, LOCALE_ID, APP_INITIALIZER } from '@angular/core';
 import { onAppInit } from './app-init.provider';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BWHttp } from './security/bw-http.service';
 
 @NgModule({
   imports: [
@@ -29,7 +28,6 @@ import { BWHttp } from './security/bw-http.service';
     AuthService,
     UserLoggedService,
     ErrorHandlerService,
-    BWHttp,
     {
       provide: LOCALE_ID,
       useValue: 'pt-BR'

@@ -10,6 +10,9 @@ export function onAppInit(auth: AuthService, userService: UserService, userLogge
           .subscribe(userAppSaved => {
             userLoggedService.updateUserLogged(userAppSaved);
             resolve();
+          }, reject => {
+            auth.clearAccessToken();
+            resolve();
           });
       } else {
         resolve();
