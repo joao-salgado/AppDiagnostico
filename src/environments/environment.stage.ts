@@ -3,8 +3,8 @@ export const environment = {
   apiUrl: 'https://api-stage-diagnosis.herokuapp.com',
   authorization: 'Basic ckc2R0NIRTkzald6d3ZLVDp0bTQ0TDJwcENIM1A2S1Z2ejhuYQ==',
 
-  tokenWhitelistedDomains: [ new RegExp(/api-stage-diagnosis.herokuapp.com/) ],
+  tokenWhitelistedDomains: [new RegExp('api-stage-diagnosis.herokuapp.com')],
   tokenBlacklistedRoutes: [
-    new RegExp(/\/oauth\/token/)
+    new RegExp('\/oauth\/token')
   ]
 };
