@@ -19,7 +19,11 @@ export class LogoutService {
   }
 
   public logout() {
-    return this.http.delete(this.tokensRenokeUrl)
+
+    this.auth.clearAccessToken();
+    this.router.navigate(['/login']);
+
+    /*return this.http.delete(this.tokensRenokeUrl)
       .toPromise()
       .then(() => {
         this.auth.clearAccessToken();
@@ -28,7 +32,7 @@ export class LogoutService {
       .catch(() => {
         this.auth.clearAccessToken();
         this.router.navigate(['/login']);
-      });
+      });*/
   }
 
 }
