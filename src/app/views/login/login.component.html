@@ -4,6 +4,17 @@
       <div class="row">
         <div class="col-md-8 mx-auto">
           <div class="card-group">
+            <div class="card text-white bg-primary py-5 register">
+              <div class="card-body text-center">
+                <div>
+                  <h2>Cadastrar</h2>
+                  <p>Faça o diagnóstico de conhecimento de sua empresa!</p>
+                  <button type="button" class="btn btn-primary active mt-3" routerLink="/cadastro-empresa">
+                    Cadastre agora!
+                  </button>
+                </div>
+              </div>
+            </div>
             <div class="card p-4">
               <div class="card-body">
                 <form (ngSubmit)="logIn(login.email, login.password)">
@@ -27,30 +38,16 @@
                   </div>
                   <div class="row">
                     <div class="col-6">
-                      <button type="submit" class="btn btn-primary px-4"
-                              [disabled]="verifyInformations(login.email, login.password) || isLoading">
+                      <button type="submit" class="btn btn-primary px-4" [disabled]="verifyInformations(login.email, login.password) || isLoading">
                         Entrar
                         <i class="fa fa-lg m-l-5" [ngClass]="{'fa-spinner fa-spin': isLoading}"></i>
                       </button>
-                    </div>
-                    <div class="col-6 text-right">
-                      <button type="button" class="btn btn-link px-0">Esqueceu sua senha?</button>
                     </div>
                   </div>
                 </form>
               </div>
             </div>
-            <div class="card text-white bg-primary py-5 d-md-down-none" style="width:44%">
-              <div class="card-body text-center">
-                <div>
-                  <h2>Cadastrar</h2>
-                  <p>Faça o diagnóstico de conhecimento de sua empresa!</p>
-                  <button type="button" class="btn btn-primary active mt-3" routerLink="/cadastro-empresa">
-                    Cadastre agora!
-                  </button>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import { LogoutService } from './../../core/security/logout.service';
 import { UserLoggedService } from './../../core/user-logged.service';
 import { AuthService } from './../../core/security/auth.service';
 import { UserService } from './../../api/user.service';
@@ -12,7 +13,10 @@ export class Login {
 
 @Component({
   selector: 'app-dashboard',
-  templateUrl: 'login.component.html'
+  templateUrl: 'login.component.html',
+  styleUrls: [
+    './login.component.scss'
+  ]
 })
 export class LoginComponent implements OnInit {
 
@@ -23,12 +27,12 @@ export class LoginComponent implements OnInit {
               private router: Router,
               private toasty: ToastyService,
               private userService: UserService,
-              private userLoggedService: UserLoggedService) {}
+              private userLoggedService: UserLoggedService,
+              private logoutService: LogoutService) {}
 
   public ngOnInit(): void {
-
+    this.logoutService.logout();
     this.login = new Login();
-
   }
 
   public logIn(email: string, password: string): void {
