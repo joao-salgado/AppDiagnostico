@@ -1,4 +1,6 @@
 <app-header
+  [asideMenuToggler]="false"
+  [mobileAsideMenuToggler]="false"
   [fixed]="true"
   [navbarBrandFull]="{src: 'assets/img/brand/icon-sm.png', width: 30, height: 25, alt: 'Diagnostico Logo'}"
   [navbarBrandMinimized]="{src: 'assets/img/brand/icon-sm.png', width: 30, height: 30, alt: 'Diagnostico Logo'}"
@@ -16,7 +18,7 @@
     </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">
-    <li class="nav-item dropdown" dropdown placement="bottom right">
+    <li class="nav-item dropdown mr-3" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" dropdownToggle (click)="false">
         <img src="assets/img/user/user-default.png" class="img-avatar" alt="Imagem do usuário"/>
         <span>{{user.name}}</span>

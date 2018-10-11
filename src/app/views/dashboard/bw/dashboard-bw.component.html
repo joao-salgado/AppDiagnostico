@@ -3,6 +3,10 @@
   <div class="row">
 
     <div class="col-sm-4 col-md-3" #filterContainer>
+      <button routerLink="/diagnosticos/bw" class="btn btn-sm btn-block btn-primary mb-3">
+        <i class="fa fa-arrow-left"></i>
+        Acessar diagnóstico
+      </button>
       <app-diagnosis-filter [parentContainer]="filterContainer" (btnSendListener)="onbtnSendListener($event)"></app-diagnosis-filter>
     </div>
 

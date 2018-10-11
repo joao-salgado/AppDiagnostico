@@ -47,8 +47,7 @@ export class UsersInviteComponent implements OnInit {
     this.inviteService.save(this.listSendEmails)
     .subscribe(response => {
       this.listSentEmails.content = this.listSentEmails.content || [];
-
-      this.listSentEmails.content = this.listSentEmails.content.concat(this.inviteSentFactory(this.listSendEmails));
+      this.listSentEmails.content = this.listSentEmails.content.concat(this.inviteSentFactory(response));
 
       this.listSendEmails = [];
       this.listSendEmails.push(this.inviteFactory());
@@ -80,7 +79,8 @@ export class UsersInviteComponent implements OnInit {
     return listEmails.map(element => {
       return {
         email: element.email,
-        situation: 'SEND'
+        situation: 'SEND',
+        id: element.id
       };
     });
   }

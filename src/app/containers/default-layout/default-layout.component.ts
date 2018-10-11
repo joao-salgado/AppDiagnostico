@@ -1,7 +1,7 @@
 import { UserLoggedService } from './../../core/user-logged.service';
 import { AuthService } from './../../core/security/auth.service';
 import { LogoutService } from './../../core/security/logout.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, AfterViewInit, Renderer } from '@angular/core';
 import { navItems } from '../../_nav';
 
 @Component({
@@ -18,7 +18,8 @@ export class DefaultLayoutComponent implements OnInit {
 
   constructor(private logoutService: LogoutService,
               public auth: AuthService,
-              private userLoggedService: UserLoggedService) {
+              private userLoggedService: UserLoggedService,
+              ) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = document.body.classList.contains('sidebar-minimized');
