@@ -8,6 +8,7 @@ export class UserAccountRegister {
   sex: string;
   meta: any;
   active: boolean;
+  startWork: string;
   userGroup: {
     id: string;
   };
