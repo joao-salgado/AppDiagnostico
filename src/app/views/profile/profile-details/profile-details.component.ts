@@ -69,6 +69,7 @@ export class ProfileDetailsComponent implements OnInit {
     this.user = this.route.snapshot.data.user;
     this.user.company.birthdate = this.formatDate(this.user.company.birthdate);
     this.user.birthdate = this.formatDate(this.user.birthdate);
+    this.user.startWork = this.formatDate(this.user.startWork);
   }
 
   public saveCompany(user: any): void {
@@ -106,6 +107,11 @@ export class ProfileDetailsComponent implements OnInit {
     if (!date) {
       return date;
     }
+
+    if (date.indexOf('T') !== -1) {
+      return new Date(date);
+    }
+
     const newDate = new Date();
     const formattedDate = date.split('-');
 
