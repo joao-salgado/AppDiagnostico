@@ -11,7 +11,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersInviteComponent implements OnInit {
 
-  public isLoading = false;
+  public loading = false;
   public listSendEmails: any;
   public listSentEmails: any;
   public user: any;
@@ -44,6 +44,8 @@ export class UsersInviteComponent implements OnInit {
 
   public send(): void {
 
+    this.loading = true;
+
     this.inviteService.save(this.listSendEmails)
     .subscribe(response => {
       this.listSentEmails.content = this.listSentEmails.content || [];
@@ -52,8 +54,10 @@ export class UsersInviteComponent implements OnInit {
       this.listSendEmails = [];
       this.listSendEmails.push(this.inviteFactory());
       this.toasty.success('Convites enviados com sucesso!');
+      this.loading = false;
     }, reject => {
       this.toasty.error('Verifique se os emails inseridos estão em formato correto.');
+      this.loading = false;
     });
 
   }

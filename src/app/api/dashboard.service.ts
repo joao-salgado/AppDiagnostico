@@ -23,6 +23,10 @@ export class DashboardService {
       params = params.append('role', String(filter.role));
     }
 
+    if (filter.experience) {
+      params = params.append('experience', String(filter.experience));
+    }
+
     if (filter.period && filter.period[0]) {
       params = params.append('start', moment(filter.period[0]).format('YYYY-MM-DD'));
     }

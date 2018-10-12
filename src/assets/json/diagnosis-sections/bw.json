@@ -8,13 +8,13 @@
       "As pessoas fornecem explicações completas quando solicitam informações.",
       "Os grupos e os indivíduos documentam e compartilham informação sobre as suas expertises rotineiramente.",
       "Há distinção entre papéis de gestão do conhecimento, que são primordialmente administrativos por natureza, e aqueles que são mais focalizados para os conteúdos.",
-      "As pessoas são capazes de tornar rotineiro o seu ambiente informacional.",
+      "As pessoas são capazes de personalizar o seu ambiente de informação.",
       "Os meios eletrônicos e físicos onde armazenamos o nosso conhecimento são mantidos atualizados.",
       "A organização aloca recursos para comunidades de especialistas que desejam gerenciar o conhecimento deles.",
       "O treinamento de novos sistemas focaliza como essas tecnologias podem ser utilizadas para melhorar a qualidade e a eficiência da forma como as pessoas trabalham.",
       "As pessoas só solicitam informação quando realmente necessitam dela.",
-      "As pessoas distinguem a informação que desejam que a organização remeta automaticamente para as suas mesas daquela que desejam procurar com base em uma necessidade hipotética.",
-      "As comunidades de especialistas são facilmente inidentificáveis, ficando claro para os demais aonde ir em busca de informação específica.",
+      "As pessoas distinguem entre informações que desejam que a organização envie automaticamente para os seus desktops e informações que desejam procurar conforme necessitem.",
+      "As comunidades de especialistas são fáceis de identificar, ficando claro para as outras pessoas da organização onde ir para obter informações específicas.",
       "As solicitações de informação enviadas para a intranet ou fóruns de discussão são fáceis de se identificar, geralmente.",
       "Os indivíduos específicos identificam, coletam, classificam, resumem e disseminam o conhecimento organizacional.",
       "Os especialistas desempenham um papel importante na identificação de informação para outros usuários.",
@@ -23,7 +23,7 @@
       "As pessoas podem pesquisar informação em uma ampla variedade de aplicações e bases de dados.",
       "A organização criou instrumentos eletrônicos e gráficos que dirigem as pessoas para os recursos disponíveis.",
       "Os especialistas em informação da empresa ajudam as pessoas a utilizar instrumentos on-line, incluindo a intranet.",
-      "Há regras para as pessoas documentarem e compartilharem informação.",
+      "Estabelecemos maneiras para as pessoas documentarem e compartilharem informações.",
       "Há distinção entre informação que deveria ser controlada centralmente e aquela em que todos deveriam ser livres para documentar e compartilhar."
     ]
   },
@@ -52,7 +52,7 @@
       "O nosso espaço de trabalho é planejado para promover o fluxo de idéias entre os grupos de trabalho.",
       "Na nossa organização as pessoas podem utilizar a informação que obtém para melhorar o seu trabalho.",
       "Ajustamos o nosso relacionamento hierárquico com base no trabalho que as pessoas necessitam fazer.",
-      "Ajustamos o nosso relacionamento hierárquico com base no trabalho que as pessoas necessitam fazer."
+      "Utilizamos abordagens que as pessoas chamariam de lúcidas, como parte do nosso processo de resolução de problemas."
     ]
   },
   {
@@ -141,7 +141,7 @@
   },
   {
     "title": "Construir/Manter",
-    "description": "Os relacionamentos internos e externos á organização devem ser parte ativa da construção do conhecimento. Empregados, fornecedores e saber até como funciona a concorrência é extremamente desejável. Surge então um estilo facilitados em substituição ao estreito controle das pessoas.",
+    "description": "Os relacionamentos internos e externos à organização devem ser parte ativa da construção do conhecimento. Empregados, fornecedores e saber até como funciona a concorrência é extremamente desejável. Surge então um estilo facilitados em substituição ao estreito controle das pessoas.",
     "model": "build",
     "icon": "icon-calculator",
     "questions": [

@@ -154,6 +154,7 @@ export class DashboardBwComponent implements OnInit {
     data.forEach(element => {
       const item = {data: [0, 0, 0, 0, 0, 0, 0], label: moment(element.answers[0].endDate).format('DD-MM-YYYY')};
 
+      radarCount = 0;
       element.answers.forEach(answer => {
         radarCount++;
 
@@ -162,7 +163,9 @@ export class DashboardBwComponent implements OnInit {
         });
       });
 
-      item.data.forEach(value => value / radarCount);
+      item.data = item.data.map(value => {
+        return value / radarCount;
+      });
       radarData.push(item);
     });
 

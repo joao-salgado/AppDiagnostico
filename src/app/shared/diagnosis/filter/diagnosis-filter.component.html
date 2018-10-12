@@ -19,6 +19,23 @@
 
     <div class="input-group mb-3">
       <div class="input-group-prepend">
+        <label class="input-group-text">
+          <i class="fa fa-history" aria-hidden="true"></i>
+        </label>
+      </div>
+
+      <select name="process" class="form-control" [(ngModel)]="filter.experience">
+        <option [ngValue]="undefined" selected>Todos</option>
+        <option value="menos de um ano">Menos de 1 ano de experiência</option>
+        <option value="de um a dois anos">De 1 a 2 anos de experiência</option>
+        <option value="de dois a cinco anos">De 2 a 5 anos de experiência</option>
+        <option value="mais de cinco anos">Mais de 5 anos de experiência</option>
+      </select>
+
+      </div>
+
+    <div class="input-group mb-3">
+      <div class="input-group-prepend">
         <span class="input-group-text">
           <i class="fa fa-calendar"></i>
         </span>

@@ -34,6 +34,24 @@
                   </div>
 
                   <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text">
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                      </label>
+                    </div>
+
+                    <input type="text"
+                        [(ngModel)]="userRegister.startWork"
+                        name="startWork"
+                        placeholder="Quando iniciou seu trabalho na área"
+                        class="form-control"
+                        bsDatepicker
+                        [bsConfig]="bsConfig"
+                        autocomplete="startWork">
+
+                  </div>
+
+                  <div class="input-group mb-3">
                       <div class="input-group-prepend">
                         <span class="input-group-text">
                           <i class="fa fa-calendar"></i>

@@ -15,7 +15,10 @@
             autocomplete="off">
         </div>
         <button class="btn btn-primary fa fa-plus pull-right mb-2" (click)="addEmail()"></button>
-        <button class="btn btn-success btn-block mt-5" (click)="send()">Enviar</button>
+        <button class="btn btn-success btn-block mt-5" (click)="send()" [disabled]="loading">
+          Enviar
+          <i class="fa fa-spinner fa-lg" *ngIf="loading"></i>
+        </button>
       </div>
     </div>
   </div>

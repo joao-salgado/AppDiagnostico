@@ -12,6 +12,7 @@ defineLocale('pt-br', ptBrLocale);
 export class Filter {
   period: Array<any>;
   role: string;
+  experience: string;
 }
 
 @Component({
