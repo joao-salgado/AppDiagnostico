@@ -16,9 +16,11 @@
           <p>Empresa: <span>{{userSaved.company.name}}</span></p>
           <p>Nome: <span>{{userSaved.name}}</span></p>
           <p>Email: <span>{{userSaved.email}}</span></p>
-          <p *ngIf="!userLoggedService.isAdmin()">Telefone: <span>{{userSaved.phone ? (userSaved.phone | mask: '(99) 99999-9999')
+          <p *ngIf="!userLoggedService.isAdmin()">Telefone: <span>{{userSaved.phone ? (userSaved.phone | mask: '(99)
+              99999-9999')
               : 'Não informado' }}</span></p>
-          <p *ngIf="userLoggedService.isAdmin()">Telefone: <span>{{userSaved.company.phone ? (userSaved.company.phone | mask:
+          <p *ngIf="userLoggedService.isAdmin()">Telefone: <span>{{userSaved.company.phone ? (userSaved.company.phone |
+              mask:
               '(99) 99999-9999') : 'Não informado' }}</span></p>
         </div>
 
@@ -40,8 +42,8 @@
                         <i class="icon-user"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" [(ngModel)]="user.company.name" placeholder="Nome da empresa" required name="name"
-                      #name="ngModel" autocomplete="company_name">
+                    <input type="text" class="form-control" [(ngModel)]="user.company.name" placeholder="Nome da empresa"
+                      required name="name" #name="ngModel" autocomplete="company_name">
                   </div>
 
                   <div class="input-group mb-3">
@@ -62,8 +64,8 @@
                         <i class="fa fa-calendar"></i>
                       </span>
                     </div>
-                    <input type="text" [(ngModel)]="user.company.birthdate" name="birthdate" placeholder="Início da empresa" class="form-control"
-                      bsDatepicker [bsConfig]="bsConfig" autocomplete="birthdate">
+                    <input type="text" [(ngModel)]="user.company.birthdate" name="birthdate" placeholder="Início da empresa"
+                      class="form-control" bsDatepicker [bsConfig]="bsConfig" autocomplete="birthdate">
                   </div>
 
                   <div class="input-group mb-3">
@@ -72,13 +74,13 @@
                         <i class="fa fa-phone"></i>
                       </span>
                     </div>
-                    <input type="tel" class="form-control" [(ngModel)]="user.company.phone" placeholder="Telefone" name="phone" #phone="ngModel"
-                      mask="(00) 00000-0000" autocomplete="phone">
+                    <input type="tel" class="form-control" [(ngModel)]="user.company.phone" placeholder="Telefone" name="phone"
+                      #phone="ngModel" mask="(00) 00000-0000" autocomplete="phone">
                   </div>
 
                   <div class="form-group">
-                    <textarea class="form-control" placeholder="Descrição da empresa" [(ngModel)]="user.company.description" name="description"
-                      #description="ngModel" rows="5"></textarea>
+                    <textarea class="form-control" placeholder="Descrição da empresa" [(ngModel)]="user.company.description"
+                      name="description" #description="ngModel" rows="5"></textarea>
                   </div>
 
                   <button type="submit" class="btn btn-block btn-success" [disabled]="!formEditCompany.valid || isLoading">
@@ -97,8 +99,8 @@
                         <i class="icon-user"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" [(ngModel)]="user.name" placeholder="Nome e sobrenome" required name="name" #name="ngModel"
-                      autocomplete="user_name">
+                    <input type="text" class="form-control" [(ngModel)]="user.name" placeholder="Nome e sobrenome"
+                      required name="name" #name="ngModel" autocomplete="user_name">
                   </div>
 
                   <div class="input-group mb-3">
@@ -113,12 +115,24 @@
 
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
+                      <label class="input-group-text">
+                        <i class="fa fa-history" aria-hidden="true"></i>
+                      </label>
+                    </div>
+
+                    <input type="text" [(ngModel)]="user.startWork" name="startWork" placeholder="Quando iniciou seu trabalho na área"
+                      class="form-control" bsDatepicker [bsConfig]="bsConfig" autocomplete="startWork">
+
+                  </div>
+
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
                       <span class="input-group-text">
                         <i class="fa fa-calendar"></i>
                       </span>
                     </div>
-                    <input type="text" [(ngModel)]="user.birthdate" name="birthdate" placeholder="Data de nascimento" class="form-control" bsDatepicker
-                      [bsConfig]="bsConfig" autocomplete="birthdate">
+                    <input type="text" [(ngModel)]="user.birthdate" name="birthdate" placeholder="Data de nascimento"
+                      class="form-control" bsDatepicker [bsConfig]="bsConfig" autocomplete="birthdate">
                   </div>
 
                   <div class="input-group mb-3">
@@ -127,21 +141,21 @@
                         <i class="fa fa-phone"></i>
                       </span>
                     </div>
-                    <input type="tel" class="form-control" [(ngModel)]="user.phone" placeholder="Telefone" name="phone" #phone="ngModel" mask="(99) 99999-9999"
-                      autocomplete="phone">
+                    <input type="tel" class="form-control" [(ngModel)]="user.phone" placeholder="Telefone" name="phone"
+                      #phone="ngModel" mask="(99) 99999-9999" autocomplete="phone">
                   </div>
 
                   <div class="form-group row text-center">
                     <div class="col-md-12 col-form-label">
                       <div class="form-check form-check-inline mr-3" id="inline-radios">
-                        <input class="form-check-input" type="radio" name="inline-radios"
-                        id="inlineRadio1" value="MALE" [(ngModel)]="user.sex">
+                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio1" value="MALE"
+                          [(ngModel)]="user.sex">
 
                         <label class="form-check-label" for="inlineRadio1">Masculino</label>
                       </div>
                       <div class="form-check form-check-inline mr-1">
-                        <input class="form-check-input" type="radio" name="inline-radios"
-                        id="inlineRadio2" value="FEMALE" [(ngModel)]="user.sex">
+                        <input class="form-check-input" type="radio" name="inline-radios" id="inlineRadio2" value="FEMALE"
+                          [(ngModel)]="user.sex">
 
                         <label class="form-check-label" for="inlineRadio2">Feminino</label>
                       </div>

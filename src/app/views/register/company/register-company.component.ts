@@ -50,10 +50,10 @@ export class RegisterCompanyComponent implements OnInit {
       });
     }, reject => {
       this.isLoading = false;
-      const msg = reject && reject.error[0]
+      /*const msg = reject && reject.error[0]
           ? reject.error[0].msgUser
           : 'Houve um erro ao realizar o cadastro, tente novamente mais tarde';
-      this.toasty.error(msg);
+      this.toasty.error(msg);*/
     });
 
   }
