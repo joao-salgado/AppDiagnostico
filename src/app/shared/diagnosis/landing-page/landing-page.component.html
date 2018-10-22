@@ -45,6 +45,15 @@
               </div>
             </div>
 
+            <div *ngIf="isUserAndHasOpenQuestionnaire()">
+              <div class="service-box-icon" (click)="btnActionListener('continue')">
+                <i class="text-center fa fa-rocket rounded-circle success" aria-hidden="true"></i>
+              </div>
+              <div class="service-box-desc">
+                <h5 class="text-white"><strong>Clique para continuar o questionário</strong></h5>
+              </div>
+            </div>
+
           </div>
         </div>
 

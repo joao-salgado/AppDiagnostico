@@ -14,7 +14,7 @@
     },
     {
       "title": "FORMULÁRIO",
-      "description": "O diagnóstico possui 7 seções com 20 questões por seção. Ao final será gerado o resultado de acordo com o cálculo proposto pelo diagnóstico. Lembre-se de responder o questionário completamente antes de sair!",
+      "description": "O diagnóstico possui 7 seções com 20 questões por seção. Ao final será gerado o resultado de acordo com o cálculo proposto pelo diagnóstico. Lembre-se de responder o questionário completamente antes de sair! Será feito um save automático sempre que a seção for mudada,",
       "icon": "fa fa-file-text-o"
     },
     {

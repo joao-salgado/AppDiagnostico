@@ -1,7 +1,7 @@
 <app-diagnosis-landing-page [dlpConfig]="landingData" (btnListener)="onBtnClick($event)" *ngIf="!doQuestionnaire()" [@doDiagnosis]="'actice'">
 </app-diagnosis-landing-page>
 
-<div *ngIf="doQuestionnaire() && !loadingQuestions" [@doDiagnosis]="'inactive'">
+<div *ngIf="doQuestionnaire() && !loadingQuestions && !loadingData" [@doDiagnosis]="'inactive'">
 
   <div class="row">
     <div class="col-12">
@@ -69,7 +69,7 @@
 
       </tab>
 
-      <tab (select)="onFinalizeTab($event)" *ngIf="true">
+      <tab *ngIf="true">
         <ng-template tabHeading><i class="mr-2 icon-calculator"></i>Finalizar diagnóstico</ng-template>
 
         <h3 class="text-center">Aqui você pode visualizar o andamento de seu diagnóstico, cada seção possui uma pontuação.</h3>
