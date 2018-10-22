@@ -47,7 +47,10 @@ export class BWComponent implements OnInit {
   public objectDiagnosis: any;
 
   public loadingFinish = false;
+  public loadingData = false;
   public loadingQuestions = false;
+
+  public diagnosis: any;
 
   constructor(private userLoggedService: UserLoggedService,
               private toasty: ToastyService,
@@ -60,6 +63,18 @@ export class BWComponent implements OnInit {
 
     this.answers = {
       get: [], use: [], learn: [], contribute: [], evaluate: [], build: [], discard: []
+    };
+
+    this.objectDiagnosis = {
+      sections: [
+        {name: 'Obter', totalResult: 0, section: 1, meta: {answers: []}},
+        {name: 'Utilizar', totalResult: 0, section: 2, meta: {answers: []}},
+        {name: 'Aprender', totalResult: 0, section: 3, meta: {answers: []}},
+        {name: 'Contribuir', totalResult: 0, section: 4, meta: {answers: []}},
+        {name: 'Avaliar', totalResult: 0, section: 5, meta: {answers: []}},
+        {name: 'Construir/Manter', totalResult: 0, section: 6, meta: {answers: []}},
+        {name: 'Descartar', totalResult: 0, section: 7, meta: {answers: []}},
+      ]
     };
 
   }
@@ -89,14 +104,20 @@ export class BWComponent implements OnInit {
         this.cancelDiagnosis();
         break;
       case 'do':
-        this.getQuestions();
+        this.initQuestions();
+        break;
+        case 'continue':
+        this.continueDiagnosis();
         break;
     }
   }
 
-  private getQuestions(): void {
+  private continueDiagnosis(): void {
+
+    this.clickType = 'continue';
 
     this.loadingQuestions = true;
+    this.loadingData = true;
 
     this.staticJsonService.getJson('assets/json/diagnosis-sections/bw.json')
     .subscribe(response => {
@@ -104,24 +125,68 @@ export class BWComponent implements OnInit {
       this.loadingQuestions = false;
     });
 
+    this.bwService.findByUserId(this.user.id).subscribe(response => {
+      this.diagnosis = response;
+
+      this.answers = {
+        get: [], use: [], learn: [], contribute: [], evaluate: [], build: [], discard: []
+      };
+
+      this.answers.get = this.diagnosis.bwPersonalSection[0].meta.answers;
+      this.answers.use = this.diagnosis.bwPersonalSection[1].meta.answers;
+      this.answers.learn = this.diagnosis.bwPersonalSection[2].meta.answers;
+      this.answers.contribute = this.diagnosis.bwPersonalSection[3].meta.answers;
+      this.answers.evaluate = this.diagnosis.bwPersonalSection[4].meta.answers;
+      this.answers.build = this.diagnosis.bwPersonalSection[5].meta.answers;
+      this.answers.discard = this.diagnosis.bwPersonalSection[6].meta.answers;
+
+      this.loadingData = false;
+    });
+
+  }
+
+  private initQuestions(): void {
+
+    this.loadingQuestions = true;
+    this.loadingData = true;
+
+    this.staticJsonService.getJson('assets/json/diagnosis-sections/bw.json')
+    .subscribe(response => {
+      this.questions = response;
+      this.loadingQuestions = false;
+    });
+
+    const questionnaireId = this.landingData.data.questionnaire.id;
+    let bwPersonal: any;
+    bwPersonal = {};
+
+    bwPersonal.totalResult = 0;
+    bwPersonal.bwPersonalSection = this.objectDiagnosis.sections;
+    bwPersonal.user = {id: this.user.id};
+    bwPersonal.bwQuestionnaire = {id: questionnaireId};
+    bwPersonal.status = 'OPEN';
+
+    this.bwService.savePersonalDiagnosis(questionnaireId, bwPersonal).subscribe(response => {
+      this.diagnosis = response;
+      this.loadingData = false;
+    }, reject => {
+      this.toasty.error('Erro ao iniciar o questionário, tente novamente mais tarde.');
+      this.loadingData = false;
+    });
+
   }
 
   public doQuestionnaire(): boolean {
-    return this.clickType === 'do';
+    return this.clickType === 'do' || this.clickType === 'continue';
   }
 
-  public onFinalizeTab(): void {
-    this.objectDiagnosis = {
-      sections: [
-        {name: 'Obter'},
-        {name: 'Utilizar'},
-        {name: 'Aprender'},
-        {name: 'Contribuir'},
-        {name: 'Avaliar'},
-        {name: 'Construir/Manter'},
-        {name: 'Descartar'},
-      ]
-    };
+  public onChangeTab(section): void {
+
+    if (this.answers[section.model].length !== 20) {
+      section.situation = 'error';
+    } else {
+      section.situation = 'success';
+    }
 
     let index = 0;
 
@@ -135,20 +200,26 @@ export class BWComponent implements OnInit {
     });
 
     this.objectDiagnosis.totalResult = 0;
-    this.objectDiagnosis.sections.forEach(section => {
-      this.objectDiagnosis.totalResult += section.totalResult;
+    this.objectDiagnosis.sections.forEach(sectionAns => {
+      this.objectDiagnosis.totalResult += sectionAns.totalResult;
     });
 
-  }
+    const questionnaireId = this.landingData.data.questionnaire.id;
+    let bwPersonal: any;
+    bwPersonal = {};
 
-  public onChangeTab(section): void {
+    bwPersonal.totalResult = this.objectDiagnosis.totalResult;
+    bwPersonal.bwPersonalSection = this.objectDiagnosis.sections;
+    bwPersonal.user = {id: this.user.id};
+    bwPersonal.bwQuestionnaire = {id: questionnaireId};
+    bwPersonal.status = 'OPEN';
+    bwPersonal.id = this.diagnosis.id;
 
-    if (this.answers[section.model].length !== 20) {
-      section.situation = 'error';
-    } else {
-      section.situation = 'success';
-    }
+    bwPersonal.bwPersonalSection.forEach((sec, ind) => {
+      sec.id = this.diagnosis.bwPersonalSection[ind].id;
+    });
 
+    this.bwService.updatePersonalDiagnosis(questionnaireId, bwPersonal).subscribe();
   }
 
   public finishDiagnosis(): void {
@@ -163,8 +234,10 @@ export class BWComponent implements OnInit {
     bwPersonal.bwPersonalSection = this.objectDiagnosis.sections;
     bwPersonal.user = {id: this.user.id};
     bwPersonal.bwQuestionnaire = {id: questionnaireId};
+    bwPersonal.status = 'CLOSED';
+    bwPersonal.id = this.diagnosis.id;
 
-    this.bwService.savePersonalDiagnosis(questionnaireId, bwPersonal).subscribe(response => {
+    this.bwService.updatePersonalDiagnosis(questionnaireId, bwPersonal).subscribe(response => {
       this.clickType = '';
       this.toasty.success('Questionário finalizado com sucesso.');
       this.loadingFinish = false;

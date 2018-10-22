@@ -32,4 +32,12 @@ export class BWService {
     return this.http.post(`${this.bwUrl}/${diagnosisId}/personal`, diagnosis);
   }
 
+  public updatePersonalDiagnosis(diagnosisId: string, diagnosis: any): Observable<any> {
+    return this.http.put(`${this.bwUrl}/${diagnosisId}/personal/${diagnosis.id}`, diagnosis);
+  }
+
+  public findByUserId(id: string): Observable<any> {
+    return this.http.get(`${this.bwUrl}/personal/${id}`);
+  }
+
 }
