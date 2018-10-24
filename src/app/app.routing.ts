@@ -12,7 +12,7 @@ import { LoginComponent } from './views/login/login.component';
 import { RegisterCompanyComponent } from './views/register/company/register-company.component';
 import { RegisterUserComponent } from './views/register/user/register-user.component';
 
-import { RegisterUserTypesResolver } from './views/register/user/register-user-type.resolver';
+import { RegisterUserTypesResolver } from './views/register/register-user-type.resolver';
 import { RegisterUserCodeResolver } from './views/register/user/register-user-code.resolver';
 import { RegisterCompanyResolver } from './views/register/company/register-company-resolver';
 
@@ -54,7 +54,8 @@ export const routes: Routes = [
       title: 'Cadastro de empresa'
     },
     resolve: {
-      homeData: RegisterCompanyResolver
+      homeData: RegisterCompanyResolver,
+      userTypes: RegisterUserTypesResolver
     },
   },
   {

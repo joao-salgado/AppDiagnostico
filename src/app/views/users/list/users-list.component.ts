@@ -1,5 +1,4 @@
 import { UserLoggedService } from './../../../core/user-logged.service';
-import { ToastyService, ToastyConfig } from 'ng2-toasty';
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../api/user.service';
 

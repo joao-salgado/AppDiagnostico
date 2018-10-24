@@ -24,7 +24,12 @@
         <span>{{user.name}}</span>
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
-        <div class="dropdown-header text-center"><strong>Sua conta</strong></div>
+        <div class="dropdown-header text-center">
+          <strong>
+            Sua conta
+            <span *ngIf="userLoggedService.isAdmin()"> - Adm</span>
+          </strong>
+        </div>
         <a class="dropdown-item" [routerLink]="['/', 'perfil', user.id]"><i class="fa fa-user"></i> Perfil</a>
         <div class="dropdown-header text-center"><strong>Sistema</strong></div>
         <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-lock"></i> Sair</a>

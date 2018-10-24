@@ -19,17 +19,20 @@
           <tbody>
             <tr *ngFor="let user of listUsers?.content">
               <td>{{user.name}}</td>
-              <td>{{user.userType.name}}</td>
+              <td>
+                <span *ngIf="user.userGroup.id === 1"><strong>Administrador</strong> e </span>
+                {{user.userType.name}}
+              </td>
               <td>{{user.email}}</td>
               <td>{{user.phone ? (user.phone | mask: '(99) 99999-9999') : 'Não informado'}}</td>
 
-              <td *ngIf="!userLoggedService.isAdmin() || user.userType.name === 'Admin'" class="text-center">
+              <td *ngIf="!userLoggedService.isAdmin() || user.userGroup.id === 1" class="text-center">
                 <span class="badge" [ngClass]="user.active ? 'badge-success' : 'badge-danger'">
                   {{user.active ? 'Ativo' : 'Inativo'}}
                 </span>
               </td>
 
-              <td *ngIf="user.userType.name !== 'Admin' && userLoggedService.isAdmin()" class="text-center">
+              <td *ngIf="user.userGroup.id !== 1 && userLoggedService.isAdmin()" class="text-center">
                 <label class="switch switch-label switch-pill switch-success">
                   <input type="checkbox" class="switch-input" [(ngModel)]="user.active"
                           (change)="toggleUserStatus(user)">
