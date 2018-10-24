@@ -6,6 +6,7 @@ import { UserService } from './../../../api/user.service';
 import { CompanyService } from './../../../api/company.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '../../../../../node_modules/@angular/router';
+import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 
 @Component({
   selector: 'app-register-company',
@@ -18,6 +19,8 @@ export class RegisterCompanyComponent implements OnInit {
   public companyRegister: CompanyRegister;
   public isLoading = false;
   public listCompanyProcesses: any;
+  public listUserTypes: any;
+  public bsConfig: any;
 
   constructor(private route: ActivatedRoute,
               private companyService: CompanyService,
@@ -25,12 +28,22 @@ export class RegisterCompanyComponent implements OnInit {
               private auth: AuthService,
               private userService: UserService,
               private userLoggedService: UserLoggedService,
-              private toasty: ToastyService) {
+              private localeService: BsLocaleService) {
     this.companyRegister = new CompanyRegister();
+
+    this.bsConfig = {
+      dateInputFormat: 'DD/MM/YYYY',
+      maxDate: new Date(),
+      minDate: new Date(1930, 0, 1)
+    };
+
+    this.localeService.use('pt-br');
   }
 
   public ngOnInit(): void {
     this.listCompanyProcesses = this.route.snapshot.data.homeData;
+    this.listUserTypes = this.route.snapshot.data.userTypes;
+    this.listUserTypes.shift();
   }
 
   public register(company: CompanyRegister): void {
@@ -50,10 +63,6 @@ export class RegisterCompanyComponent implements OnInit {
       });
     }, reject => {
       this.isLoading = false;
-      /*const msg = reject && reject.error[0]
-          ? reject.error[0].msgUser
-          : 'Houve um erro ao realizar o cadastro, tente novamente mais tarde';
-      this.toasty.error(msg);*/
     });
 
   }

@@ -36,6 +36,6 @@ export class CompanyRegister {
   constructor() {
     this.companyProcess = {id: undefined};
     this.userAccount = new Array<UserAccountRegister>();
-    this.userAccount.push(new UserAccountRegister('1', 'Administrador', '1'));
+    this.userAccount.push(new UserAccountRegister('1'));
   }
 }

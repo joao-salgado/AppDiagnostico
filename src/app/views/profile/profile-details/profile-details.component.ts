@@ -40,16 +40,14 @@ export class ProfileDetailsComponent implements OnInit {
 
     this.toastyConfig.theme = 'bootstrap';
 
-    if (this.userLoggedService.isAdmin()) {
-      this.companyProcessService.findAll().subscribe(response => {
-        this.listCompanyProcesses = response;
-      });
-    } else {
-      this.userTypeService.findAll().subscribe(response => {
-        response.shift();
-        this.listUserTypes = response;
-      });
-    }
+    this.companyProcessService.findAll().subscribe(response => {
+      this.listCompanyProcesses = response;
+    });
+
+    this.userTypeService.findAll().subscribe(response => {
+      response.shift();
+      this.listUserTypes = response;
+    });
 
     this.bsConfig = {
       dateInputFormat: 'DD/MM/YYYY',

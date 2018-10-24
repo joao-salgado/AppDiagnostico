@@ -83,10 +83,6 @@ export class RegisterUserComponent implements OnInit {
       });
     }, reject => {
       this.isLoading = false;
-      /*const msg = reject && reject.error[0]
-          ? reject.error[0].msgUser
-          : 'Houve um erro ao realizar o cadastro, tente novamente mais tarde';
-      this.toasty.error(msg);*/
     });
   }
 

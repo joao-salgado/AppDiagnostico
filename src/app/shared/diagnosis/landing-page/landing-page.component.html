@@ -21,21 +21,6 @@
               </div>
             </div>
 
-            <div *ngIf="isAdminAndHasQuestionnaire()">
-              <div class="service-box-icon" (click)="btnActionListener('close')">
-                <i class="text-center fa fa-check rounded-circle success" aria-hidden="true"></i>
-              </div>
-              <div class="service-box-desc">
-                <h5 class="text-white"><strong>Fechar diagnóstico</strong></h5>
-                <h6 *ngIf="!!dlpConfig.data && !dlpConfig.manualOpen">{{dlpConfig.data.countUsersWhoResponded + ' de ' + dlpConfig.data.countUsers + ' responderam o questionário.'}}</h6>
-              </div>
-
-              <div>
-                <button class="btn btn-danger" (click)="btnActionListener('cancel')">Cancelar diagnóstico</button>
-              </div>
-
-            </div>
-
             <div *ngIf="isUserAndHasQuestionnaire()">
               <div class="service-box-icon" (click)="btnActionListener('do')">
                 <i class="text-center fa fa-rocket rounded-circle success" aria-hidden="true"></i>
@@ -52,6 +37,12 @@
               <div class="service-box-desc">
                 <h5 class="text-white"><strong>Clique para continuar o questionário</strong></h5>
               </div>
+            </div>
+
+            <div *ngIf="isAdminAndHasQuestionnaire()">
+              <h6 *ngIf="!!dlpConfig.data && !dlpConfig.manualOpen">{{dlpConfig.data.countUsersWhoResponded + ' de ' + dlpConfig.data.countUsers + ' responderam o questionário.'}}</h6>
+              <button class="btn btn-success mr-2" (click)="btnActionListener('close')">Concluir diagnóstico</button>
+              <button class="btn btn-danger" (click)="btnActionListener('cancel')">Cancelar diagnóstico</button>
             </div>
 
           </div>

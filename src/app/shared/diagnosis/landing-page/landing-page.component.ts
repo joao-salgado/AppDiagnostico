@@ -40,17 +40,15 @@ export class DiagnosisLandingPageComponent implements OnInit, OnDestroy {
     return this.btnShow === 'open'
     ? false
     : this.userLoggedService.isAdmin() && (
-    !this.dlpConfig.data ||
-    !this.dlpConfig.data.questionnaire ||
-    !this.dlpConfig.data.questionnaire.id);
+      !this.dlpConfig.data ||
+      (!this.dlpConfig.data.questionnaire && !this.dlpConfig.data.questionnaireId));
 
   }
 
   public isAdminAndHasQuestionnaire(): boolean {
-    return (this.userLoggedService.isAdmin() &&
-    this.dlpConfig.data &&
-    this.dlpConfig.data.questionnaire &&
-    this.dlpConfig.data.questionnaire.id)
+    return this.userLoggedService.isAdmin() && this.dlpConfig.data &&
+    ((this.dlpConfig.data.questionnaire && this.dlpConfig.data.questionnaire.id)
+    || (this.dlpConfig.data && this.dlpConfig.data.questionnaireId))
     || this.btnShow === 'open';
   }
 
@@ -58,31 +56,31 @@ export class DiagnosisLandingPageComponent implements OnInit, OnDestroy {
 
     let alreadyResponded = false;
 
-    if (this.dlpConfig.data && Array(this.dlpConfig.data.usersWhoResponded) && this.dlpConfig.data.usersWhoResponded.length) {
+    if (this.btnShow !== 'open' && this.dlpConfig.data && Array.isArray(this.dlpConfig.data.usersWhoResponded)
+        && this.dlpConfig.data.usersWhoResponded.length) {
       alreadyResponded = this.dlpConfig.data.usersWhoResponded.some(user => {
         return user && user.user && user.user.id === this.user.id;
       });
     }
 
-    return !this.userLoggedService.isAdmin() &&
-    this.dlpConfig.data &&
+    return this.dlpConfig.data &&
     this.dlpConfig.data.questionnaire &&
     this.dlpConfig.data.questionnaire.id &&
-    !alreadyResponded;
+    (!alreadyResponded || this.btnShow === 'open');
   }
 
   public isUserAndHasOpenQuestionnaire(): boolean {
 
     let alreadyResponded = false;
 
-    if (this.dlpConfig.data && Array(this.dlpConfig.data.usersWhoResponded) && this.dlpConfig.data.usersWhoResponded.length) {
+    if (this.btnShow !== 'open' && this.dlpConfig.data && Array.isArray(this.dlpConfig.data.usersWhoResponded)
+         && this.dlpConfig.data.usersWhoResponded.length) {
       alreadyResponded = this.dlpConfig.data.usersWhoResponded.some(user => {
         return user && user.user && user.user.id === this.user.id && user.status === 'OPEN';
       });
     }
 
-    return !this.userLoggedService.isAdmin() &&
-    this.dlpConfig.data &&
+    return this.dlpConfig.data &&
     this.dlpConfig.data.questionnaire &&
     this.dlpConfig.data.questionnaire.id &&
     alreadyResponded;

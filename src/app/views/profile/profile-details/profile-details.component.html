@@ -16,12 +16,9 @@
           <p>Empresa: <span>{{userSaved.company.name}}</span></p>
           <p>Nome: <span>{{userSaved.name}}</span></p>
           <p>Email: <span>{{userSaved.email}}</span></p>
-          <p *ngIf="!userLoggedService.isAdmin()">Telefone: <span>{{userSaved.phone ? (userSaved.phone | mask: '(99)
+          <p>Telefone: <span>{{userSaved.phone ? (userSaved.phone | mask: '(99)
               99999-9999')
               : 'Não informado' }}</span></p>
-          <p *ngIf="userLoggedService.isAdmin()">Telefone: <span>{{userSaved.company.phone ? (userSaved.company.phone |
-              mask:
-              '(99) 99999-9999') : 'Não informado' }}</span></p>
         </div>
 
       </div>
@@ -32,8 +29,8 @@
         <div class="col-lg-12 col-12 bg-white rounded-top tab-head">
           <tabset [justified]="true">
 
-            <tab heading="Editar">
-              <fieldset *ngIf="userLoggedService.isAdmin()">
+            <tab heading="Editar empresa" *ngIf="userLoggedService.isAdmin()">
+              <fieldset>
                 <legend>Empresa</legend>
                 <form #formEditCompany="ngForm" (ngSubmit)="saveCompany(user)" novalidate>
                   <div class="input-group mb-3">
@@ -89,8 +86,10 @@
                   </button>
                 </form>
               </fieldset>
+            </tab>
 
-              <fieldset *ngIf="!userLoggedService.isAdmin()">
+            <tab heading="Editar dados pessoais" *ngIf="true">
+              <fieldset>
                 <legend>Usuário</legend>
                 <form #formEditUser="ngForm" (ngSubmit)="saveUser(user)" novalidate>
                   <div class="input-group mb-3">

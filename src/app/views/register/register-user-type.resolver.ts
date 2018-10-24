@@ -1,4 +1,4 @@
-import { UserTypeService } from './../../../api/user-type.service';
+import { UserTypeService } from './../../api/user-type.service';
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot   } from '@angular/router';
 
