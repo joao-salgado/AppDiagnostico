@@ -71,16 +71,19 @@ export const navItems = [
   },
   {
     title: true,
-    name: 'Usuários'
+    name: 'Usuários',
+    notRearcher: true
   },
   {
     name: 'Usuários',
     url: '/usuarios',
-    icon: 'fa fa-user-o'
+    icon: 'fa fa-user-o',
+    notRearcher: true
   },
   {
     name: 'Convites',
     url: '/convites',
-    icon: 'icon-user-follow'
+    icon: 'icon-user-follow',
+    notRearcher: true
   }
 ];

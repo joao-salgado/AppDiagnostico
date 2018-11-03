@@ -11,10 +11,10 @@
       <a class="nav-link" routerLink="/dashboard"><i class="icon-graph"></i> &nbsp;Dashboard</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" routerLink="/usuarios"><i class="fa fa-user-o"></i> &nbsp;Usuários</a>
+      <a class="nav-link" *ngIf="!userLoggedService.isRearcher()" routerLink="/usuarios"><i class="fa fa-user-o"></i> &nbsp;Usuários</a>
     </li>
     <li class="nav-item px-3">
-      <a class="nav-link" routerLink="/convites"><i class="icon-user-follow"></i> &nbsp;Convites</a>
+      <a class="nav-link" *ngIf="!userLoggedService.isRearcher()" routerLink="/convites"><i class="icon-user-follow"></i> &nbsp;Convites</a>
     </li>
   </ul>
   <ul class="nav navbar-nav ml-auto">

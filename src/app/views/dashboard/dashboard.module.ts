@@ -8,10 +8,13 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { DashboardComponent } from './dashboard.component';
 import { DashboardRoutingModule } from './dashboard.routing';
 import { DashboardBwComponent } from './bw/dashboard-bw.component';
+import { BwRComponent } from './bw-r/bw-r.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
     FormsModule,
+    CommonModule,
     DashboardRoutingModule,
     ChartsModule,
     BsDropdownModule,
@@ -20,7 +23,8 @@ import { DashboardBwComponent } from './bw/dashboard-bw.component';
   ],
   declarations: [
     DashboardComponent,
-    DashboardBwComponent
+    DashboardBwComponent,
+    BwRComponent
   ]
 })
 export class DashboardModule { }
