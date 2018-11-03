@@ -20,7 +20,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   constructor(private logoutService: LogoutService,
               public auth: AuthService,
-              private userLoggedService: UserLoggedService,
+              public userLoggedService: UserLoggedService,
               ) {
 
     this.changes = new MutationObserver((mutations) => {
