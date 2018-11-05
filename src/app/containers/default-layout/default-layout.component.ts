@@ -1,7 +1,7 @@
 import { UserLoggedService } from './../../core/user-logged.service';
 import { AuthService } from './../../core/security/auth.service';
 import { LogoutService } from './../../core/security/logout.service';
-import { Component, OnInit, ElementRef, AfterViewInit, Renderer } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { navItems } from '../../_nav';
 
 @Component({
@@ -9,7 +9,9 @@ import { navItems } from '../../_nav';
   templateUrl: './default-layout.component.html'
 })
 export class DefaultLayoutComponent implements OnInit {
-  public navItems = navItems;
+
+  public navItems;
+
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement = document.body;
@@ -18,7 +20,7 @@ export class DefaultLayoutComponent implements OnInit {
 
   constructor(private logoutService: LogoutService,
               public auth: AuthService,
-              private userLoggedService: UserLoggedService,
+              public userLoggedService: UserLoggedService,
               ) {
 
     this.changes = new MutationObserver((mutations) => {
@@ -28,6 +30,8 @@ export class DefaultLayoutComponent implements OnInit {
     this.changes.observe(<Element>this.element, {
       attributes: true
     });
+
+    this.navItems = userLoggedService.isRearcher() ? navItems.filter(item => !item.notRearcher) : navItems;
   }
 
   public ngOnInit(): void {

@@ -83,7 +83,7 @@ registerLocaleData(ptBr);
     InviteModule,
     ProfileModule,
     DiagnosisModule,
-    UsersModule
+    UsersModule,
   ],
   declarations: [
     AppComponent,

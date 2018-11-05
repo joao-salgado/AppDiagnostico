@@ -42,4 +42,8 @@ export class DashboardService {
     });
   }
 
+  public getForRearcher(diagnosis: string): Observable<any> {
+    return this.http.get(`${this.dashboardUrl}/rearchers/${diagnosis}`);
+  }
+
 }

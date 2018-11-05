@@ -18,4 +18,12 @@ export class UserLoggedService {
     return this.role === 1;
   }
 
+  public isCollaborator(): boolean {
+    return this.role === 2;
+  }
+
+  public isRearcher(): boolean {
+    return this.role === 3;
+  }
+
 }

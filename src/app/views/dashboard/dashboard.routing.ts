@@ -6,7 +6,10 @@ import { DashboardComponent } from './dashboard.component';
 import { DashboardBwComponent } from './bw/dashboard-bw.component';
 import { DiagnosisListComponent } from '../../shared/diagnosis/list/diagnosis-list.component';
 import { ComingSoonComponent } from '../../shared/coming-soon/coming-soon.component';
-import { DashboardBWResolver } from './bw/dashboar-bw.resolver';
+import { DashboardBWResolver } from './bw/dashboard-bw.resolver';
+import { BwRComponent } from './bw-r/bw-r.component';
+import { AuthGuard } from '../../core/security/auth.guard';
+import { DashboardBWRResolver } from './bw-r/dashboard-bw-r.resolver';
 
 const routes: Routes = [
   {
@@ -73,6 +76,59 @@ const routes: Routes = [
           title: 'Seven Dimensions of Knowledge Management',
           diagnosis: 'sdkm'
         }
+      },
+      {
+        path: 'bw-r',
+        component: BwRComponent,
+        canActivate: [AuthGuard],
+        data: {
+          title: 'Diagnóstico de Gestão de Conhecimento',
+          diagnosis: 'bw',
+          roles: ['ROLE_RESEARCH_DASHBOARD'],
+        },
+        resolve: {
+          data: DashboardBWRResolver
+        },
+      },
+      {
+        path: 'dgcc-r',
+        component: ComingSoonComponent,
+        data: {
+          title: 'Diagnóstico Claudia',
+          diagnosis: 'dgcc'
+        }
+      },
+      {
+        path: 'kmd-r',
+        component: ComingSoonComponent,
+        data: {
+          title: 'Knowledge Management Diagnostic',
+          diagnosis: 'kmd'
+        }
+      },
+      {
+        path: 'apo-r',
+        component: ComingSoonComponent,
+        data: {
+          title: 'Asian Productivity Organization',
+          diagnosis: 'apo'
+        }
+      },
+      {
+        path: 'oka-r',
+        component: ComingSoonComponent,
+        data: {
+          title: 'Organizational Knowledge Assessment',
+          diagnosis: 'oka'
+        }
+      },
+      {
+        path: 'sdkm-r',
+        component: ComingSoonComponent,
+        data: {
+          title: 'Seven Dimensions of Knowledge Management',
+          diagnosis: 'sdkm'
+        }
       }
     ]
   }
@@ -82,7 +138,8 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
   providers: [
-    DashboardBWResolver
+    DashboardBWResolver,
+    DashboardBWRResolver
   ]
 })
 export class DashboardRoutingModule {}
