@@ -22,6 +22,7 @@ export class DashboardBwComponent implements OnInit {
   private prepareData(data: any): void {
     const diagnosisIds = [];
     data.forEach(element => {
+      element.bwPersonalSection.sort((a, b) => a.section > b.section ? 0 : -1);
       if (!diagnosisIds.some(id => id === element.diagnosisId)) {
         diagnosisIds.push(element.diagnosisId);
       }
