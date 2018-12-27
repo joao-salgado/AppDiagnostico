@@ -2,6 +2,7 @@
   {
     "title": "Obter",
     "description": "As pessoas não devem mais agir sem informação. Assim garimpar as informações úteis para as suas tarefas é a atividade inicial. Buscar eficiência dos processos.",
+    "show": true,
     "model": "get",
     "icon": "icon-calculator",
     "questions": [
@@ -30,6 +31,7 @@
   {
     "title": "Utilizar",
     "description": "Inovar ao utilizar a informação é fundamental. Criar novas soluções combinando as informações é a principal atuação desta fase. Estabelecer um ambiente que encoraje as pessoas a criatividade, utilizar instrumentos, equipamentos e tecnologias são fatores fundamentais.",
+    "show": true,
     "model": "use",
     "icon": "icon-calculator",
     "questions": [
@@ -58,6 +60,7 @@
   {
     "title": "Aprender",
     "description": "O desafio para as organizações é encontrar formas de integrar o processo de aprendizagem à maneira como as pessoas trabalham. Considerar o longo prazo sobre as premências do curto prazo deve ser considerado.",
+    "show": false,
     "model": "learn",
     "icon": "icon-calculator",
     "questions": [
@@ -86,6 +89,7 @@
   {
     "title": "Contribuir",
     "description": "O maior desafio é conseguir que os empregados contribuam para a base de conhecimento comum com o que aprenderam. Convencer pessoas a dar sua contribuição e estabelecer uma infraestrutura são fatores fundamentais.",
+    "show": true,
     "model": "contribute",
     "icon": "icon-calculator",
     "questions": [
@@ -114,6 +118,7 @@
   {
     "title": "Avaliar",
     "description": "Medir o crescimento da base de conhecimento e os lucros advindos da utilização do capital intelectual é fundamental nessa fase. Naturalmente avaliar, exige que a empresa defina qual o conhecimento necessário para cumprir sua missão.",
+    "show": false,
     "model": "evaluate",
     "icon": "icon-calculator",
     "questions": [
@@ -142,6 +147,7 @@
   {
     "title": "Construir/Manter",
     "description": "Os relacionamentos internos e externos à organização devem ser parte ativa da construção do conhecimento. Empregados, fornecedores e saber até como funciona a concorrência é extremamente desejável. Surge então um estilo facilitados em substituição ao estreito controle das pessoas.",
+    "show": false,
     "model": "build",
     "icon": "icon-calculator",
     "questions": [
@@ -170,6 +176,7 @@
   {
     "title": "Descartar",
     "description": "Tal como os ativos físicos, o conhecimento sem valor deve ser descartado. Analisar custos e oportunidades pode indicar alternativas e transferir informações para fora da empresa pode representar ganhos para a empresa.",
+    "show": false,
     "model": "discard",
     "icon": "icon-calculator",
     "questions": [
