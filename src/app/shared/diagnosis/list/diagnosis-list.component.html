@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-primary cursor-pointer" [routerLink]="[userLoggedService.isRearcher() ? 'bw-r' : 'bw']">
+      <div class="card text-white bg-primary cursor-pointer" (click)="goToDashboard('bw')">
         <div class="card-body">
           <div class="h5 m-0">Diagnóstico de Gestão de Conhecimento</div>
           <div>Por Bukowitz & Williams</div>
@@ -12,7 +12,7 @@
     </div>
     <!--/.col-->
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-dark cursor-pointer" [routerLink]="[userLoggedService.isRearcher() ? 'dgcc-r' : 'dgcc']">
+      <div class="card text-white bg-dark cursor-pointer" (click)="goToDashboard('dgcc')">
         <div class="card-body">
           <div class="h5 m-0">Diagnóstico de Gestão de Conhecimento - Claudia</div>
           <!-- <div>Por Claudia</div> -->

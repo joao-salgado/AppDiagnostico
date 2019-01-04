@@ -12,6 +12,10 @@ export class CompanyService {
     this.companyUrl = `${environment.apiUrl}/companies`;
   }
 
+  public getAll(): Observable<any> {
+    return this.http.get(this.companyUrl);
+  }
+
   public save(company: any): Observable<any> {
     return this.http.post(this.companyUrl, company);
   }
