@@ -23,10 +23,19 @@ export class DashboardBwComponent implements OnInit {
     const diagnosisIds = [];
     data.forEach(element => {
       element.bwPersonalSection.sort((a, b) => a.section > b.section ? 0 : -1);
+
+      /**REMOVER ESSAS LINHAS AO LIBERAR AS OUTRAS SEÇÕES */
+      element.bwPersonalSection.splice(2, 1);
+      element.bwPersonalSection.splice(3, 1);
+      element.bwPersonalSection.splice(3, 1);
+      element.bwPersonalSection.splice(3, 1);
+
       if (!diagnosisIds.some(id => id === element.diagnosisId)) {
         diagnosisIds.push(element.diagnosisId);
       }
     });
+
+    console.log(data);
 
     const organizedData = [];
     diagnosisIds.forEach(element => {
@@ -59,17 +68,17 @@ export class DashboardBwComponent implements OnInit {
           totalResult: 0,
           section: 2
         },
-        {
+        /*{
           name: 'Aprender',
           totalResult: 0,
           section: 3
-        },
+        },*/
         {
           name: 'Contribuir',
           totalResult: 0,
           section: 4
         },
-        {
+        /*{
           name: 'Avaliar',
           totalResult: 0,
           section: 5
@@ -83,7 +92,7 @@ export class DashboardBwComponent implements OnInit {
           name: 'Descartar',
           totalResult: 0,
           section: 7
-        }
+        }*/
       ],
       totalResult: 0
     };
@@ -153,7 +162,7 @@ export class DashboardBwComponent implements OnInit {
     const radarData = [];
     let radarCount = 0;
     data.forEach(element => {
-      const item = {data: [0, 0, 0, 0, 0, 0, 0], label: moment(element.answers[0].endDate).format('DD-MM-YYYY')};
+      const item = {data: [0, 0, 0/*, 0, 0, 0, 0*/], label: moment(element.answers[0].endDate).format('DD-MM-YYYY')};
 
       radarCount = 0;
       element.answers.forEach(answer => {
@@ -171,8 +180,8 @@ export class DashboardBwComponent implements OnInit {
     });
 
     const radar = {
-      data: radarData.length ? radarData : [{data: [0, 0, 0, 0, 0, 0, 0], label: 'Não há dados'}],
-      labels: ['Obter', 'Utilizar', 'Aprender', 'Contribuir', 'Avaliar', 'Construir/Manter', 'Descartar']
+      data: radarData.length ? radarData : [{data: [0, 0, 0, /*0, 0, 0, 0*/], label: 'Não há dados'}],
+      labels: ['Obter', 'Utilizar', /*'Aprender',*/ 'Contribuir', /*'Avaliar', 'Construir/Manter', 'Descartar'*/]
     };
 
     // OBJECT

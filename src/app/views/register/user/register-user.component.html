@@ -25,7 +25,7 @@
                     <div class="input-group-prepend">
                       <label class="input-group-text">P</label>
                     </div>
-                    <select name="role" class="form-control" required #role="ngModel" [(ngModel)]="userRegister.userType.id">
+                    <select name="type" class="form-control" required #type="ngModel" [(ngModel)]="userRegister.userType.id">
                       <option [ngValue]="undefined" selected disabled>Selecione seu papel</option>
                       <option *ngFor="let type of listUserTypes; trackBy:type?.id" [value]="type.id">{{type.name}}</option>
                     </select>
