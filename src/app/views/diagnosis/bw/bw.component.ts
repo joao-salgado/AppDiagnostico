@@ -312,9 +312,16 @@ export class BWComponent implements OnInit {
   }
 
   public isDiagnosisCompleted(): boolean {
+
+    // REMOVER QUANDO LIBERAR TODAS AS SEÇÕES
+    return this.questions[0].situation === 'success'
+        && this.questions[1].situation === 'success'
+        && this.questions[3].situation === 'success';
+
+    /* DESCOMENTAR QUANDO LIBERAR TODAS AS SEÇÕES
     return this.questions.every(section => {
       return section.situation === 'success';
-    });
+    });*/
   }
 
   private openDiagnosis(): void {
@@ -402,4 +409,5 @@ export class BWComponent implements OnInit {
       }
     });
   }
+
 }

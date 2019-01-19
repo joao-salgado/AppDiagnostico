@@ -1,21 +1,23 @@
 <div class="row" *ngIf="!!data">
-  <div class="col-sm-6 col-lg-3" *ngFor="let section of data.sections">
-    <div class="brand-card">
-      <div class="brand-card-header bg-facebook">
-        <span>{{section.name}}</span>
-      </div>
-      <div class="brand-card-body">
-        <div>
-          <div class="text-value">{{section.totalResult | number:'0.0-0'}}</div>
-          <div class="text-uppercase text-muted small">Pontos</div>
+  <ng-container *ngFor="let section of data.sections">
+    <div class="col-sm-6 col-lg-3" *ngIf="showSection(section.section)">
+      <div class="brand-card">
+        <div class="brand-card-header bg-facebook">
+          <span>{{section.name}}</span>
         </div>
-        <div>
-          <div class="text-value">{{(section.totalResult/60) | percent:'1.0'}}</div>
-          <div class="text-uppercase text-muted small">Porcentagem</div>
+        <div class="brand-card-body">
+          <div>
+            <div class="text-value">{{section.totalResult | number:'0.0-0'}}</div>
+            <div class="text-uppercase text-muted small">Pontos</div>
+          </div>
+          <div>
+            <div class="text-value">{{(section.totalResult/60) | percent:'1.0'}}</div>
+            <div class="text-uppercase text-muted small">Porcentagem</div>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </ng-container>
 
   <div class="col-sm-6 col-lg-3">
     <div class="brand-card">
@@ -28,11 +30,13 @@
           <div class="text-uppercase text-muted small">Pontos</div>
         </div>
         <div>
-          <div class="text-value">{{(data.totalResult/420) | percent:'1.0'}}</div>
+          <!--
+            TROCAR PARA 420 QUANDO FOR AS 7 SEÇÕES
+          -->
+          <div class="text-value">{{(data.totalResult/180) | percent:'1.0'}}</div>
           <div class="text-uppercase text-muted small">Porcentagem</div>
         </div>
       </div>
     </div>
   </div>
-
 </div>

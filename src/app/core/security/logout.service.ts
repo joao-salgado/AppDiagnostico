@@ -21,6 +21,7 @@ export class LogoutService {
   public logout() {
 
     this.auth.clearAccessToken();
+    localStorage.removeItem('selectedCompany');
     this.router.navigate(['/login']);
 
     /*return this.http.delete(this.tokensRenokeUrl)

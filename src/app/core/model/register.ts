@@ -28,6 +28,7 @@ export class UserAccountRegister {
 
 export class CompanyRegister {
   name: string;
+  meta: any;
   companyProcess: {
     id: string;
   };
@@ -37,5 +38,6 @@ export class CompanyRegister {
     this.companyProcess = {id: undefined};
     this.userAccount = new Array<UserAccountRegister>();
     this.userAccount.push(new UserAccountRegister('1'));
+    this.meta = {};
   }
 }
