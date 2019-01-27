@@ -70,6 +70,11 @@ export const navItems = [
     ]
   },
   {
+    name: 'Acessar diagnóstico',
+    url: '/diagnosticos/bw',
+    icon: 'fa fa-file-text-o'
+  },
+  {
     title: true,
     name: 'Usuários',
     notRearcher: true

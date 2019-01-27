@@ -25,4 +25,8 @@ export class DiagnosisBasicResultComponent implements OnInit {
 
   }
 
+  public showSection(section: number) {
+    return section === 1 || section === 2 || section === 4;
+  }
+
 }

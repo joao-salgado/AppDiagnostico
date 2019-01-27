@@ -2,7 +2,7 @@
 
   <div class="row">
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-primary cursor-pointer" [routerLink]="[userLoggedService.isRearcher() ? 'bw-r' : 'bw']">
+      <div class="card text-white bg-primary cursor-pointer" (click)="goToDashboard('bw')">
         <div class="card-body">
           <div class="h5 m-0">Diagnóstico de Gestão de Conhecimento</div>
           <div>Por Bukowitz & Williams</div>
@@ -12,7 +12,7 @@
     </div>
     <!--/.col-->
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-dark cursor-pointer" [routerLink]="[userLoggedService.isRearcher() ? 'dgcc-r' : 'dgcc']">
+      <div class="card text-white bg-dark cursor-pointer" (click)="goToDashboard('dgcc')">
         <div class="card-body">
           <div class="h5 m-0">Diagnóstico de Gestão de Conhecimento - Claudia</div>
           <!-- <div>Por Claudia</div> -->
@@ -22,7 +22,7 @@
     </div>
     <!--/.col-->
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-dark cursor-pointer" [routerLink]="[userLoggedService.isRearcher() ? 'kmd-r' : 'kmd']">
+      <div class="card text-white bg-dark cursor-pointer" (click)="goToDashboard('kmd')">
         <div class="card-body">
           <div class="h5 m-0">Asian Productivity Organization</div>
           <!-- <div>Por Lorem...</div> -->
@@ -32,7 +32,7 @@
     </div>
     <!--/.col-->
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-dark cursor-pointer" [routerLink]="[userLoggedService.isRearcher() ? 'apo-r' : 'apo']">
+      <div class="card text-white bg-dark cursor-pointer" (click)="goToDashboard('apo')">
         <div class="card-body">
           <div class="h5 m-0">Knowledge Management Diagnostic</div>
           <!-- <div>Por Lorem...</div> -->
@@ -42,7 +42,7 @@
     </div>
     <!--/.col-->
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-dark cursor-pointer" [routerLink]="[userLoggedService.isRearcher() ? 'oka-r' : 'oka']">
+      <div class="card text-white bg-dark cursor-pointer" (click)="goToDashboard('oka')">
         <div class="card-body">
           <div class="h5 m-0">Organizational Knowledge Assessment</div>
           <!-- <div>Por Lorem...</div> -->
@@ -52,7 +52,7 @@
     </div>
     <!--/.col-->
     <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-dark cursor-pointer" [routerLink]="[userLoggedService.isRearcher() ? 'sdkm-r' : 'sdkm']">
+      <div class="card text-white bg-dark cursor-pointer" (click)="goToDashboard('sdkm')">
         <div class="card-body">
           <div class="h5 m-0">Seven Dimensions of Knowledge Management</div>
           <!-- <div>Por Lorem...</div> -->

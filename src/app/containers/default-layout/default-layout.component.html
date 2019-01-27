@@ -10,12 +10,24 @@
     <li class="nav-item px-3">
       <a class="nav-link" routerLink="/dashboard"><i class="icon-graph"></i> &nbsp;Dashboard</a>
     </li>
-    <li class="nav-item px-3">
-      <a class="nav-link" *ngIf="!userLoggedService.isRearcher()" routerLink="/usuarios"><i class="fa fa-user-o"></i> &nbsp;Usuários</a>
+    <li class="nav-item px-3" *ngIf="!userLoggedService.isRearcher()">
+      <a class="nav-link" routerLink="/usuarios"><i class="fa fa-user-o"></i> &nbsp;Usuários</a>
     </li>
-    <li class="nav-item px-3">
-      <a class="nav-link" *ngIf="!userLoggedService.isRearcher()" routerLink="/convites"><i class="icon-user-follow"></i> &nbsp;Convites</a>
+    <li class="nav-item px-3" *ngIf="!userLoggedService.isRearcher()">
+      <a class="nav-link" routerLink="/convites"><i class="icon-user-follow"></i> &nbsp;Convites</a>
     </li>
+
+    <li class="nav-item px-3" *ngIf="userLoggedService.isRearcher()">
+
+      <select class="form-control" name="selectedCompany"
+           [(ngModel)]="selectedCompany" (ngModelChange)="onSelectCompany(selectedCompany)">
+        <option *ngFor="let company of companies trackBy:company?.id"
+                [value]="company.id">{{company.name}}</option>
+      </select>
+
+    </li>
+
+
   </ul>
   <ul class="nav navbar-nav ml-auto">
     <li class="nav-item dropdown mr-3" dropdown placement="bottom right">
@@ -50,7 +62,7 @@
       <!-- Breadcrumb Menu-->
       <li class="breadcrumb-menu d-md-down-none">
         <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-          Diagnósticando o conhecimento de sua empresa
+          Diagnosticando o conhecimento de sua empresa
         </div>
       </li>
     </ol>
