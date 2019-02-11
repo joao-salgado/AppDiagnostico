@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-bw-r',
@@ -7,125 +8,170 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./bw-r.component.scss']
 })
 export class BwRComponent implements OnInit {
-  public basicResult = null;
-  public barChartData;
-  public data;
-  public barChartType = 'obter';
 
-  @ViewChild('barChart')
-  barChart;
-
-  // barChart
-  public barChartOptions: any = {
-    scaleShowVerticalLines: true,
-    responsive: true,
-    scales: {
-      xAxes: [
-        {
-          stacked: true
-        }
-      ],
-      yAxes: [
-        {
-          stacked: true
-        }
-      ]
-    }
-  };
+  public basicData: any;
+  public advancedData: any;
 
   constructor(private route: ActivatedRoute) {
-    this.data = this.route.snapshot.data.data;
-
-    this.basicResult = [
-      {
-        label: 'Quantidade de empresas cadastradas',
-        result: this.data.companyCount
-      },
-      {
-        label: 'Quantidade de empresas que concluíram o questionário',
-        result: this.data.companyConcluedCount
-      },
-      {
-        label: 'Quantidade de empresas que cancelaram o questionário',
-        result: this.data.companyCanceledCount
-      },
-      {
-        label: 'Quantidade de questionários abertos',
-        result: this.data.questionnairesOpenCount
-      },
-      {
-        label: 'Quantidade de questionários concluídos',
-        result: this.data.questionnairesConcluedCount
-      },
-      {
-        label: 'Quantidade de questionários cancelados',
-        result: this.data.questionnairesCanceledCount
-      },
-      {
-        label: 'Quantidade de usuários cadastrados',
-        result: this.data.usersCount
-      },
-      {
-        label: 'Media de usuários por empresa',
-        result: this.data.usersByCompany
-      }
-    ];
-
-    this.onChangeData();
+    this.prepareData(this.route.snapshot.data.data);
   }
 
-  public ngOnInit() {}
+  public ngOnInit(): void {}
 
-  public onChangeData(): void {
+  public onbtnSendListener(event: any) {
+    this.prepareData(event);
+  }
 
-    // BAR
-    const barData = [
-      {data: [], label: 'Diagnósticos'}
-    ];
+  private prepareData(data: any): void {
 
-    switch (this.barChartType) {
-      case 'obter':
-        barData[0].data = this.data.byProcess.map(element => element.get ? element.get.toFixed(0) : 0);
-        break;
-      case 'utilizar':
-        barData[0].data = this.data.byProcess.map(element => element.learn ? element.learn.toFixed(0) : 0);
-        break;
-      case 'aprender':
-        barData[0].data = this.data.byProcess.map(element => element.learn ? element.learn.toFixed(0) : 0);
-        break;
-      case 'contribuir':
-        barData[0].data = this.data.byProcess.map(element => element.contribute ? element.contribute.toFixed(0) : 0);
-        break;
-      case 'avaliar':
-        barData[0].data = this.data.byProcess.map(element => element.evaluate ? element.evaluate.toFixed(0) : 0);
-        break;
-      case 'construir':
-        barData[0].data = this.data.byProcess.map(element => element.build ? element.build.toFixed(0) : 0);
-        break;
-      case 'descartar':
-        barData[0].data = this.data.byProcess.map(element => element.discard ? element.discard.toFixed(0) : 0);
-        break;
-      case 'quantidade':
-        barData[0].data = this.data.byProcess.map(element => element.count ? element.count.toFixed(0) : 0);
-        break;
-      case 'total':
-        barData[0].data = this.data.byProcess.map(element => element.total ? element.total.toFixed(0) : 0);
-        break;
-    }
+    const diagnosisIds = [];
+    data.forEach(element => {
+      element.bwPersonalSection.sort((a, b) => a.section > b.section ? 0 : -1);
 
-    const bar = {
-      data: barData,
-      labels: this.data.byProcess.map(element => element.name)
-    };
+      /**REMOVER ESSAS LINHAS AO LIBERAR AS OUTRAS SEÇÕES */
+      element.bwPersonalSection.splice(2, 1);
+      element.bwPersonalSection.splice(3, 1);
+      element.bwPersonalSection.splice(3, 1);
+      element.bwPersonalSection.splice(3, 1);
 
-    setTimeout(() => {
-      if (this.barChart !== undefined) {
-        this.barChart.ngOnDestroy();
-        this.barChart.chart = 0;
-        this.barChart.datasets = bar.data;
-        this.barChart.labels = bar.labels;
-        this.barChart.ngOnInit();
+      if (!diagnosisIds.some(id => id === element.diagnosisId)) {
+        diagnosisIds.push(element.diagnosisId);
       }
     });
+
+    const organizedData = [];
+    diagnosisIds.forEach(element => {
+      organizedData.push({ id: element, answers: [] });
+    });
+
+    data.forEach(item => {
+      organizedData.forEach(value => {
+        if (item.diagnosisId === value.id) {
+          value.answers.push(item);
+        }
+      });
+    });
+
+    this.prepareBasicData(organizedData);
+    this.prepareAdvancedData(organizedData);
   }
+
+  private prepareBasicData(data) {
+
+    this.basicData = {
+      sections: [
+        {
+          name: 'Obter',
+          totalResult: 0,
+          section: 1
+        },
+        {
+          name: 'Utilizar',
+          totalResult: 0,
+          section: 2
+        },
+        /*{
+          name: 'Aprender',
+          totalResult: 0,
+          section: 3
+        },*/
+        {
+          name: 'Contribuir',
+          totalResult: 0,
+          section: 4
+        },
+        /*{
+          name: 'Avaliar',
+          totalResult: 0,
+          section: 5
+        },
+        {
+          name: 'Construir/Manter',
+          totalResult: 0,
+          section: 6
+        },
+        {
+          name: 'Descartar',
+          totalResult: 0,
+          section: 7
+        }*/
+      ],
+      totalResult: 0
+    };
+
+    if (!data.length) {
+      return;
+    }
+
+    let answersCount = 0;
+    data.forEach(element => {
+
+      element.answers.forEach(answer => {
+
+        answersCount++;
+
+        this.basicData.totalResult += answer.totalPersonalResult;
+
+        answer.bwPersonalSection.forEach((section, index) => {
+          this.basicData.sections[index].totalResult += section.totalResult;
+        });
+
+      });
+
+    });
+
+    this.basicData.totalResult = (this.basicData.totalResult / answersCount);
+
+    this.basicData.sections.forEach(element => {
+      element.totalResult = (element.totalResult / answersCount);
+    });
+
+  }
+
+  private prepareAdvancedData(data) {
+
+    this.advancedData = this.advancedData || {};
+
+    // PIE
+    const pie = {
+      data: this.basicData.sections.map(element => element.totalResult.toFixed(0)),
+      labels: this.basicData.sections.map(element => `${element.name}`)
+    };
+
+    // BAR
+    const barData = [];
+    this.basicData.sections.forEach((element) => {
+      barData.push({
+        data: [element.totalResult.toFixed(0)], label: element.name
+      });
+    });
+    const bar = {
+      data: barData,
+      labels: ['Seção']
+    };
+
+    // RADAR
+    const radarData = [{
+              data: [
+                this.basicData.sections[0].totalResult.toFixed(0),
+                this.basicData.sections[1].totalResult.toFixed(0),
+                this.basicData.sections[2].totalResult.toFixed(0)
+              ],
+              label: 'Seção'
+            }];
+
+    const radar = {
+      data: radarData.length ? radarData : [{data: [0, 0, 0, /*0, 0, 0, 0*/], label: 'Não há dados'}],
+      labels: ['Obter', 'Utilizar', /*'Aprender',*/ 'Contribuir', /*'Avaliar', 'Construir/Manter', 'Descartar'*/]
+    };
+
+    // OBJECT
+    this.advancedData = {
+      pie: pie,
+      bar: bar,
+      radar: radar,
+      line: radar
+    };
+  }
+
 }
