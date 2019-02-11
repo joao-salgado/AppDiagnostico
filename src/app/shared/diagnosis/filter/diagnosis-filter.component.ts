@@ -45,7 +45,7 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
 
   constructor(private localeService: BsLocaleService,
               private userTypeService: UserTypeService,
-              private userLoggedService: UserLoggedService,
+              public userLoggedService: UserLoggedService,
               private dashboardService: DashboardService,
               private route: ActivatedRoute,
               private processService: CompanyProcessService,
