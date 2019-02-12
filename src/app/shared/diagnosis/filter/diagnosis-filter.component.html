@@ -6,7 +6,7 @@
 >
   <div class="card-header"><i class="fa fa-align-justify"></i> Filtro</div>
   <div class="card-body">
-    <div *ngIf="userLoggedService.isRearcher()">
+    <div *ngIf="userLoggedService.isRearcher() && isResearcherRoute()">
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <label class="input-group-text">Processo</label>

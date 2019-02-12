@@ -8,7 +8,7 @@ import { BsLocaleService } from 'ngx-bootstrap/datepicker';
 import { UserTypeService } from '../../../api/user-type.service';
 import { UserLoggedService } from '../../../core/user-logged.service';
 import { DashboardService } from '../../../api/dashboard.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 defineLocale('pt-br', ptBrLocale);
 
 export class Filter {
@@ -43,11 +43,14 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
 
   public isViewLoaded = false;
 
+  private url: Array<String>;
+
   constructor(private localeService: BsLocaleService,
               private userTypeService: UserTypeService,
               public userLoggedService: UserLoggedService,
               private dashboardService: DashboardService,
               private route: ActivatedRoute,
+              private router: Router,
               private processService: CompanyProcessService,
               private companyService: CompanyService) {
 
@@ -81,6 +84,7 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
   }
 
   public ngOnInit(): void {
+    this.url = this.router.url.split('/');
   }
 
   public ngAfterViewInit(): void {
@@ -109,6 +113,10 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
       });
     }
 
+  }
+
+  public isResearcherRoute(): boolean {
+    return this.url[this.url.length - 1] === 'bw-r';
   }
 
 }
