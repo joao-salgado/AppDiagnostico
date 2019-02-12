@@ -1,3 +1,5 @@
+import { CompanyService } from './../../../api/company.service';
+import { CompanyProcessService } from './../../../api/company-process.service';
 import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { defineLocale } from 'ngx-bootstrap/chronos';
@@ -13,6 +15,8 @@ export class Filter {
   period: Array<any>;
   role: string;
   experience: string;
+  process: string;
+  companies: Array<string>;
 }
 
 @Component({
@@ -30,6 +34,8 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
   public filter: Filter;
   public bsConfig: any;
   public listUserTypes: any;
+  public listProcess: any;
+  public listCompanies: any;
   public user: any;
 
   public parentDivElement: any;
@@ -39,9 +45,11 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
 
   constructor(private localeService: BsLocaleService,
               private userTypeService: UserTypeService,
-              private userLoggedService: UserLoggedService,
+              public userLoggedService: UserLoggedService,
               private dashboardService: DashboardService,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private processService: CompanyProcessService,
+              private companyService: CompanyService) {
 
     this.userLoggedService.currentUserLogged.subscribe((userLogged) => {
       this.user = JSON.parse(userLogged);
@@ -61,6 +69,15 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
       response.shift();
       this.listUserTypes = response;
     });
+
+    this.processService.findAll().subscribe(response => {
+      this.listProcess = response;
+    });
+
+    this.companyService.getAll().subscribe(response => {
+      response.shift();
+      this.listCompanies = response;
+    });
   }
 
   public ngOnInit(): void {
@@ -74,12 +91,23 @@ export class DiagnosisFilterComponent implements OnInit, AfterViewInit {
 
   public send() {
 
-    this.dashboardService.getByCompany(this.user.company.id,
-                                        this.route.snapshot.data.diagnosis,
-                                        this.filter)
+    if (this.userLoggedService.isRearcher()) {
+
+      this.dashboardService.getForRearcher(
+        this.route.snapshot.data.diagnosis,
+        this.filter)
       .subscribe(response => {
         this.btnSendListener.emit(response);
       });
+
+    } else {
+      this.dashboardService.getByCompany(this.user.company.id,
+        this.route.snapshot.data.diagnosis,
+        this.filter)
+      .subscribe(response => {
+        this.btnSendListener.emit(response);
+      });
+    }
 
   }
 

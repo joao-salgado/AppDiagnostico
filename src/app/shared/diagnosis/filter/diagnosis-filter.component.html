@@ -1,18 +1,33 @@
-<div class="card diagnosis-filter"
-      [ngStyle]="{'width': isViewLoaded ? parentContainer.offsetWidth-30 + 'px' : 'inherit'}">
-  <div class="card-header">
-    <i class="fa fa-align-justify"></i> Filtro
-  </div>
+<div
+  class="card diagnosis-filter"
+  [ngStyle]="{
+    width: isViewLoaded ? parentContainer.offsetWidth - 30 + 'px' : 'inherit'
+  }"
+>
+  <div class="card-header"><i class="fa fa-align-justify"></i> Filtro</div>
   <div class="card-body">
+    <div *ngIf="userLoggedService.isRearcher()">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text">Processo</label>
+        </div>
+        <select name="process" class="form-control" [(ngModel)]="filter.role">
+          <option [ngValue]="undefined" selected>Todos</option>
+          <option *ngFor="let process of listProcess" [value]="process.id">
+            {{ process.name }}
+          </option>
+        </select>
+      </div>
+    </div>
 
     <div class="input-group mb-3">
       <div class="input-group-prepend">
-        <label class="input-group-text">P</label>
+        <label class="input-group-text">Papel</label>
       </div>
       <select name="process" class="form-control" [(ngModel)]="filter.role">
         <option [ngValue]="undefined" selected>Todos</option>
-        <option *ngFor="let type of listUserTypes;" [value]="type.id">
-          {{type.name}}
+        <option *ngFor="let type of listUserTypes" [value]="type.id">
+          {{ type.name }}
         </option>
       </select>
     </div>
@@ -24,15 +39,22 @@
         </label>
       </div>
 
-      <select name="process" class="form-control" [(ngModel)]="filter.experience">
+      <select
+        name="process"
+        class="form-control"
+        [(ngModel)]="filter.experience"
+      >
         <option [ngValue]="undefined" selected>Todos</option>
         <option value="menos de um ano">Menos de 1 ano de experiência</option>
         <option value="de um a dois anos">De 1 a 2 anos de experiência</option>
-        <option value="de dois a cinco anos">De 2 a 5 anos de experiência</option>
-        <option value="mais de cinco anos">Mais de 5 anos de experiência</option>
+        <option value="de dois a cinco anos"
+          >De 2 a 5 anos de experiência</option
+        >
+        <option value="mais de cinco anos"
+          >Mais de 5 anos de experiência</option
+        >
       </select>
-
-      </div>
+    </div>
 
     <div class="input-group mb-3">
       <div class="input-group-prepend">
@@ -40,9 +62,17 @@
           <i class="fa fa-calendar"></i>
         </span>
       </div>
-      <input type="text" [(ngModel)]="filter.period" name="periodo"
-            placeholder="Período" class="form-control" placement="right"
-            bsDaterangepicker [bsConfig]="bsConfig" autocomplete="period">
+      <input
+        type="text"
+        [(ngModel)]="filter.period"
+        name="periodo"
+        placeholder="Período"
+        class="form-control"
+        placement="right"
+        bsDaterangepicker
+        [bsConfig]="bsConfig"
+        autocomplete="period"
+      />
     </div>
 
     <button class="btn btn-success btn-block" (click)="send()">Filtrar</button>

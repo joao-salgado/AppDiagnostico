@@ -42,8 +42,33 @@ export class DashboardService {
     });
   }
 
-  public getForRearcher(diagnosis: string): Observable<any> {
-    return this.http.get(`${this.dashboardUrl}/rearchers/${diagnosis}`);
+  public getForRearcher(diagnosis: string, filter: any): Observable<any> {
+
+    let params = new HttpParams();
+
+    if (filter.role) {
+      params = params.append('role', String(filter.role));
+    }
+
+    if (filter.process) {
+      params = params.append('process', String(filter.process));
+    }
+
+    if (filter.experience) {
+      params = params.append('experience', String(filter.experience));
+    }
+
+    if (filter.period && filter.period[0]) {
+      params = params.append('start', moment(filter.period[0]).format('YYYY-MM-DD'));
+    }
+
+    if (filter.period && filter.period[1]) {
+      params = params.append('end', moment(filter.period[1]).format('YYYY-MM-DD'));
+    }
+
+    return this.http.get(`${this.dashboardUrl}/rearchers/${diagnosis}`, {
+      params: params
+    });
   }
 
 }

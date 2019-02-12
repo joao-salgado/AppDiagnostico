@@ -1,63 +1,18 @@
-<div class="row" *ngIf="!!basicResult">
+<div class="animated fadeIn">
 
-  <div class="col-12">
-    <h2>Dados gerais</h2>
-  </div>
+  <div class="row">
 
-  <div class="col-sm-6 col-lg-3" *ngFor="let data of basicResult">
-    <div class="brand-card">
-      <div class="brand-card-header bg-facebook">
-        <span class="text-center">{{data.label}}</span>
-      </div>
-      <div class="brand-card-body">
-        <div>
-          <div class="text-value">{{data.result | number:'0.0-0'}}</div>
-        </div>
-      </div>
+    <div class="col-sm-4 col-md-3" #filterContainer>
+      <app-diagnosis-filter [parentContainer]="filterContainer" (btnSendListener)="onbtnSendListener($event)"></app-diagnosis-filter>
     </div>
-  </div>
 
+    <div class="col-sm-8 col-md-9">
+      <app-diagnosis-basic-result [data]="basicData"></app-diagnosis-basic-result>
 
-  <div class="col-12">
-    <h2>Dados específicos</h2>
-  </div>
-
-  <div class="col-12">
-
-    <div class="card">
-      <div class="card-body">
-        <div class="row">
-          <div class="col-sm-5">
-            <h4 class="card-title mb-0">Comparativo entre processos</h4>
-          </div>
-
-          <div class="col-sm-7">
-            <div class="btn-group pull-right">
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="obter" tabindex="0" role="button">Obter</label>
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="utilizar" tabindex="0" role="button">Utilizar</label>
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="aprender" tabindex="0" role="button">Aprender</label>
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="contribuir" tabindex="0" role="button">Contribuir</label>
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="avaliar" tabindex="0" role="button">Avaliar</label>
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="construir" tabindex="0" role="button">Construir</label>
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="descartar" tabindex="0" role="button">Descartar</label>
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="quantidade" tabindex="0" role="button">Quantidade</label>
-              <label class="btn btn-info" (click)="onChangeData()" [(ngModel)]="barChartType" btnRadio="total" tabindex="0" role="button">Total</label>
-            </div>
-          </div>
-
-          <div class="col-12">
-            <div class="chart-wrapper">
-              <canvas #barChart="base-chart" class="chart"
-                      baseChart [datasets]="data?.bar?.data"
-                      [labels]="data?.bar?.labels"
-                      [options]="barChartOptions" [legend]="false" [chartType]="'bar'">
-              </canvas>
-            </div>
-          </div>
-
-        </div>
-      </div>
+      <app-diagnosis-advanced-result [data]="advancedData"></app-diagnosis-advanced-result>
     </div>
+
   </div>
 
 </div>
+
