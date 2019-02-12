@@ -22,11 +22,16 @@
       <select class="form-control" name="selectedCompany"
            [(ngModel)]="selectedCompany" (ngModelChange)="onSelectCompany(selectedCompany)">
         <option *ngFor="let company of companies trackBy:company?.id"
-                [value]="company.id">{{company.name}}</option>
+                [value]="company.id">
+
+          <span class="text-bold" *ngIf="company.name === 'Pesquisadores'">
+            Todas as empresas
+          </span>
+          <span *ngIf="company.name !== 'Pesquisadores'">{{company.name}}</span>
+
+        </option>
       </select>
-
     </li>
-
 
   </ul>
   <ul class="nav navbar-nav ml-auto">
