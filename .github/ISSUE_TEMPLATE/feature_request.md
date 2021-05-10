@@ -1,20 +1,24 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
-title: ''
+name: Issue template
+about: Create an issue.
+title: Issue title
 labels: ''
 assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### 💡 Título
+[Descrição da nova funcionalidade ou do problema encontrado]
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+### 🔍Passos para reprodução do problema ou novas funcionalidades
+1. [Primeiro passo]
+2. [Segundo passo]
+3. [demais passos...]
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+**🙂 Comportamento esperado:** [para novas funcionalidades ou da resolução do problema encontrado]
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+**🙁 Comportamento atual:** [do sistema para novas funcionalidades ou do problema encontrado]
+### ✅ Etapas
+* [ ] Etapa 1
+* [ ] Etapa 2
+* [ ] Demais etapas...
